@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ярославия — Игра</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="game-page">
+    <!-- Верхняя панель -->
+    <header class="game-header">
+        <a href="index.html" class="back-btn">← Меню</a>
+        <h2 id="game-mode-title">ГеоКвест</h2>
+        <div class="game-stats">
+            <span id="score-display">Очки: 0</span>
+            <span id="timer-display" class="hidden">⏱️ 5:00</span>
+            <span id="round-display">Раунд: 1/10</span>
+        </div>
+    </header>
+
+    <!-- Панель настроек перед стартом -->
+    <div id="settings-panel" class="settings-panel">
+        <div class="settings-card">
+            <h3>Настройки игры</h3>
+            
+            <div id="geoguesser-settings">
+                <div class="setting-group">
+                    <label>Режим:</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="gg-mode" value="free" checked> Свободный
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="gg-mode" value="time"> На время (5 мин)
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <label>Количество раундов:</label>
+                    <select id="total-rounds">
+                        <option value="5">5 раундов</option>
+                        <option value="10" selected>10 раундов</option>
+                        <option value="15">15 раундов</option>
+                        <option value="20">20 раундов</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="writename-settings" style="display:none;">
+                <p class="settings-info">
+                    Вводи названия населённых пунктов Ярославской области. 
+                    Каждое правильное название отмечается на карте. 
+                    Найди как можно больше мест!
+                </p>
+            </div>
+
+            <button id="start-game-btn" class="btn btn-primary btn-large">Начать игру</button>
+        </div>
+    </div>
+
+    <!-- Игровое поле -->
+    <div id="game-area" class="game-area" style="display:none;">
+        <!-- Карта -->
+        <div id="map" class="game-map"></div>
+
+        <!-- Боковая панель для режима "Знаток Ярославщины" -->
+        <div id="side-panel" class="side-panel" style="display:none;">
+            <div class="input-group">
+                <input type="text" id="place-input" placeholder="Введи название места..." autocomplete="off">
+                <button id="submit-place-btn" class="btn btn-primary">✓</button>
+            </div>
+            <div id="feedback" class="feedback"></div>
+            <div id="found-list" class="found-list">
+                <h4>Найденные места (<span id="found-count">0</span>):</h4>
+                <ul id="found-places"></ul>
+            </div>
+        </div>
+
+        <!-- Панель информации для ГеоКвеста -->
+        <div id="guess-panel" class="guess-panel" style="display:none;">
+            <div class="location-info">
+                <h3 id="location-name">Загрузка...</h3>
+                <p id="location-hint" class="hint"></p>
+            </div>
+            <button id="confirm-guess-btn" class="btn btn-primary">Подтвердить ответ</button>
+        </div>
+
+        <!-- Результат раунда -->
+        <div id="round-result" class="round-result" style="display:none;">
+            <div class="result-card">
+                <h3 id="result-title">Результат</h3>
+                <p id="result-distance">Расстояние: 0 км</p>
+                <p id="result-score">Очки за раунд: 0</p>
+                <div id="result-line" class="result-line"></div>
+                <button id="next-round-btn" class="btn btn-primary">Следующий раунд →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Экран окончания игры -->
+    <div id="game-over" class="game-over" style="display:none;">
+        <div class="game-over-card">
+            <h2>🏆 Игра окончена!</h2>
+            <div class="final-stats">
+                <div class="final-stat">
+                    <span class="final-value" id="final-score">0</span>
+                    <span class="final-label">Общий счёт</span>
+                </div>
+                <div class="final-stat">
+                    <span class="final-value" id="final-accuracy">0%</span>
+                    <span class="final-label">Точность</span>
+                </div>
+                <div class="final-stat">
+                    <span class="final-value" id="final-rounds">0</span>
+                    <span class="final-label">Раундов</span>
+                </div>
+            </div>
+            <div class="game-over-actions">
+                <input type="text" id="player-name" placeholder="Твоё имя" maxlength="20">
+                <button id="save-score-btn" class="btn btn-primary">Сохранить результат</button>
+                <button id="play-again-btn" class="btn btn-secondary">Играть снова</button>
+                <a href="index.html" class="btn btn-secondary">В меню</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> -->
+    <script src="js/data.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/game-logic.js"></script>
+    <script src="js/main.js"></script>
+	
+</body>
+</html>

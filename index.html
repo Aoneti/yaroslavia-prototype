@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ярославия — Краеведческая игра</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+</head>
+<body class="home-page">
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="logo-container">
+                <img src="assets/images/logo.svg" alt="Ярославия" class="logo">
+            </div>
+            <h1 class="title">ОТКРЫВАЙ ЯРОСЛАВИЮ</h1>
+            <p class="subtitle">Краеведческая игра по столице Золотому кольцу России</p>
+            <p class="description">
+                Исследуй Ярославскую область, узнавай новые места и проверяй свои знания 
+                о древних городах Золотого кольца в интерактивном формате.
+            </p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🗺️</div>
+                <h3>Интерактивная карта</h3>
+                <p>Реальная карта Ярославской области с масштабом и зумом</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>Два режима игры</h3>
+                <p>Угадай на карте или назови место — выбирай свой стиль</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Система очков</h3>
+                <p>Чем точнее ответ — тем больше баллов. Собирай рекорды!</p>
+            </div>
+        </section>
+
+        <section class="game-modes">
+            <h2>Режимы игры</h2>
+            <div class="modes-grid">
+                <div class="mode-card">
+                    <div class="mode-header">
+                        <span class="mode-icon">🎯</span>
+                        <h3>ГеоКвест</h3>
+                    </div>
+                    <p class="mode-desc">
+                        Тебе показывают название места. Поставь пин на карте как можно ближе к цели. 
+                        Баллы начисляются по расстоянию — чем точнее, тем лучше!
+                    </p>
+                    <ul class="mode-features">
+                        <li>✅ Свободный режим (без ограничений)</li>
+                        <li>⏱️ Режим на время (5 минут)</li>
+                    </ul>
+                    <a href="game.html?mode=geoguesser" class="btn btn-primary">Играть</a>
+                </div>
+
+                <div class="mode-card">
+                    <div class="mode-header">
+                        <span class="mode-icon">✍️</span>
+                        <h3>Знаток Ярославщины</h3>
+                    </div>
+                    <p class="mode-desc">
+                        Вводи названия населённых пунктов Ярославской области. 
+                        Угадай правильно — и место появится на карте! Сколько сможешь найти?
+                    </p>
+                    <ul class="mode-features">
+                        <li>📝 Текстовый ввод названий</li>
+                        <li>🗺️ Визуализация на карте</li>
+                        <li>⭐ Подсчёт найденных мест</li>
+                    </ul>
+                    <a href="game.html?mode=writename" class="btn btn-primary">Играть</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="leaderboard-preview">
+            <h2>Таблица лидеров</h2>
+            <div class="leaderboards-grid">
+                <div class="leaderboard-column">
+                    <h3>🎯 ГеоКвест</h3>
+                    <div id="geoguesser-leaderboard" class="leaderboard-table">
+                        <p class="empty-leaderboard">Пока никто не игр</p>
+                    </div>
+                </div>
+                <div class="leaderboard-column">
+                    <h3>✍️ Знаток Ярославщины</h3>
+                    <div id="writename-leaderboard" class="leaderboard-table">
+                        <p class="empty-leaderboard">Пока никто не игр</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about">
+            <h2>О проекте</h2>
+            <div class="about-content">
+                <p>
+                    <strong>«Ярославия»</strong> — это образовательная краеведческая игра, 
+                    посвящённая Ярославской области и городам Золотого кольца России. 
+                    Проект создан для популяризации региональной истории и географии 
+                    в увлекательном игровом формате.
+                </p>
+                <p>
+                    Ярославская область — сердце Золотого кольца: Ярославль, Ростов Великий, 
+                    Углич, Мышкин, Переславль-Залесский и десятки других уникальных мест 
+                    с тысячелетней историей.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Ярославия — Краеведческая игра | Прототип MVP</p>
+    </footer>
+
+	<script src="js/data.js"></script>
+	<script src="js/game-logic.js"></script>
+	<script src="js/map.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+</html>
+</body>
+</html>
