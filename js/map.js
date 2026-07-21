@@ -6,8 +6,15 @@ let targetMarker = null;
 let foundMarkers = [];
 let resultLine = null;
 let outsideOverlay = null;
+let oblastOutlineLayer = null; // Добавлена переменная для контроля слоя границы
 
 function initMap() {
+    // Защита от повторной инициализации карты
+    if (map) {
+        ensureBoundaryLayers();
+        return map;
+    }
+
     map = L.map('map', {
         center: [YAROSLAVL_CENTER.lat, YAROSLAVL_CENTER.lng],
         zoom: 9,
@@ -33,25 +40,41 @@ function initMap() {
     return map;
 }
 
+// Функция для принудительного восстановления слоев границы (вызывается при смене режимов)
+function ensureBoundaryLayers() {
+    addOblastOutline();
+    addOutsideOverlay();
+}
+
 function addOblastOutline() {
-    if (!OBLAST_BORDER || OBLAST_BORDER.length === 0) {
-        console.warn('Граница области не загружена');
+    if (!window.OBLAST_BORDER || window.OBLAST_BORDER.length === 0) {
+        console.warn('Граница области не загружена (OBLAST_BORDER пуст)');
         return;
     }
     
-    L.polygon(OBLAST_BORDER, {
+    // Удаляем старый слой, если он есть, чтобы избежать дублирования и проблем с z-index
+    if (oblastOutlineLayer) {
+        map.removeLayer(oblastOutlineLayer);
+    }
+    
+    oblastOutlineLayer = L.polygon(window.OBLAST_BORDER, {
         color: '#c8a415',
         weight: 2,
         fillColor: '#c8a415',
         fillOpacity: 0.03,
-        dashArray: '5, 10'
+        dashArray: '5, 10',
+        className: 'oblast-border' // Важно: привязка к CSS
     }).addTo(map);
 }
 
 function addOutsideOverlay() {
-    if (!OBLAST_BORDER || OBLAST_BORDER.length === 0) {
-        console.warn('Граница области не загружена');
+    if (!window.OBLAST_BORDER || window.OBLAST_BORDER.length === 0) {
+        console.warn('Граница области не загружена (OBLAST_BORDER пуст)');
         return;
+    }
+    
+    if (outsideOverlay) {
+        map.removeLayer(outsideOverlay);
     }
     
     const outerBounds = [
@@ -61,11 +84,12 @@ function addOutsideOverlay() {
         [-90, -180]
     ];
     
-    outsideOverlay = L.polygon([outerBounds, OBLAST_BORDER], {
+    outsideOverlay = L.polygon([outerBounds, window.OBLAST_BORDER], {
         color: 'transparent',
         fillColor: '#000',
         fillOpacity: 0.4,
-        interactive: false
+        interactive: false,
+        className: 'outside-overlay' // Важно: привязка к CSS
     }).addTo(map);
 }
 
@@ -131,6 +155,7 @@ function clearAllMarkers() {
     }
     foundMarkers.forEach(m => map.removeLayer(m));
     foundMarkers = [];
+    // Границы и маска НЕ удаляются здесь, они управляются отдельно
 }
 
 function onMapClick(e) {
@@ -148,17 +173,4 @@ function bindMapClick() {
 
 function unbindMapClick() {
     map.off('click', onMapClick);
-}
-
-// Пересоздание границ и маски (если нужно)
-function recreateBoundaryLayers() {
-    // Очищаем старые слои если есть
-    if (outsideOverlay) {
-        map.removeLayer(outsideOverlay);
-        outsideOverlay = null;
-    }
-    
-    // Пересоздаем слои
-    addOblastOutline();
-    addOutsideOverlay();
 }

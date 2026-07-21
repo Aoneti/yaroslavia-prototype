@@ -1,25 +1,30 @@
 // Главный скрипт: инициализация, роутинг, обработчики событий
 
-document.addEventListener('DOMContentLoaded', async () => {
-    // Проверяем, что LOCATIONS уже загружены из data.js
-    if (typeof LOCATIONS === 'undefined' || !Array.isArray(LOCATIONS)) {
-        console.error(' Ошибка: LOCATIONS не загружены. Проверьте подключение js/data.js');
-        alert('Не удалось загрузить данные. Обновите страницу.');
-        return;
-    }
-    
-    console.log(`✅ Используется ${LOCATIONS.length} локаций из data.js`);
+// Гарантируем глобальную видимость переменных для всех скриптов
+window.LOCATIONS = [];
+window.OBLAST_BORDER = [];
 
-    // Загружаем границу области
+document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const borderRes = await fetch('data/oblast-border.json');
+        // Параллельно загружаем локации и границу области
+        const [locationsRes, borderRes] = await Promise.all([
+            fetch('data/locations.json'),
+            fetch('data/oblast-border.json')
+        ]);
+
+        window.LOCATIONS = await locationsRes.json();
+        console.log(`✅ Загружено ${window.LOCATIONS.length} локаций`);
+
+        // Парсим GeoJSON и инвертируем координаты [lng, lat] → [lat, lng]
         const borderGeoJSON = await borderRes.json();
         const rawCoords = borderGeoJSON.features[0].geometry.coordinates[0];
-        OBLAST_BORDER = rawCoords.map(([lng, lat]) => [lat, lng]);
-        console.log(`✅ Загружена граница области (${OBLAST_BORDER.length} точек)`);
+        window.OBLAST_BORDER = rawCoords.map(([lng, lat]) => [lat, lng]);
+        console.log(`✅ Загружена граница области (${window.OBLAST_BORDER.length} точек)`);
+
     } catch (error) {
-        console.error('❌ Ошибка загрузки границы:', error);
-        OBLAST_BORDER = [];
+        console.error('❌ Ошибка загрузки данных:', error);
+        alert('Не удалось загрузить данные. Проверьте наличие файлов data/locations.json и data/oblast-border.json');
+        return;
     }
 
     // Определяем, на какой странице мы

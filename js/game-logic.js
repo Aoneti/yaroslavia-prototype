@@ -19,7 +19,6 @@ function toRad(deg) {
 // Расчёт очков (максимум 5000, минимум 0)
 function calculateScore(distanceKm) {
     const maxScore = 5000;
-    // Экспоненциальное затухание: на 0 км — 5000, на 200+ км — близко к 0
     if (distanceKm <= 0.5) return maxScore;
     if (distanceKm >= 200) return 0;
     
@@ -27,7 +26,7 @@ function calculateScore(distanceKm) {
     return Math.round(score);
 }
 
-// Нормализация строки для сравнения (убираем регистр, ё → е, пробелы)
+// Нормализация строки для сравнения
 function normalizeString(str) {
     return str
         .toLowerCase()
@@ -45,13 +44,9 @@ function checkPlaceName(input, locations) {
     
     for (const loc of locations) {
         const locNorm = normalizeString(loc.name);
-        // Полное совпадение
         if (normalized === locNorm) {
             matches.push(loc);
-        }
-        // Вхождение подстроки (для составных названий)
-        else if (locNorm.includes(normalized) || normalized.includes(locNorm)) {
-            // Минимальная длина для подстроки — 4 символа
+        } else if (locNorm.includes(normalized) || normalized.includes(locNorm)) {
             if (normalized.length >= 4) {
                 matches.push(loc);
             }
@@ -72,28 +67,23 @@ function shuffleArray(arr) {
 
 // === СОСТОЯНИЕ ИГРЫ ===
 const gameState = {
-    mode: 'geoguesser', // 'geoguesser' или 'writename'
+    mode: 'geoguesser',
     isPlaying: false,
     roundAnswered: false,
-    
-    // ГеоКвест
-    ggMode: 'free', // 'free' или 'time'
+    ggMode: 'free',
     totalRounds: 10,
     currentRound: 0,
     currentLocation: null,
     currentGuess: null,
     totalScore: 0,
     roundScores: [],
-    timeLeft: 300, // 5 минут в секундах
+    timeLeft: 300,
     timerInterval: null,
-    
-    // Знаток Ярославщины
     foundLocations: [],
     availableLocations: []
 };
 
 // === ЛОГИКА ГЕОКВЕСТА ===
-
 function startGeoguesser() {
     gameState.mode = 'geoguesser';
     gameState.isPlaying = true;
@@ -102,20 +92,21 @@ function startGeoguesser() {
     gameState.totalScore = 0;
     gameState.roundScores = [];
 
-    // Перемешиваем локации и берём нужное количество
-    const shuffled = shuffleArray(LOCATIONS);
+    const shuffled = shuffleArray(window.LOCATIONS);
     gameState.gameLocations = shuffled.slice(0, gameState.totalRounds);
 
-    // Запускаем таймер если нужно
     if (gameState.ggMode === 'time') {
         gameState.timeLeft = 300;
         startTimer();
     }
 
-    // Обновляем UI
     updateGameUI();
     clearAllMarkers();
     bindMapClick();
+    
+    // Гарантируем, что границы на месте при старте
+    if (typeof ensureBoundaryLayers === 'function') ensureBoundaryLayers();
+    
     nextGeoguesserRound();
 }
 
@@ -125,7 +116,6 @@ function nextGeoguesserRound() {
         return;
     }
 
-    // Проверка по времени
     if (gameState.ggMode === 'time' && gameState.timeLeft <= 0) {
         endGame();
         return;
@@ -135,10 +125,8 @@ function nextGeoguesserRound() {
     gameState.currentGuess = null;
     gameState.currentRound++;
 
-    // Выбираем текущую локацию
     gameState.currentLocation = gameState.gameLocations[gameState.currentRound - 1];
 
-    // Убираем старые маркеры
     if (guessMarker) map.removeLayer(guessMarker);
     if (targetMarker) map.removeLayer(targetMarker);
     if (resultLine) map.removeLayer(resultLine);
@@ -146,10 +134,8 @@ function nextGeoguesserRound() {
     targetMarker = null;
     resultLine = null;
 
-    // Центрируем карту
     map.setView([YAROSLAVL_CENTER.lat, YAROSLAVL_CENTER.lng], 9);
 
-    // Обновляем UI
     document.getElementById('location-name').textContent = gameState.currentLocation.name;
     const hint = gameState.currentLocation.hint || getDefaultHint(gameState.currentLocation.type);
     document.getElementById('location-hint').textContent = hint;
@@ -180,17 +166,14 @@ function confirmGuess() {
     const guess = gameState.currentGuess;
     const target = gameState.currentLocation;
 
-    // Расчёт
     const distance = haversineDistance(guess.lat, guess.lng, target.lat, target.lng);
     const score = calculateScore(distance);
     gameState.totalScore += score;
     gameState.roundScores.push(score);
 
-    // Показываем результат на карте
     placeTargetMarker(target.lat, target.lng);
     drawResultLine(guess.lat, guess.lng, target.lat, target.lng);
 
-    // Показываем результат
     document.getElementById('result-distance').textContent = `Расстояние: ${distance.toFixed(1)} км`;
     document.getElementById('result-score').textContent = `Очки за раунд: ${score}`;
     
@@ -212,7 +195,6 @@ function confirmGuess() {
 
     updateGameUI();
 
-    // Приближаем карту к результату
     const bounds = L.latLngBounds(
         [Math.min(guess.lat, target.lat), Math.min(guess.lng, target.lng)],
         [Math.max(guess.lat, target.lat), Math.max(guess.lng, target.lng)]
@@ -237,30 +219,28 @@ function startTimer() {
 function updateTimerDisplay() {
     const minutes = Math.floor(gameState.timeLeft / 60);
     const seconds = gameState.timeLeft % 60;
-    document.getElementById('timer-display').textContent = 
-        `⏱️ ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById('timer-display').textContent = `⏱️ ${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
 // === ЛОГИКА "ЗНАТОК ЯРОСЛАВЩИНЫ" ===
-
 function startWriteName() {
     gameState.mode = 'writename';
     gameState.isPlaying = true;
     gameState.foundLocations = [];
-    gameState.availableLocations = [...LOCATIONS];
+    gameState.availableLocations = [...window.LOCATIONS];
     gameState.totalScore = 0;
 
     clearAllMarkers();
-	if (typeof recreateBoundaryLayers === 'function') {
-    recreateBoundaryLayers();
-    }
     unbindMapClick();
+
+    // 🔥 КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: принудительно перерисовываем границу и маску
+    if (typeof ensureBoundaryLayers === 'function') ensureBoundaryLayers();
 
     // UI
     document.getElementById('side-panel').style.display = 'flex';
     document.getElementById('guess-panel').style.display = 'none';
     document.getElementById('round-result').style.display = 'none';
-    document.getElementById('round-display').textContent = `Найдено: 0/${LOCATIONS.length}`;
+    document.getElementById('round-display').textContent = `Найдено: 0/${window.LOCATIONS.length}`;
     document.getElementById('found-count').textContent = '0';
     document.getElementById('found-places').innerHTML = '';
     document.getElementById('place-input').value = '';
@@ -277,7 +257,6 @@ function submitPlaceName() {
 
     if (!value) return;
 
-    // Ищем все совпадения
     const matches = checkPlaceName(value, gameState.availableLocations);
     
     if (matches.length === 0) {
@@ -288,7 +267,6 @@ function submitPlaceName() {
         return;
     }
 
-    // Фильтруем уже найденные
     const newMatches = matches.filter(match => {
         const isDuplicate = gameState.foundLocations.some(l => l.id === match.id);
         return !isDuplicate;
@@ -302,14 +280,11 @@ function submitPlaceName() {
         return;
     }
 
-    // Добавляем все новые совпадения
     newMatches.forEach(found => {
         gameState.foundLocations.push(found);
-        gameState.totalScore += 500; // 500 за каждое найденное
-        
+        gameState.totalScore += 500;
         addFoundMarker(found.lat, found.lng, found.name);
         
-        // Обновляем список
         const li = document.createElement('li');
         li.textContent = found.name;
         li.classList.add('fade-in');
@@ -317,10 +292,8 @@ function submitPlaceName() {
     });
 
     document.getElementById('found-count').textContent = gameState.foundLocations.length;
-    document.getElementById('round-display').textContent = 
-        `Найдено: ${gameState.foundLocations.length}/${LOCATIONS.length}`;
+    document.getElementById('round-display').textContent = `Найдено: ${gameState.foundLocations.length}/${window.LOCATIONS.length}`;
 
-    // Feedback
     if (newMatches.length === 1) {
         feedback.textContent = `✅ Верно! ${newMatches[0].name}`;
     } else {
@@ -329,17 +302,14 @@ function submitPlaceName() {
     }
     feedback.className = 'feedback success';
 
-    // Центрируем на первом найденном
     if (newMatches.length === 1) {
         map.setView([newMatches[0].lat, newMatches[0].lng], 12);
     } else {
-        // Если несколько - показываем все
         const bounds = L.latLngBounds(newMatches.map(l => [l.lat, l.lng]));
         map.fitBounds(bounds, { padding: [50, 50], maxZoom: 11 });
     }
 
-    // Проверяем, все ли найдены
-    if (gameState.foundLocations.length >= LOCATIONS.length) {
+    if (gameState.foundLocations.length >= window.LOCATIONS.length) {
         setTimeout(() => endGame(), 1000);
     }
 
@@ -349,7 +319,6 @@ function submitPlaceName() {
 }
 
 // === ОБЩАЯ ЛОГИКА ===
-
 function updateGameUI() {
     document.getElementById('score-display').textContent = `Очки: ${gameState.totalScore}`;
     
@@ -374,11 +343,9 @@ function endGame() {
 
     unbindMapClick();
 
-    // Показываем экран окончания
     document.getElementById('game-area').style.display = 'none';
     document.getElementById('game-over').style.display = 'flex';
 
-    // Статистика
     document.getElementById('final-score').textContent = gameState.totalScore;
     
     if (gameState.mode === 'geoguesser') {
@@ -389,7 +356,7 @@ function endGame() {
         document.getElementById('final-accuracy').textContent = accuracy + '%';
         document.getElementById('final-rounds').textContent = gameState.roundScores.length;
     } else {
-        const accuracy = Math.round((gameState.foundLocations.length / LOCATIONS.length) * 100);
+        const accuracy = Math.round((gameState.foundLocations.length / window.LOCATIONS.length) * 100);
         document.getElementById('final-accuracy').textContent = accuracy + '%';
         document.getElementById('final-rounds').textContent = gameState.foundLocations.length;
     }
@@ -398,7 +365,6 @@ function endGame() {
 function saveScore() {
     const name = document.getElementById('player-name').value.trim() || 'Аноним';
     
-    // Получаем таблицу из localStorage
     let leaderboard = JSON.parse(localStorage.getItem('yaroslavia_leaderboard') || '[]');
     
     leaderboard.push({
@@ -409,10 +375,7 @@ function saveScore() {
         rounds: gameState.mode === 'geoguesser' ? gameState.roundScores.length : gameState.foundLocations.length
     });
 
-    // Сортируем по убыванию очков
     leaderboard.sort((a, b) => b.score - a.score);
-    
-    // Оставляем топ-50
     leaderboard = leaderboard.slice(0, 50);
     
     localStorage.setItem('yaroslavia_leaderboard', JSON.stringify(leaderboard));
