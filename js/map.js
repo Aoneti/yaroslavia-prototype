@@ -8,8 +8,12 @@ let resultLine = null;
 let outsideOverlay = null;
 let oblastOutlineLayer = null; // Добавлена переменная для контроля слоя границы
 
+// Глобальные константы для центра и границ (резервные)
+const YAROSLAVL_CENTER = { lat: 57.6263877, lng: 39.8933705 };
+const YAROSLAVL_BOUNDS = { south: 56.4, north: 58.9, west: 37.3, east: 41.3 };
+
 function initMap() {
-    // Защита от повторной инициализации карты
+    // Если карта уже инициализирована, просто обновляем границы
     if (map) {
         ensureBoundaryLayers();
         return map;
@@ -40,19 +44,35 @@ function initMap() {
     return map;
 }
 
-// Функция для принудительного восстановления слоев границы (вызывается при смене режимов)
+// Функция для гарантированного восстановления слоев границы
 function ensureBoundaryLayers() {
+    if (!window.OBLAST_BORDER || window.OBLAST_BORDER.length < 10) {
+        console.warn('⚠️ Граница области не загружена или слишком мала');
+        return;
+    }
+    
+    // Удаляем старые слои, если они есть
+    if (oblastOutlineLayer) {
+        map.removeLayer(oblastOutlineLayer);
+        oblastOutlineLayer = null;
+    }
+    if (outsideOverlay) {
+        map.removeLayer(outsideOverlay);
+        outsideOverlay = null;
+    }
+    
+    // Пересоздаем слои
     addOblastOutline();
     addOutsideOverlay();
 }
 
 function addOblastOutline() {
-    if (!window.OBLAST_BORDER || window.OBLAST_BORDER.length === 0) {
-        console.warn('Граница области не загружена (OBLAST_BORDER пуст)');
+    if (!window.OBLAST_BORDER || window.OBLAST_BORDER.length < 10) {
+        console.warn('⚠️ Граница области не загружена или слишком мала');
         return;
     }
     
-    // Удаляем старый слой, если он есть, чтобы избежать дублирования и проблем с z-index
+    // Удаляем старый слой, если он есть
     if (oblastOutlineLayer) {
         map.removeLayer(oblastOutlineLayer);
     }
@@ -68,8 +88,8 @@ function addOblastOutline() {
 }
 
 function addOutsideOverlay() {
-    if (!window.OBLAST_BORDER || window.OBLAST_BORDER.length === 0) {
-        console.warn('Граница области не загружена (OBLAST_BORDER пуст)');
+    if (!window.OBLAST_BORDER || window.OBLAST_BORDER.length < 10) {
+        console.warn('⚠️ Граница области не загружена или слишком мала');
         return;
     }
     
@@ -155,7 +175,6 @@ function clearAllMarkers() {
     }
     foundMarkers.forEach(m => map.removeLayer(m));
     foundMarkers = [];
-    // Границы и маска НЕ удаляются здесь, они управляются отдельно
 }
 
 function onMapClick(e) {

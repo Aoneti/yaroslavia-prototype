@@ -1,39 +1,50 @@
 // Главный скрипт: инициализация, роутинг, обработчики событий
 
-// Гарантируем глобальную видимость переменных для всех скриптов
+// Глобальные переменные для данных
 window.LOCATIONS = [];
 window.OBLAST_BORDER = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        // Параллельно загружаем локации и границу области
-        const [locationsRes, borderRes] = await Promise.all([
-            fetch('data/locations.json'),
-            fetch('data/oblast-border.json')
-        ]);
+        console.log("🔄 Начинаем загрузку данных...");
 
-        window.LOCATIONS = await locationsRes.json();
+        // Используем правильные пути (без пробелов)
+        const locationsResponse = await fetch('data/locations.json');
+        if (!locationsResponse.ok) {
+            throw new Error(`Не удалось найти locations.json (Статус: ${locationsResponse.status})`);
+        }
+        window.LOCATIONS = await locationsResponse.json();
         console.log(`✅ Загружено ${window.LOCATIONS.length} локаций`);
 
-        // Парсим GeoJSON и инвертируем координаты [lng, lat] → [lat, lng]
-        const borderGeoJSON = await borderRes.json();
-        const rawCoords = borderGeoJSON.features[0].geometry.coordinates[0];
-        window.OBLAST_BORDER = rawCoords.map(([lng, lat]) => [lat, lng]);
+        const borderResponse = await fetch('data/oblast-border.json');
+        if (!borderResponse.ok) {
+            throw new Error(`Не удалось найти oblast-border.json (Статус: ${borderResponse.status})`);
+        }
+        const borderGeoJSON = await borderResponse.json();
+        
+        // Инвертируем координаты [lng, lat] -> [lat, lng] для Leaflet
+        window.OBLAST_BORDER = borderGeoJSON.features[0].geometry.coordinates[0].map(([lng, lat]) => [lat, lng]);
         console.log(`✅ Загружена граница области (${window.OBLAST_BORDER.length} точек)`);
+        
+        // Проверка загрузки
+        if (window.LOCATIONS.length === 0) {
+            throw new Error("Список локаций пуст");
+        }
+        if (window.OBLAST_BORDER.length < 10) {
+            throw new Error("Граница области содержит недостаточно точек");
+        }
+
+        // Определяем, на какой странице мы
+        const isGamePage = document.getElementById('map') !== null;
+        if (isGamePage) {
+            initGamePage();
+        } else {
+            initHomePage();
+        }
 
     } catch (error) {
-        console.error('❌ Ошибка загрузки данных:', error);
-        alert('Не удалось загрузить данные. Проверьте наличие файлов data/locations.json и data/oblast-border.json');
-        return;
-    }
-
-    // Определяем, на какой странице мы
-    const isGamePage = document.getElementById('map') !== null;
-    
-    if (isGamePage) {
-        initGamePage();
-    } else {
-        initHomePage();
+        console.error("❌ КРИТИЧЕСКАЯ ОШИБКА ЗАГРУЗКИ:", error);
+        alert(`Ошибка загрузки данных: ${error.message}\n\n1. Проверьте, что файлы лежат в папке data/\n2. Имена файлов должны быть: locations.json и oblast-border.json\n3. В locations.json должен быть чистый JSON (без const, let и т.д.)`);
     }
 });
 
@@ -49,7 +60,6 @@ function renderHomeLeaderboard() {
     if (!geoguesserContainer || !writenameContainer) return;
 
     const leaderboard = JSON.parse(localStorage.getItem('yaroslavia_leaderboard') || '[]');
-    
     const geoguesserEntries = leaderboard.filter(e => e.mode === 'ГеоКвест').slice(0, 10);
     const writenameEntries = leaderboard.filter(e => e.mode === 'Знаток Ярославщины').slice(0, 10);
 
