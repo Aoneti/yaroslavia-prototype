@@ -9,14 +9,9 @@ let outsideOverlay = null;
 let oblastOutlineLayer = null; // Добавлена переменная для контроля слоя границы
 
 // Глобальные константы для центра и границ (резервные)
-// Защита от двойного объявления
-if (typeof window.YAROSLAVL_CENTER === 'undefined') {
-    window.YAROSLAVL_CENTER = { lat: 57.6263877, lng: 39.8933705 };
-    window.YAROSLAVL_BOUNDS = { south: 56.4, north: 58.9, west: 37.3, east: 41.3 };
-}
-
-const YAROSLAVL_CENTER = window.YAROSLAVL_CENTER;
-const YAROSLAVL_BOUNDS = window.YAROSLAVL_BOUNDS;
+// Используем глобальное пространство для избежания конфликтов
+const YAROSLAVL_CENTER = { lat: 57.6263877, lng: 39.8933705 };
+const YAROSLAVL_BOUNDS = { south: 56.4, north: 58.9, west: 37.3, east: 41.3 };
 
 function initMap() {
     // Если карта уже инициализирована, просто обновляем границы
