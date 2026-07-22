@@ -34,24 +34,35 @@ function normalizeString(str) {
         .replace(/\s+/g, ' ')
         .replace(/[-–—]/g, ' ')
         .replace(/[.,!?;:]/g, '')
+        .replace(/\b(с\.|с\.п\.|п\.|п\.п\.|д\.п\.|д\.|р\.|п\.к\.|ж\.р\.|м\.|к\.|з\.|снт|днт|дп|кп|мкрг|мкр)\b/g, '')
         .trim();
 }
 
-// Проверка названия места - возвращает массив всех совпадений
+// Проверка названия места - точное или максимально строгое сопоставление
 function checkPlaceName(input, locations) {
     const normalized = normalizeString(input);
     const matches = [];
     
+    if (normalized.length < 3) return matches;
+    
     for (const loc of locations) {
         const locNorm = normalizeString(loc.name);
+        
         if (normalized === locNorm) {
             matches.push(loc);
-        } else if (locNorm.includes(normalized) || normalized.includes(locNorm)) {
-            if (normalized.length >= 4) {
+        }
+    }
+    
+    if (matches.length === 0 && normalized.length >= 4) {
+        for (const loc of locations) {
+            const locNorm = normalizeString(loc.name);
+            if (locNorm.startsWith(normalized)) {
                 matches.push(loc);
+                break;
             }
         }
     }
+    
     return matches;
 }
 
@@ -66,7 +77,7 @@ function shuffleArray(arr) {
 }
 
 // === СОСТОЯНИЕ ИГРЫ ===
-const gameState = {
+window.gameState = {
     mode: 'geoguesser',
     isPlaying: false,
     roundAnswered: false,
@@ -80,7 +91,10 @@ const gameState = {
     timeLeft: 300,
     timerInterval: null,
     foundLocations: [],
-    availableLocations: []
+    availableLocations: [],
+    settings: {
+        autoZoom: true
+    }
 };
 
 // === ЛОГИКА ГЕОКВЕСТА ===
@@ -104,7 +118,6 @@ function startGeoguesser() {
     clearAllMarkers();
     bindMapClick();
     
-    // Гарантируем, что границы на месте при старте
     if (typeof ensureBoundaryLayers === 'function') ensureBoundaryLayers();
     
     nextGeoguesserRound();
@@ -140,6 +153,8 @@ function nextGeoguesserRound() {
     const hint = gameState.currentLocation.hint || getDefaultHint(gameState.currentLocation.type);
     document.getElementById('location-hint').textContent = hint;
     document.getElementById('round-display').textContent = `Раунд: ${gameState.currentRound}/${gameState.totalRounds}`;
+    
+    updateRoundProgress();
     
     document.getElementById('guess-panel').style.display = 'block';
     document.getElementById('round-result').style.display = 'none';
@@ -233,10 +248,8 @@ function startWriteName() {
     clearAllMarkers();
     unbindMapClick();
 
-    // 🔥 КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: принудительно перерисовываем границу и маску
     if (typeof ensureBoundaryLayers === 'function') ensureBoundaryLayers();
 
-    // UI
     document.getElementById('side-panel').style.display = 'flex';
     document.getElementById('guess-panel').style.display = 'none';
     document.getElementById('round-result').style.display = 'none';
@@ -247,6 +260,9 @@ function startWriteName() {
     document.getElementById('feedback').textContent = '';
     document.getElementById('feedback').className = 'feedback';
 
+    document.getElementById('score-display').classList.add('hidden');
+    document.getElementById('round-display').classList.add('hidden');
+    
     updateGameUI();
 }
 
@@ -302,15 +318,13 @@ function submitPlaceName() {
     }
     feedback.className = 'feedback success';
 
-    if (newMatches.length === 1) {
-        map.setView([newMatches[0].lat, newMatches[0].lng], 12);
-    } else {
-        const bounds = L.latLngBounds(newMatches.map(l => [l.lat, l.lng]));
-        map.fitBounds(bounds, { padding: [50, 50], maxZoom: 11 });
-    }
-
-    if (gameState.foundLocations.length >= window.LOCATIONS.length) {
-        setTimeout(() => endGame(), 1000);
+    if (gameState.settings.autoZoom) {
+        if (newMatches.length === 1) {
+            map.setView([newMatches[0].lat, newMatches[0].lng], 12);
+        } else {
+            const bounds = L.latLngBounds(newMatches.map(l => [l.lat, l.lng]));
+            map.fitBounds(bounds, { padding: [50, 50], maxZoom: 11 });
+        }
     }
 
     input.value = '';
@@ -319,17 +333,37 @@ function submitPlaceName() {
 }
 
 // === ОБЩАЯ ЛОГИКА ===
+function updateRoundProgress() {
+    const progressContainer = document.getElementById('round-progress');
+    if (gameState.mode === 'geoguesser' && gameState.isPlaying) {
+        progressContainer.style.display = 'block';
+        const progressPercent = ((gameState.currentRound - 1) / gameState.totalRounds) * 100;
+        const progressBar = document.getElementById('progress-bar');
+        if (progressBar) {
+            progressBar.style.width = `${progressPercent}%`;
+        }
+        document.getElementById('progress-text').textContent = `Раунд ${gameState.currentRound} из ${gameState.totalRounds}`;
+    }
+}
+
 function updateGameUI() {
-    document.getElementById('score-display').textContent = `Очки: ${gameState.totalScore}`;
-    
-    if (gameState.mode === 'geoguesser') {
-        if (gameState.ggMode === 'time') {
-            document.getElementById('timer-display').classList.remove('hidden');
+    if (gameState.isPlaying) {
+        document.getElementById('score-display').classList.remove('hidden');
+        
+        if (gameState.mode === 'geoguesser') {
+            document.getElementById('round-display').classList.remove('hidden');
+            if (gameState.ggMode === 'time') {
+                document.getElementById('timer-display').classList.remove('hidden');
+            } else {
+                document.getElementById('timer-display').classList.add('hidden');
+            }
+            updateRoundProgress();
         } else {
+            document.getElementById('round-display').classList.add('hidden');
             document.getElementById('timer-display').classList.add('hidden');
         }
-    } else {
-        document.getElementById('timer-display').classList.add('hidden');
+        
+        document.getElementById('score-display').textContent = `Очки: ${gameState.totalScore}`;
     }
 }
 
@@ -346,6 +380,11 @@ function endGame() {
     document.getElementById('game-area').style.display = 'none';
     document.getElementById('game-over').style.display = 'flex';
 
+    document.getElementById('score-display').classList.add('hidden');
+    document.getElementById('round-display').classList.add('hidden');
+    document.getElementById('timer-display').classList.add('hidden');
+    document.getElementById('round-progress').style.display = 'none';
+    
     document.getElementById('final-score').textContent = gameState.totalScore;
     
     if (gameState.mode === 'geoguesser') {
@@ -360,6 +399,10 @@ function endGame() {
         document.getElementById('final-accuracy').textContent = accuracy + '%';
         document.getElementById('final-rounds').textContent = gameState.foundLocations.length;
     }
+}
+
+function endGameEarly() {
+    endGame();
 }
 
 function saveScore() {
@@ -397,4 +440,22 @@ function resetGame() {
     if (gameState.timerInterval) {
         clearInterval(gameState.timerInterval);
     }
+}
+
+function loadSettings() {
+    const saved = localStorage.getItem('yaroslavia_settings');
+    if (saved) {
+        try {
+            const parsed = JSON.parse(saved);
+            if (parsed.autoZoom !== undefined) {
+                gameState.settings.autoZoom = parsed.autoZoom;
+            }
+        } catch (e) {
+            console.error('Ошибка загрузки настроек:', e);
+        }
+    }
+}
+
+function saveSettings() {
+    localStorage.setItem('yaroslavia_settings', JSON.stringify(gameState.settings));
 }

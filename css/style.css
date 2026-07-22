@@ -26,11 +26,15 @@
 }
 
 body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
     background: var(--cream);
     color: var(--dark);
     line-height: 1.6;
     min-height: 100vh;
+}
+
+.title, .game-header h2, .mode-header h3, .settings-card h3 {
+    font-family: 'Playfair Display', serif;
 }
 
 /* === ГЛАВНАЯ СТРАНИЦА === */
@@ -407,6 +411,37 @@ body {
     display: none !important;
 }
 
+.round-progress {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 400px;
+    z-index: 400;
+    text-align: center;
+}
+
+.progress-container {
+    height: 8px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.3rem;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--gold);
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    font-size: 0.8rem;
+    color: var(--dark);
+    font-weight: 600;
+}
+
 /* === ПАНЕЛЬ НАСТРОЕК === */
 .settings-panel {
     flex: 1;
@@ -462,6 +497,19 @@ body {
 }
 
 .radio-label:hover {
+    background: var(--cream);
+}
+
+.setting-group .checkbox-label {
+    cursor: pointer;
+    font-weight: 400;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    background: transparent;
+}
+
+.setting-group .checkbox-label:hover {
     background: var(--cream);
 }
 
@@ -556,9 +604,16 @@ body {
     color: #721c24;
 }
 
+.found-list {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
 .found-list h4 {
     margin-bottom: 0.5rem;
     color: var(--dark);
+    padding-right: 0.5rem;
 }
 
 .found-list ul {
@@ -566,6 +621,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
+    margin: 0;
+    padding: 0;
 }
 
 .found-list li {
@@ -574,6 +631,8 @@ body {
     border-radius: 4px;
     font-size: 0.85rem;
     border-left: 3px solid var(--green);
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 /* === ПАНЕЛЬ УГАДЫВАНИЯ (ГеоГессер) === */
@@ -755,6 +814,55 @@ body {
 }
 
 /* === МОБИЛЬНАЯ АДАПТИВНОСТЬ === */
+.settings-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.settings-modal-content {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: var(--shadow-lg);
+}
+
+.settings-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.settings-modal-header h3 {
+    font-size: 1.4rem;
+    color: var(--dark);
+    margin: 0;
+}
+
+.close-settings {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--dark);
+    padding: 0.25rem 0.5rem;
+}
+
+.settings-modal-body {
+    margin-bottom: 1.5rem;
+}
+
+.settings-modal-footer {
+    text-align: right;
+}
+
 @media (max-width: 768px) {
     .hero {
         min-height: 50vh;
@@ -779,7 +887,7 @@ body {
 
     .side-panel {
         width: 100%;
-        height: 45%;
+        height: 55%;
         top: auto;
         bottom: 0;
         box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
@@ -801,6 +909,11 @@ body {
     .about-stats {
         gap: 1.5rem;
     }
+
+    .round-progress {
+        top: 55px;
+        width: 90%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -814,6 +927,15 @@ body {
 
     .settings-card {
         padding: 1.5rem;
+    }
+
+    .game-over-actions {
+        gap: 0.5rem;
+    }
+
+    .game-over-actions input {
+        padding: 0.6rem;
+        font-size: 0.9rem;
     }
 }
 

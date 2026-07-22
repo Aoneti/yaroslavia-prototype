@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // === ГЛАВНАЯ СТРАНИЦА ===
 function initHomePage() {
     renderHomeLeaderboard();
+    setupSettingsHandlers();
 }
 
 function renderHomeLeaderboard() {
@@ -77,9 +78,12 @@ function renderHomeLeaderboard() {
 }
 
 function renderLeaderboardTable(entries) {
-    let html = `<table><thead><tr><th>#</th><th>Имя</th><th>Очки</th><th>Дата</th></tr></thead><tbody>`;
+    let html = `<table><thead><tr><th>#</th><th>Имя</th><th>Очки</th><th>Статистика</th><th>Дата</th></tr></thead><tbody>`;
     entries.forEach((entry, i) => {
-        html += `<tr><td>${i + 1}</td><td>${escapeHtml(entry.name)}</td><td><strong>${entry.score}</strong></td><td>${entry.date}</td></tr>`;
+        const stats = entry.mode === 'ГеоКвест' 
+            ? `${entry.rounds} раундов` 
+            : `${entry.rounds} мест`;
+        html += `<tr><td>${i + 1}</td><td>${escapeHtml(entry.name)}</td><td><strong>${entry.score}</strong></td><td>${stats}</td><td>${entry.date}</td></tr>`;
     });
     html += '</tbody></table>';
     return html;
@@ -101,20 +105,87 @@ function initGamePage() {
         document.getElementById('writename-settings').style.display = 'block';
     }
     
-    gameState.mode = mode;
+    window.gameState.mode = mode;
+    loadSettings();
     initMap();
     setupSettingsHandlers();
     setupGameHandlers();
+    setupSettingsCheckboxes();
+    
+    if (mode === 'writename') {
+        const endGameBtn = document.getElementById('end-game-btn-writename');
+        if (endGameBtn) {
+            endGameBtn.addEventListener('click', endGameEarly);
+        }
+    }
 }
 
-function setupSettingsHandlers() {
-    document.getElementById('start-game-btn').addEventListener('click', () => {
-        startGameFromSettings();
+function showSettingsModal() {
+    const settingsPanel = document.createElement('div');
+    settingsPanel.id = 'settings-modal';
+    settingsPanel.className = 'settings-modal';
+    settingsPanel.innerHTML = `
+        <div class="settings-modal-content">
+            <div class="settings-modal-header">
+                <h3>Настройки</h3>
+                <button class="close-settings">&times;</button>
+            </div>
+            <div class="settings-modal-body">
+                <div class="setting-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="modal-auto-zoom" ${window.gameState.settings.autoZoom ? 'checked' : ''}> Автоприближение карты
+                    </label>
+                </div>
+            </div>
+            <div class="settings-modal-footer">
+                <button id="save-settings-btn" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(settingsPanel);
+    
+    settingsPanel.style.display = 'flex';
+    
+    document.querySelector('.close-settings').addEventListener('click', () => {
+        settingsPanel.remove();
+    });
+    
+    document.getElementById('save-settings-btn').addEventListener('click', () => {
+        window.gameState.settings.autoZoom = document.getElementById('modal-auto-zoom').checked;
+        saveSettings();
+        settingsPanel.remove();
     });
 }
 
+function setupSettingsHandlers() {
+    const startBtn = document.getElementById('start-game-btn');
+    startBtn.addEventListener('click', () => {
+        updateSettingsFromUI();
+        startGameFromSettings();
+    });
+    
+    const settingsBtn = document.getElementById('settings-btn');
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', showSettingsModal);
+    }
+}
+
+function updateSettingsFromUI() {
+    const autoZoomCheckbox = document.getElementById('auto-zoom-checkbox');
+    if (autoZoomCheckbox) {
+        window.gameState.settings.autoZoom = autoZoomCheckbox.checked;
+    }
+    
+    const autoZoomWnCheckbox = document.getElementById('auto-zoom-checkbox-wn');
+    if (autoZoomWnCheckbox) {
+        window.gameState.settings.autoZoom = autoZoomWnCheckbox.checked;
+    }
+}
+
 function startGameFromSettings() {
-    const mode = gameState.mode;
+    updateSettingsFromUI();
+    
+    const mode = window.gameState.mode;
     
     document.getElementById('settings-panel').style.display = 'none';
     document.getElementById('game-area').style.display = 'flex';
@@ -128,8 +199,8 @@ function startGameFromSettings() {
         const ggMode = document.querySelector('input[name="gg-mode"]:checked').value;
         const totalRounds = parseInt(document.getElementById('total-rounds').value);
         
-        gameState.ggMode = ggMode;
-        gameState.totalRounds = totalRounds;
+        window.gameState.ggMode = ggMode;
+        window.gameState.totalRounds = totalRounds;
         
         document.getElementById('guess-panel').style.display = 'block';
         document.getElementById('side-panel').style.display = 'none';
@@ -156,4 +227,20 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+function setupSettingsCheckboxes() {
+    const ggCheckbox = document.getElementById('auto-zoom-checkbox');
+    const wnCheckbox = document.getElementById('auto-zoom-checkbox-wn');
+    
+    if (ggCheckbox) {
+        ggCheckbox.checked = window.gameState.settings.autoZoom;
+    }
+    if (wnCheckbox) {
+        wnCheckbox.checked = window.gameState.settings.autoZoom;
+    }
+}
+
+if (typeof window.gameState !== 'undefined') {
+    loadSettings();
 }

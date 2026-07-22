@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ярославия — Игра</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
@@ -15,9 +18,9 @@
         <a href="index.html" class="back-btn">← Меню</a>
         <h2 id="game-mode-title">ГеоКвест</h2>
         <div class="game-stats">
-            <span id="score-display">Очки: 0</span>
+            <span id="score-display" class="hidden">Очки: 0</span>
             <span id="timer-display" class="hidden">⏱️ 5:00</span>
-            <span id="round-display">Раунд: 1/10</span>
+            <span id="round-display" class="hidden">Раунд: 1/10</span>
         </div>
     </header>
 
@@ -47,6 +50,11 @@
                         <option value="20">20 раундов</option>
                     </select>
                 </div>
+                <div class="setting-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="auto-zoom-checkbox" checked> Автоприближение карты
+                    </label>
+                </div>
             </div>
 
             <div id="writename-settings" style="display:none;">
@@ -55,6 +63,11 @@
                     Каждое правильное название отмечается на карте. 
                     Найди как можно больше мест!
                 </p>
+                <div class="setting-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="auto-zoom-checkbox-wn" checked> Автоприближение карты
+                    </label>
+                </div>
             </div>
 
             <button id="start-game-btn" class="btn btn-primary btn-large">Начать игру</button>
@@ -77,6 +90,7 @@
                 <h4>Найденные места (<span id="found-count">0</span>):</h4>
                 <ul id="found-places"></ul>
             </div>
+            <button id="end-game-btn-writename" class="btn btn-secondary" style="margin-top: 1rem; width: 100%; margin-bottom: 0.5rem;">✖ Закончить игру</button>
         </div>
 
         <!-- Панель информации для ГеоКвеста -->
@@ -86,6 +100,14 @@
                 <p id="location-hint" class="hint"></p>
             </div>
             <button id="confirm-guess-btn" class="btn btn-primary">Подтвердить ответ</button>
+        </div>
+
+        <!-- Прогресс-бар раундов (для ГеоКвеста) -->
+        <div id="round-progress" class="round-progress" style="display:none;">
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            <div id="progress-text" class="progress-text">Раунд 1 из 10</div>
         </div>
 
         <!-- Результат раунда -->
