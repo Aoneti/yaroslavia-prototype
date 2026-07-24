@@ -320,30 +320,6 @@ body {
     color: #555;
 }
 
-.about-stats {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.stat {
-    text-align: center;
-}
-
-.stat-number {
-    display: block;
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--gold-dark);
-}
-
-.stat-label {
-    font-size: 0.85rem;
-    color: #777;
-}
-
 /* === ФУТЕР === */
 .footer {
     background: var(--dark);
@@ -786,6 +762,7 @@ body {
 /* === LEAFLET КАСТОМИЗАЦИЯ === */
 .leaflet-container {
     font-family: inherit;
+    background: #2d2d44 !important;
 }
 
 .custom-marker {
@@ -906,10 +883,6 @@ body {
         gap: 1rem;
     }
 
-    .about-stats {
-        gap: 1.5rem;
-    }
-
     .round-progress {
         top: 55px;
         width: 90%;
@@ -945,17 +918,8 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
 .fade-in {
     animation: fadeIn 0.5s ease forwards;
-}
-
-.pulse {
-    animation: pulse 2s infinite;
 }
 
 /* === ТАБЛИЦА ЛИДЕРОВ - ДВЕ КОЛОНКИ === */
@@ -979,10 +943,6 @@ body {
 }
 
 /* === ЗАТЕМНЕНИЕ ЗА ПРЕДЕЛАМИ ОБЛАСТИ === */
-.leaflet-container {
-    background: #2d2d44 !important;
-}
-
 .outside-overlay {
     fill: rgba(26, 26, 46, 0.6);
     stroke: none;

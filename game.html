@@ -7,10 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
-	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
 </head>
 <body class="game-page">
     <!-- Верхняя панель -->
@@ -19,7 +19,7 @@
         <h2 id="game-mode-title">ГеоКвест</h2>
         <div class="game-stats">
             <span id="score-display" class="hidden">Очки: 0</span>
-            <span id="timer-display" class="hidden">⏱️ 5:00</span>
+            <span id="timer-display" class="hidden" aria-label="Оставшееся время">⏱️ 5:00</span>
             <span id="round-display" class="hidden">Раунд: 1/10</span>
         </div>
     </header>
@@ -125,7 +125,7 @@
     <!-- Экран окончания игры -->
     <div id="game-over" class="game-over" style="display:none;">
         <div class="game-over-card">
-            <h2>🏆 Игра окончена!</h2>
+            <h2><span aria-hidden="true">🏆</span> Игра окончена!</h2>
             <div class="final-stats">
                 <div class="final-stat">
                     <span class="final-value" id="final-score">0</span>

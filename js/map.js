@@ -7,11 +7,31 @@ let foundMarkers = [];
 let resultLine = null;
 let outsideOverlay = null;
 let oblastOutlineLayer = null; // Добавлена переменная для контроля слоя границы
+let mapClickBound = false; // Флаг, чтобы bindMapClick()/unbindMapClick() были идемпотентны
 
-// Глобальные константы для центра и границ (резервные)
-// Используем глобальное пространство для избежания конфликтов
+// Центр карты — реальные координаты города Ярославля (единственная используемая копия)
 const YAROSLAVL_CENTER = { lat: 57.6263877, lng: 39.8933705 };
-const YAROSLAVL_BOUNDS = { south: 56.4, north: 58.9, west: 37.3, east: 41.3 };
+
+// Резервные границы на случай отсутствия/повреждения border (в норме не используются —
+// main.js уже проверяет, что window.OBLAST_BORDER содержит >= 10 точек до вызова initMap())
+const FALLBACK_BOUNDS = { south: 56.4, north: 58.9, west: 37.3, east: 41.3 };
+
+// Границы карты теперь вычисляются из реальных точек oblast-border.json,
+// а не хранятся отдельной ручной копией чисел. Раньше одни и те же константы
+// были продублированы (и рассинхронизированы) в config.js, data.js и здесь —
+// теперь единственный источник правды — сам файл границы (код-ревью §Medium/2).
+function computeBoundsFromBorder(border) {
+    if (!border || border.length === 0) return FALLBACK_BOUNDS;
+
+    let south = Infinity, north = -Infinity, west = Infinity, east = -Infinity;
+    for (const [lat, lng] of border) {
+        if (lat < south) south = lat;
+        if (lat > north) north = lat;
+        if (lng < west) west = lng;
+        if (lng > east) east = lng;
+    }
+    return { south, north, west, east };
+}
 
 function initMap() {
     // Если карта уже инициализирована, просто обновляем границы
@@ -19,6 +39,8 @@ function initMap() {
         ensureBoundaryLayers();
         return map;
     }
+
+    const extent = computeBoundsFromBorder(window.OBLAST_BORDER);
 
     map = L.map('map', {
         center: [YAROSLAVL_CENTER.lat, YAROSLAVL_CENTER.lng],
@@ -28,11 +50,11 @@ function initMap() {
         zoomControl: true
     });
 
-    const bounds = L.latLngBounds(
-        [YAROSLAVL_BOUNDS.south - 0.5, YAROSLAVL_BOUNDS.west - 0.5],
-        [YAROSLAVL_BOUNDS.north + 0.5, YAROSLAVL_BOUNDS.east + 0.5]
+    const maxBoundsLatLng = L.latLngBounds(
+        [extent.south - 0.5, extent.west - 0.5],
+        [extent.north + 0.5, extent.east + 0.5]
     );
-    map.setMaxBounds(bounds);
+    map.setMaxBounds(maxBoundsLatLng);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -51,7 +73,7 @@ function ensureBoundaryLayers() {
         console.warn('⚠️ Граница области не загружена или слишком мала');
         return;
     }
-    
+
     // Удаляем старые слои, если они есть
     if (oblastOutlineLayer) {
         map.removeLayer(oblastOutlineLayer);
@@ -61,7 +83,7 @@ function ensureBoundaryLayers() {
         map.removeLayer(outsideOverlay);
         outsideOverlay = null;
     }
-    
+
     // Пересоздаем слои
     addOblastOutline();
     addOutsideOverlay();
@@ -72,12 +94,12 @@ function addOblastOutline() {
         console.warn('⚠️ Граница области не загружена или слишком мала');
         return;
     }
-    
+
     // Удаляем старый слой, если он есть
     if (oblastOutlineLayer) {
         map.removeLayer(oblastOutlineLayer);
     }
-    
+
     oblastOutlineLayer = L.polygon(window.OBLAST_BORDER, {
         color: '#c8a415',
         weight: 2,
@@ -93,18 +115,18 @@ function addOutsideOverlay() {
         console.warn('⚠️ Граница области не загружена или слишком мала');
         return;
     }
-    
+
     if (outsideOverlay) {
         map.removeLayer(outsideOverlay);
     }
-    
+
     const outerBounds = [
         [90, -180],
         [90, 180],
         [-90, 180],
         [-90, -180]
     ];
-    
+
     outsideOverlay = L.polygon([outerBounds, window.OBLAST_BORDER], {
         color: 'transparent',
         fillColor: '#000',
@@ -157,7 +179,7 @@ function addFoundMarker(lat, lng, name) {
     const marker = L.marker([lat, lng], {
         icon: createIcon('found')
     }).addTo(map);
-    marker.bindPopup(`✅ ${name}`);
+    marker.bindPopup(`✅ ${escapeHtml(name)}`);
     foundMarkers.push(marker);
 }
 
@@ -187,10 +209,20 @@ function onMapClick(e) {
     gameState.currentGuess = { lat, lng };
 }
 
+// bindMapClick()/unbindMapClick() теперь идемпотентны через mapClickBound —
+// раньше повторный вызов bindMapClick() (например, при "Играть снова" в рамках
+// одной и той же карты) мог регистрировать обработчик клика второй раз;
+// современный Leaflet, вероятно, сам защищает от дублирования fn+context в
+// map.on(), но код не должен на это полагаться (код-ревью §Info, низкая
+// уверенность в исходной формулировке — теперь это не имеет значения).
 function bindMapClick() {
+    if (mapClickBound) return;
     map.on('click', onMapClick);
+    mapClickBound = true;
 }
 
 function unbindMapClick() {
+    if (!mapClickBound) return;
     map.off('click', onMapClick);
+    mapClickBound = false;
 }

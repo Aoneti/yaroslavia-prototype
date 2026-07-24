@@ -297,51 +297,6 @@
     "type": "village"
   },
   {
-    "id": 262625929,
-    "name": "Песочное",
-    "lat": 57.6981115,
-    "lng": 40.686095,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 262625930,
-    "name": "Василёво",
-    "lat": 57.7049592,
-    "lng": 40.6924272,
-    "hint": "",
-    "description": "",
-    "type": "village"
-  },
-  {
-    "id": 262625941,
-    "name": "Злобино",
-    "lat": 57.6797515,
-    "lng": 40.7129276,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 262625942,
-    "name": "Захарово",
-    "lat": 57.7185125,
-    "lng": 40.6693408,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 262625943,
-    "name": "Деньгино",
-    "lat": 57.725242,
-    "lng": 40.679676,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 266295209,
     "name": "Берендеево",
     "lat": 56.5991505,
@@ -1089,24 +1044,6 @@
     "type": "village"
   },
   {
-    "id": 420484068,
-    "name": "Пищалкино",
-    "lat": 57.82176,
-    "lng": 37.372,
-    "hint": "",
-    "description": "",
-    "type": "village"
-  },
-  {
-    "id": 422520385,
-    "name": "Горка",
-    "lat": 57.8444541,
-    "lng": 37.37154,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 424150567,
     "name": "Васильково",
     "lat": 58.219521,
@@ -1170,15 +1107,6 @@
     "type": "neighbourhood"
   },
   {
-    "id": 440453360,
-    "name": "Владимирово",
-    "lat": 56.5467141,
-    "lng": 38.9072568,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 440453361,
     "name": "Давыдово",
     "lat": 56.5904468,
@@ -1219,60 +1147,6 @@
     "name": "Киучер",
     "lat": 56.6048112,
     "lng": 39.2722807,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 440453371,
-    "name": "Чернецкое",
-    "lat": 56.5346352,
-    "lng": 38.9935019,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 440453372,
-    "name": "Большие Вёски",
-    "lat": 56.5428271,
-    "lng": 39.0530451,
-    "hint": "",
-    "description": "",
-    "type": "village"
-  },
-  {
-    "id": 440453373,
-    "name": "Малые Вёски",
-    "lat": 56.5298138,
-    "lng": 39.0510075,
-    "hint": "",
-    "description": "",
-    "type": "village"
-  },
-  {
-    "id": 440453383,
-    "name": "Долгополье",
-    "lat": 56.532126,
-    "lng": 39.2254334,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 440453388,
-    "name": "Спорново",
-    "lat": 56.5377491,
-    "lng": 39.2244433,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 440453390,
-    "name": "Подвязье",
-    "lat": 56.5358308,
-    "lng": 39.2133136,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -2239,24 +2113,6 @@
     "hint": "",
     "description": "",
     "type": "hamlet"
-  },
-  {
-    "id": 540728433,
-    "name": "Красное Пламя",
-    "lat": 56.5613648,
-    "lng": 38.5401719,
-    "hint": "",
-    "description": "",
-    "type": "village"
-  },
-  {
-    "id": 540728514,
-    "name": "Лунёво",
-    "lat": 56.6144232,
-    "lng": 38.4956995,
-    "hint": "",
-    "description": "",
-    "type": "village"
   },
   {
     "id": 541432863,
@@ -8379,172 +8235,10 @@
     "type": "hamlet"
   },
   {
-    "id": 619136493,
-    "name": "Дор",
-    "lat": 58.713718,
-    "lng": 38.486923,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 619136494,
-    "name": "Анисимовка",
-    "lat": 58.722198,
-    "lng": 38.474609,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 619200049,
-    "name": "Добрица",
-    "lat": 58.4044519,
-    "lng": 37.4120214,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 619202596,
-    "name": "Васильки",
-    "lat": 58.295841,
-    "lng": 37.382183,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 619202600,
-    "name": "Болонино",
-    "lat": 58.3457387,
-    "lng": 37.3605175,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 619202714,
-    "name": "Мосеевское",
-    "lat": 58.3916882,
-    "lng": 37.4135191,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 619202732,
-    "name": "Матюшкино",
-    "lat": 58.366667,
-    "lng": 37.377852,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 619202746,
-    "name": "Топорищево",
-    "lat": 58.4110837,
-    "lng": 37.4821701,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 619203292,
-    "name": "Дюдиково",
-    "lat": 58.4213117,
-    "lng": 37.5489146,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 619256730,
-    "name": "Валгус",
-    "lat": 58.1002002,
-    "lng": 37.6303021,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 619256747,
-    "name": "Эглень",
-    "lat": 58.1356266,
-    "lng": 37.5781408,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 619256766,
-    "name": "Загайно",
-    "lat": 58.0363132,
-    "lng": 37.5068985,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 626135990,
-    "name": "Боброво",
-    "lat": 57.7975173,
-    "lng": 37.4516597,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 626135995,
-    "name": "Фоминское",
-    "lat": 57.7447326,
-    "lng": 37.5497672,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 626136014,
-    "name": "Божонка",
-    "lat": 57.9140089,
-    "lng": 37.3848171,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 626136027,
-    "name": "Назимово",
-    "lat": 57.9907926,
-    "lng": 37.4119509,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 626136031,
     "name": "Павлово",
     "lat": 57.8474875,
     "lng": 37.497628,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 628729435,
-    "name": "Курган",
-    "lat": 58.726936,
-    "lng": 38.521461,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 628729440,
-    "name": "Корниговка",
-    "lat": 58.7360555,
-    "lng": 38.5157709,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -8590,42 +8284,6 @@
     "name": "Захарино",
     "lat": 58.6692221,
     "lng": 38.0226228,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 631932547,
-    "name": "Новинки",
-    "lat": 57.3524566,
-    "lng": 37.9440732,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 631932562,
-    "name": "Бабеево",
-    "lat": 57.4068151,
-    "lng": 37.8545562,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 631932566,
-    "name": "Токарево",
-    "lat": 57.4442567,
-    "lng": 37.7964017,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 631932619,
-    "name": "Пепелино",
-    "lat": 57.243153,
-    "lng": 38.1398035,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -8694,55 +8352,10 @@
     "type": "village"
   },
   {
-    "id": 639051490,
-    "name": "Каменка",
-    "lat": 58.3848652,
-    "lng": 37.5237592,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 656728814,
-    "name": "Светлый Луч",
-    "lat": 57.1845871,
-    "lng": 38.1416853,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 656728909,
-    "name": "Потаповка",
-    "lat": 57.2306932,
-    "lng": 38.1780544,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 659248076,
-    "name": "Садки",
-    "lat": 56.8565437,
-    "lng": 38.0872901,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 659248084,
     "name": "Ермово",
     "lat": 56.8632012,
     "lng": 38.1280435,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 659803453,
-    "name": "Горбачёво",
-    "lat": 58.3994306,
-    "lng": 37.4315488,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -9540,15 +9153,6 @@
     "type": "hamlet"
   },
   {
-    "id": 683800166,
-    "name": "Тюгаево",
-    "lat": 57.2304214,
-    "lng": 40.232193,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 694042883,
     "name": "Фёдоровское",
     "lat": 57.4461808,
@@ -9895,15 +9499,6 @@
     "name": "Чёрная Заводь",
     "lat": 57.7367268,
     "lng": 40.5454712,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 725055243,
-    "name": "Орлово",
-    "lat": 58.2592901,
-    "lng": 41.009288,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -10836,33 +10431,6 @@
     "type": "hamlet"
   },
   {
-    "id": 740462219,
-    "name": "Подол",
-    "lat": 56.9042621,
-    "lng": 38.1577023,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 740462261,
-    "name": "Новое",
-    "lat": 56.9524846,
-    "lng": 38.1559092,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 740495847,
-    "name": "Дидерёво",
-    "lat": 56.9687168,
-    "lng": 38.1388784,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 740690875,
     "name": "Займищи",
     "lat": 57.6826887,
@@ -11493,33 +11061,6 @@
     "type": "village"
   },
   {
-    "id": 760303463,
-    "name": "Пенье",
-    "lat": 56.7238331,
-    "lng": 39.3693039,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 760305473,
-    "name": "Маймор",
-    "lat": 56.6749475,
-    "lng": 39.3361967,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 760305688,
-    "name": "Кокорекино",
-    "lat": 56.6486527,
-    "lng": 39.3462016,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
-  },
-  {
     "id": 763079286,
     "name": "Лесная Поляна",
     "lat": 57.6886429,
@@ -11727,24 +11268,6 @@
     "type": "hamlet"
   },
   {
-    "id": 767836889,
-    "name": "Корешниково",
-    "lat": 57.5523426,
-    "lng": 40.6258698,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 767836915,
-    "name": "Котельницы",
-    "lat": 57.5667162,
-    "lng": 40.6288266,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 767836988,
     "name": "Дубенки",
     "lat": 57.6264366,
@@ -11878,15 +11401,6 @@
     "hint": "",
     "description": "",
     "type": "hamlet"
-  },
-  {
-    "id": 778529234,
-    "name": "Ярославская область",
-    "lat": 57.7781976,
-    "lng": 39.0021095,
-    "hint": "",
-    "description": "",
-    "type": "state"
   },
   {
     "id": 781590569,
@@ -12465,15 +11979,6 @@
     "type": "hamlet"
   },
   {
-    "id": 795817200,
-    "name": "Малавино",
-    "lat": 58.3320699,
-    "lng": 41.1878876,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 795817780,
     "name": "Тетерино",
     "lat": 58.3324779,
@@ -12501,15 +12006,6 @@
     "type": "locality"
   },
   {
-    "id": 796681548,
-    "name": "Сандогора",
-    "lat": 58.1902772,
-    "lng": 40.9548026,
-    "hint": "",
-    "description": "",
-    "type": "village"
-  },
-  {
     "id": 796681737,
     "name": "Алёшино",
     "lat": 58.2585532,
@@ -12528,55 +12024,10 @@
     "type": "hamlet"
   },
   {
-    "id": 797792419,
-    "name": "Поварово",
-    "lat": 56.5649989,
-    "lng": 39.1589867,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
-  },
-  {
     "id": 799856527,
     "name": "Григорово",
     "lat": 56.8793867,
     "lng": 39.4517529,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 806439268,
-    "name": "Лисавы",
-    "lat": 56.5448127,
-    "lng": 38.5323927,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 806440825,
-    "name": "Ям",
-    "lat": 56.6414744,
-    "lng": 38.4565114,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 806440826,
-    "name": "Пустынь",
-    "lat": 56.6420742,
-    "lng": 38.4751172,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 806441364,
-    "name": "Яншино",
-    "lat": 56.6465397,
-    "lng": 38.3494365,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -13761,24 +13212,6 @@
     "type": "hamlet"
   },
   {
-    "id": 818649356,
-    "name": "Анисимка",
-    "lat": 56.6290813,
-    "lng": 38.5044694,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 818649369,
-    "name": "Мостищево",
-    "lat": 56.6094652,
-    "lng": 38.5306635,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 818941683,
     "name": "Стан",
     "lat": 58.4628727,
@@ -13894,42 +13327,6 @@
     "hint": "",
     "description": "",
     "type": "locality"
-  },
-  {
-    "id": 823665352,
-    "name": "Конищево",
-    "lat": 56.5730481,
-    "lng": 38.5419872,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 823684234,
-    "name": "Сабельское",
-    "lat": 56.6067737,
-    "lng": 38.5239484,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 825455923,
-    "name": "Тепелёво",
-    "lat": 56.545841,
-    "lng": 39.1828932,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 825460484,
-    "name": "Егорьевское",
-    "lat": 56.5551989,
-    "lng": 38.8853164,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
   },
   {
     "id": 825695839,
@@ -15046,24 +14443,6 @@
     "hint": "",
     "description": "",
     "type": "hamlet"
-  },
-  {
-    "id": 829879407,
-    "name": "Исаково",
-    "lat": 56.6001023,
-    "lng": 39.352738,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 829882472,
-    "name": "Новопавловка",
-    "lat": 56.5820527,
-    "lng": 39.2995204,
-    "hint": "",
-    "description": "",
-    "type": "locality"
   },
   {
     "id": 830003167,
@@ -19242,24 +18621,6 @@
     "type": "suburb"
   },
   {
-    "id": 880394602,
-    "name": "Малиново",
-    "lat": 56.8463074,
-    "lng": 39.4644117,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 880394613,
-    "name": "Мартьяново",
-    "lat": 56.855818,
-    "lng": 39.443683,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 880469269,
     "name": "Заозерье",
     "lat": 56.8215844,
@@ -19660,15 +19021,6 @@
     "name": "Рудниково",
     "lat": 58.0811734,
     "lng": 40.7668408,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 913057078,
-    "name": "Бугры",
-    "lat": 58.0587472,
-    "lng": 40.8021219,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -20830,24 +20182,6 @@
     "name": "Попово",
     "lat": 58.2528388,
     "lng": 40.9684815,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 929998640,
-    "name": "Гагарино",
-    "lat": 58.4837822,
-    "lng": 41.0932606,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 929999183,
-    "name": "Казариново",
-    "lat": 58.3932721,
-    "lng": 41.1784646,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -23530,15 +22864,6 @@
     "name": "Алексеевка",
     "lat": 58.374994,
     "lng": 40.9650335,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 984352124,
-    "name": "Лобановка",
-    "lat": 58.3461641,
-    "lng": 41.1970711,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -26739,15 +26064,6 @@
     "type": "hamlet"
   },
   {
-    "id": 1207802900,
-    "name": "Аркатово",
-    "lat": 58.558754,
-    "lng": 40.503021,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 1207803174,
     "name": "Слобода",
     "lat": 58.5151991,
@@ -26779,42 +26095,6 @@
     "name": "Михалёво",
     "lat": 58.2023896,
     "lng": 39.9158543,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1212641661,
-    "name": "Пустынь",
-    "lat": 58.1026677,
-    "lng": 40.9126146,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1212671100,
-    "name": "Молчаново",
-    "lat": 58.1864752,
-    "lng": 40.9299084,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1212671106,
-    "name": "Колесово",
-    "lat": 58.2000281,
-    "lng": 40.9709205,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1212681691,
-    "name": "Колгора",
-    "lat": 58.1404838,
-    "lng": 40.8960469,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -28107,24 +27387,6 @@
     "type": "hamlet"
   },
   {
-    "id": 1260584759,
-    "name": "Малое Ворсино",
-    "lat": 58.832943,
-    "lng": 38.990353,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1260584835,
-    "name": "Большое Ворсино",
-    "lat": 58.839142,
-    "lng": 38.981693,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 1260659959,
     "name": "Макарово",
     "lat": 58.3275523,
@@ -28413,105 +27675,6 @@
     "type": "locality"
   },
   {
-    "id": 1265936130,
-    "name": "Куклино",
-    "lat": 57.9802276,
-    "lng": 37.3369246,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1265936142,
-    "name": "Сергеевское",
-    "lat": 57.938628,
-    "lng": 37.3963586,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1265936178,
-    "name": "Турчаниново",
-    "lat": 57.9300879,
-    "lng": 37.3686028,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1265936207,
-    "name": "Макаровское",
-    "lat": 57.9215992,
-    "lng": 37.3972373,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1265936262,
-    "name": "Романцево",
-    "lat": 57.9224395,
-    "lng": 37.3656597,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1265936268,
-    "name": "Горка",
-    "lat": 57.9279796,
-    "lng": 37.3950113,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1269750887,
-    "name": "Аксёново",
-    "lat": 58.963245,
-    "lng": 39.105808,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1270239315,
-    "name": "Дуброво",
-    "lat": 57.8678655,
-    "lng": 37.41059,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1270239329,
-    "name": "Щепни",
-    "lat": 57.8314526,
-    "lng": 37.3636925,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1270239353,
-    "name": "Новоселье",
-    "lat": 57.8569298,
-    "lng": 37.342806,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1270239393,
-    "name": "Полуево",
-    "lat": 57.8005336,
-    "lng": 37.4389382,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 1270814390,
     "name": "Котово",
     "lat": 57.4873294,
@@ -28773,42 +27936,6 @@
     "type": "locality"
   },
   {
-    "id": 1274436434,
-    "name": "Поповское",
-    "lat": 58.3509503,
-    "lng": 37.3602765,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1274436587,
-    "name": "Будакино",
-    "lat": 58.0491405,
-    "lng": 37.4971632,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1274436657,
-    "name": "Головково",
-    "lat": 58.0529434,
-    "lng": 37.51954,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1274436662,
-    "name": "Потешкино",
-    "lat": 58.2980535,
-    "lng": 37.4025931,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 1278968605,
     "name": "Патрюшино",
     "lat": 58.1566894,
@@ -28867,69 +27994,6 @@
     "name": "Володино",
     "lat": 57.8345713,
     "lng": 38.5120727,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1282799970,
-    "name": "Головково",
-    "lat": 58.3619111,
-    "lng": 37.3773553,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1282799977,
-    "name": "Новое",
-    "lat": 58.4022508,
-    "lng": 37.5354769,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1282799981,
-    "name": "Сычёво",
-    "lat": 58.4008327,
-    "lng": 37.4407684,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1282799993,
-    "name": "Игнатково",
-    "lat": 58.3541467,
-    "lng": 37.3734648,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1282800016,
-    "name": "Талашманка",
-    "lat": 58.3850567,
-    "lng": 37.4069449,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1282800028,
-    "name": "Коверниково",
-    "lat": 58.4123741,
-    "lng": 37.5561625,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1282800040,
-    "name": "Огнишино",
-    "lat": 58.4261794,
-    "lng": 37.5713762,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -29407,24 +28471,6 @@
     "name": "Потанино",
     "lat": 56.646216,
     "lng": 38.8197602,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1293832221,
-    "name": "Запрудье",
-    "lat": 57.8379782,
-    "lng": 37.3627746,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1293832222,
-    "name": "Пищалкино",
-    "lat": 57.818,
-    "lng": 37.3746,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -31927,15 +30973,6 @@
     "name": "Осташево",
     "lat": 57.816868,
     "lng": 39.328899,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1323770029,
-    "name": "Лазарцево",
-    "lat": 56.8986478,
-    "lng": 39.4759476,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -35352,91 +34389,10 @@
     "type": "hamlet"
   },
   {
-    "id": 1368676722,
-    "name": "Висляково",
-    "lat": 58.556213,
-    "lng": 40.22665,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1368676741,
-    "name": "Неверово",
-    "lat": 58.6895052,
-    "lng": 40.0547318,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1368676744,
-    "name": "Никольское",
-    "lat": 58.6633319,
-    "lng": 40.0717623,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 1368676747,
-    "name": "Образцово",
-    "lat": 58.565762,
-    "lng": 40.5218164,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
-  },
-  {
-    "id": 1368676752,
-    "name": "Полянка",
-    "lat": 58.5658733,
-    "lng": 40.2388905,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 1368676755,
     "name": "Скалино",
     "lat": 58.541042,
     "lng": 40.214039,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1368676759,
-    "name": "Темниково",
-    "lat": 58.695461,
-    "lng": 40.050602,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1368676765,
-    "name": "Чистопьяново",
-    "lat": 58.549694,
-    "lng": 40.508858,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1368926668,
-    "name": "Кокарево",
-    "lat": 58.7586719,
-    "lng": 40.0141427,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1368926764,
-    "name": "Скураково",
-    "lat": 58.7884696,
-    "lng": 39.865602,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -36283,24 +35239,6 @@
     "name": "Колотово",
     "lat": 58.5969998,
     "lng": 39.2908909,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1378898616,
-    "name": "Леушкино",
-    "lat": 58.912991,
-    "lng": 39.372028,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
-  },
-  {
-    "id": 1378898634,
-    "name": "Нелидово",
-    "lat": 58.889938,
-    "lng": 39.378086,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -43623,15 +42561,6 @@
     "type": "hamlet"
   },
   {
-    "id": 1520900580,
-    "name": "Бережки",
-    "lat": 57.5438429,
-    "lng": 37.8249333,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 1523006927,
     "name": "Власово",
     "lat": 57.9368624,
@@ -44946,42 +43875,6 @@
     "type": "neighbourhood"
   },
   {
-    "id": 1586158143,
-    "name": "Капцево",
-    "lat": 57.1328194,
-    "lng": 39.8627761,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1586158176,
-    "name": "Лысцево",
-    "lat": 57.1272008,
-    "lng": 39.8606908,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1586158208,
-    "name": "Мартюково",
-    "lat": 57.1447099,
-    "lng": 39.8670703,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1586158273,
-    "name": "Рышнево",
-    "lat": 57.0933856,
-    "lng": 39.8668457,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 1587994232,
     "name": "Сажевик",
     "lat": 57.6044693,
@@ -45054,51 +43947,6 @@
     "type": "hamlet"
   },
   {
-    "id": 1597773083,
-    "name": "Бабанино",
-    "lat": 57.0032785,
-    "lng": 39.5622268,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 1598092176,
-    "name": "Демнево",
-    "lat": 56.8677614,
-    "lng": 39.4920686,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
-  },
-  {
-    "id": 1598092204,
-    "name": "Крестопоклонная",
-    "lat": 56.9327287,
-    "lng": 39.5152596,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1598984287,
-    "name": "Волосцево",
-    "lat": 56.9072716,
-    "lng": 39.4589149,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 1599535837,
-    "name": "Малое Чурилово",
-    "lat": 57.0127236,
-    "lng": 39.5324464,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
     "id": 1599535865,
     "name": "Чашницы",
     "lat": 57.0831997,
@@ -45148,24 +43996,6 @@
     "name": "Мишаки",
     "lat": 57.9707162,
     "lng": 39.4258131,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1608163820,
-    "name": "Белавино",
-    "lat": 57.571795,
-    "lng": 40.524075,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1608163829,
-    "name": "Макарово",
-    "lat": 57.5757547,
-    "lng": 40.534369,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -49518,24 +48348,6 @@
     "type": "hamlet"
   },
   {
-    "id": 1631903141,
-    "name": "Введенское",
-    "lat": 57.2563637,
-    "lng": 40.2004984,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 1631903142,
-    "name": "Голохово",
-    "lat": 57.2222943,
-    "lng": 40.221646,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 1631903144,
     "name": "Иваки",
     "lat": 57.254392,
@@ -49543,42 +48355,6 @@
     "hint": "",
     "description": "",
     "type": "locality"
-  },
-  {
-    "id": 1631903146,
-    "name": "Кривцево",
-    "lat": 57.2676698,
-    "lng": 40.2829981,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 1631903149,
-    "name": "Окулово",
-    "lat": 57.2592819,
-    "lng": 40.2416656,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1631903150,
-    "name": "Петровское",
-    "lat": 57.2127508,
-    "lng": 40.2130415,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1631903153,
-    "name": "Таганово",
-    "lat": 57.25327,
-    "lng": 40.3787073,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
   },
   {
     "id": 1632154273,
@@ -50526,15 +49302,6 @@
     "type": "hamlet"
   },
   {
-    "id": 1634476440,
-    "name": "Толстиково",
-    "lat": 57.2295681,
-    "lng": 40.1989794,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
-  },
-  {
     "id": 1642742978,
     "name": "Богородское",
     "lat": 58.1382477,
@@ -50688,28 +49455,10 @@
     "type": "locality"
   },
   {
-    "id": 1647011683,
-    "name": "Подозерье",
-    "lat": 57.2650266,
-    "lng": 40.2465636,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
     "id": 1647022292,
     "name": "Блехково",
     "lat": 57.2830586,
     "lng": 40.2390817,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 1647022297,
-    "name": "Колобов Хутор",
-    "lat": 57.2840541,
-    "lng": 40.4227933,
     "hint": "",
     "description": "",
     "type": "locality"
@@ -51264,60 +50013,6 @@
     "type": "hamlet"
   },
   {
-    "id": 1782382857,
-    "name": "Берёзовка",
-    "lat": 57.3860786,
-    "lng": 40.4305455,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1782382859,
-    "name": "Лепилово",
-    "lat": 57.3918007,
-    "lng": 40.4171488,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1782382860,
-    "name": "Миснево",
-    "lat": 57.3839881,
-    "lng": 40.4604406,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1792239603,
-    "name": "Выголово",
-    "lat": 57.4516392,
-    "lng": 40.4519117,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1793570765,
-    "name": "Соколиха",
-    "lat": 57.4823793,
-    "lng": 40.4411959,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 1793578386,
-    "name": "Крутая Гора",
-    "lat": 57.4596414,
-    "lng": 40.4370644,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 1802085066,
     "name": "Клещин",
     "lat": 56.7764926,
@@ -51750,33 +50445,6 @@
     "type": "locality"
   },
   {
-    "id": 2024236212,
-    "name": "Алёшково",
-    "lat": 58.365587,
-    "lng": 41.201447,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
-  },
-  {
-    "id": 2024236213,
-    "name": "Высоково",
-    "lat": 58.3603548,
-    "lng": 41.1898371,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 2024236216,
-    "name": "Соколово",
-    "lat": 58.358536,
-    "lng": 41.198439,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 2032971423,
     "name": "Середа",
     "lat": 58.0014312,
@@ -51894,42 +50562,6 @@
     "type": "locality"
   },
   {
-    "id": 2163993402,
-    "name": "Родионцево",
-    "lat": 56.9897321,
-    "lng": 38.1855655,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2164674726,
-    "name": "Сажино",
-    "lat": 57.106595,
-    "lng": 38.221372,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2164694154,
-    "name": "Збуйнево",
-    "lat": 57.0969922,
-    "lng": 38.2413711,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2164694161,
-    "name": "Ознобиха",
-    "lat": 57.1083303,
-    "lng": 38.2409389,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 2166432685,
     "name": "Капустино",
     "lat": 58.2553831,
@@ -51991,15 +50623,6 @@
     "hint": "",
     "description": "",
     "type": "suburb"
-  },
-  {
-    "id": 2229612112,
-    "name": "Пашня",
-    "lat": 57.2419562,
-    "lng": 38.1690539,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
   },
   {
     "id": 2232543709,
@@ -52254,24 +50877,6 @@
     "type": "locality"
   },
   {
-    "id": 2447167300,
-    "name": "Заозерье",
-    "lat": 58.2386516,
-    "lng": 40.9880937,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2447167303,
-    "name": "Починок-Чапков",
-    "lat": 58.221604,
-    "lng": 40.979243,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 2451381360,
     "name": "Шенское",
     "lat": 58.524681,
@@ -52452,15 +51057,6 @@
     "type": "locality"
   },
   {
-    "id": 2482858715,
-    "name": "Скатерка",
-    "lat": 57.3408711,
-    "lng": 37.986153,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 2486004450,
     "name": "СНТ \"Рябинушка-2\"",
     "lat": 57.5968344,
@@ -52519,24 +51115,6 @@
     "name": "Закоторосье",
     "lat": 57.6180764,
     "lng": 39.3324175,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 2489274528,
-    "name": "Вахромеево",
-    "lat": 57.4598164,
-    "lng": 37.8001685,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
-  },
-  {
-    "id": 2489274531,
-    "name": "Савашкино",
-    "lat": 57.46867,
-    "lng": 37.8087664,
     "hint": "",
     "description": "",
     "type": "locality"
@@ -52639,42 +51217,6 @@
     "hint": "",
     "description": "",
     "type": "suburb"
-  },
-  {
-    "id": 2542007374,
-    "name": "Вороново",
-    "lat": 57.4114874,
-    "lng": 37.8560959,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
-  },
-  {
-    "id": 2554727568,
-    "name": "Васенево",
-    "lat": 57.5474871,
-    "lng": 37.8140421,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2554727604,
-    "name": "Марково",
-    "lat": 57.5681782,
-    "lng": 37.8169744,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2554727613,
-    "name": "Митрохино",
-    "lat": 57.5784502,
-    "lng": 37.8184516,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
   },
   {
     "id": 2556043916,
@@ -54072,42 +52614,6 @@
     "type": "hamlet"
   },
   {
-    "id": 2722612647,
-    "name": "Акулово",
-    "lat": 56.8160998,
-    "lng": 38.1445205,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2722612650,
-    "name": "Белоглазово",
-    "lat": 56.8401714,
-    "lng": 38.1131639,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2722612654,
-    "name": "Ворынино",
-    "lat": 56.8517699,
-    "lng": 38.0842733,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2722612682,
-    "name": "Старово",
-    "lat": 56.814816,
-    "lng": 38.166897,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 2726379635,
     "name": "Беляевское",
     "lat": 58.6779873,
@@ -54238,15 +52744,6 @@
     "name": "Хлестово",
     "lat": 58.627171,
     "lng": 39.8133294,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2727206075,
-    "name": "Деревеньки",
-    "lat": 56.8489448,
-    "lng": 38.1261933,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -54567,42 +53064,6 @@
     "type": "hamlet"
   },
   {
-    "id": 2740418409,
-    "name": "Большая Петровка",
-    "lat": 57.6171211,
-    "lng": 37.7297431,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2740418486,
-    "name": "Плосково",
-    "lat": 57.6280739,
-    "lng": 37.6980334,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2740418492,
-    "name": "Полузьево",
-    "lat": 57.6548914,
-    "lng": 37.6505684,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2740418528,
-    "name": "Чулково",
-    "lat": 57.6247919,
-    "lng": 37.7104912,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
     "id": 2742465418,
     "name": "Ваулово",
     "lat": 57.929237,
@@ -54864,87 +53325,6 @@
     "type": "locality"
   },
   {
-    "id": 2758460325,
-    "name": "Андрианово",
-    "lat": 57.3496334,
-    "lng": 38.2682585,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 2758460327,
-    "name": "Большое Льгово",
-    "lat": 57.2421788,
-    "lng": 38.218591,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
-  },
-  {
-    "id": 2758460329,
-    "name": "Большое Сидорово",
-    "lat": 57.3405762,
-    "lng": 38.2805637,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2758460330,
-    "name": "Брыкино",
-    "lat": 57.3242062,
-    "lng": 38.1186204,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2758460337,
-    "name": "Кулишки",
-    "lat": 57.3240597,
-    "lng": 38.099664,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2758460339,
-    "name": "Кутузово",
-    "lat": 57.2288072,
-    "lng": 38.1403647,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 2758460345,
-    "name": "Малое Льгово",
-    "lat": 57.243586,
-    "lng": 38.214446,
-    "hint": "",
-    "description": "",
-    "type": "isolated_dwelling"
-  },
-  {
-    "id": 2758460346,
-    "name": "Малое Сидорово",
-    "lat": 57.3428462,
-    "lng": 38.2770172,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 2758460348,
-    "name": "Раменье",
-    "lat": 57.2684577,
-    "lng": 38.3013952,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 2758831944,
     "name": "Выползово",
     "lat": 57.0905592,
@@ -55080,24 +53460,6 @@
     "type": "hamlet"
   },
   {
-    "id": 2776827824,
-    "name": "Ногино",
-    "lat": 57.0649033,
-    "lng": 38.2460674,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2776827830,
-    "name": "Павлово",
-    "lat": 57.0705174,
-    "lng": 38.2381355,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 2779477257,
     "name": "Ботово",
     "lat": 57.6667009,
@@ -55197,24 +53559,6 @@
     "type": "hamlet"
   },
   {
-    "id": 2781112785,
-    "name": "Лыткино",
-    "lat": 57.3614924,
-    "lng": 38.2729885,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 2781112793,
-    "name": "Селищи",
-    "lat": 56.9409878,
-    "lng": 38.1873841,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
     "id": 2781379794,
     "name": "Автополигон ДОСААФ",
     "lat": 57.5653041,
@@ -55228,15 +53572,6 @@
     "name": "Муравьёво",
     "lat": 57.7992576,
     "lng": 39.1980332,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2789870274,
-    "name": "Трояки",
-    "lat": 57.8028439,
-    "lng": 37.4263074,
     "hint": "",
     "description": "",
     "type": "hamlet"
@@ -55917,15 +54252,6 @@
     "type": "neighbourhood"
   },
   {
-    "id": 2877171412,
-    "name": "Верхний остров",
-    "lat": 57.7368277,
-    "lng": 39.7838905,
-    "hint": "",
-    "description": "",
-    "type": "island"
-  },
-  {
     "id": 2877301408,
     "name": "Мирный микрорайон",
     "lat": 57.5382274,
@@ -56176,42 +54502,6 @@
     "hint": "",
     "description": "",
     "type": "locality"
-  },
-  {
-    "id": 2991188490,
-    "name": "Пасынково",
-    "lat": 57.84499,
-    "lng": 40.652893,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2994541846,
-    "name": "Уварово",
-    "lat": 57.7666978,
-    "lng": 40.6456433,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2994541847,
-    "name": "Филино",
-    "lat": 57.7653933,
-    "lng": 40.6627658,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
-  },
-  {
-    "id": 2994541848,
-    "name": "Филино",
-    "lat": 57.7718283,
-    "lng": 40.6592828,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
   },
   {
     "id": 3006022859,
@@ -61749,15 +60039,6 @@
     "type": "hamlet"
   },
   {
-    "id": 4488652239,
-    "name": "заброшенная ферма (пилорама)",
-    "lat": 56.9719676,
-    "lng": 38.230595,
-    "hint": "",
-    "description": "",
-    "type": "farm"
-  },
-  {
     "id": 4497839337,
     "name": "ДОЛ им М Горького",
     "lat": 57.5181227,
@@ -62080,15 +60361,6 @@
     "hint": "",
     "description": "",
     "type": "allotments"
-  },
-  {
-    "id": 7575428487,
-    "name": "Погост Крест",
-    "lat": 56.9387296,
-    "lng": 39.5215344,
-    "hint": "",
-    "description": "",
-    "type": "hamlet"
   },
   {
     "id": 7595706384,
@@ -62649,15 +60921,6 @@
     "type": "locality"
   },
   {
-    "id": 9796980298,
-    "name": "Новосёлка",
-    "lat": 56.5571649,
-    "lng": 39.107285,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
     "id": 9864985064,
     "name": "Бужениново",
     "lat": 58.4045111,
@@ -62869,24 +61132,6 @@
     "name": "Погорелка",
     "lat": 58.3396272,
     "lng": 40.1772111,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 11007967397,
-    "name": "Советская площадь",
-    "lat": 57.0131818,
-    "lng": 39.2631078,
-    "hint": "",
-    "description": "",
-    "type": "square"
-  },
-  {
-    "id": 11038016557,
-    "name": "болото Комарово",
-    "lat": 58.1569389,
-    "lng": 37.5152206,
     "hint": "",
     "description": "",
     "type": "locality"
@@ -63508,15 +61753,6 @@
     "name": "Степанцево",
     "lat": 57.7818389,
     "lng": 39.8496974,
-    "hint": "",
-    "description": "",
-    "type": "locality"
-  },
-  {
-    "id": 14019561349,
-    "name": "Ишмик",
-    "lat": 58.7886212,
-    "lng": 38.7074518,
     "hint": "",
     "description": "",
     "type": "locality"
