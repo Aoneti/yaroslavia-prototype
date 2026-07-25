@@ -13,6 +13,12 @@
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
 </head>
 <body class="game-page">
+    <!-- Индикатор загрузки данных игры (скрывается из main.js после успешной инициализации) -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>Загружаем карту Ярославской области…</p>
+    </div>
+
     <!-- Верхняя панель -->
     <header class="game-header">
         <a href="index.html" class="back-btn">← Меню</a>
@@ -99,7 +105,7 @@
                 <h3 id="location-name">Загрузка...</h3>
                 <p id="location-hint" class="hint"></p>
             </div>
-            <button id="confirm-guess-btn" class="btn btn-primary">Подтвердить ответ</button>
+            <button id="confirm-guess-btn" class="btn btn-primary" disabled>Подтвердить ответ</button>
         </div>
 
         <!-- Прогресс-бар раундов (для ГеоКвеста) -->
