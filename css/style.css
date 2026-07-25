@@ -1,4 +1,4 @@
-/* === БАЗОВЫЕ СТИЛИ === */
+/* === СБРОС И ОСНОВА === */
 * {
     margin: 0;
     padding: 0;
@@ -23,48 +23,72 @@
     --radius: 12px;
     --radius-sm: 8px;
     --transition: all 0.3s ease;
+    --transition-fast: all 0.15s ease;
+    --transition-move: transform 0.2s ease, box-shadow 0.2s ease;
+
+    /* Шкала типографики — 6 фиксированных шагов + один адаптивный (хиро),
+       вместо 15+ почти неразличимых размеров (код-ревью §High/7) */
+    --text-xs: 0.75rem;    /* 12px — вспомогательные подписи */
+    --text-sm: 0.875rem;   /* 14px — второстепенный текст, подсказки */
+    --text-base: 1rem;     /* 16px — основной текст, стандартные кнопки */
+    --text-lg: 1.125rem;   /* 18px — подзаголовки, названия карточек */
+    --text-xl: 1.375rem;   /* 22px — заголовки блоков и модалок */
+    --text-2xl: 2rem;      /* 32px — крупные заголовки секций и цифры */
+    --text-hero: clamp(2.25rem, 8vw, 4.5rem);
 }
 
 body {
-    font-family: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background: var(--cream);
     color: var(--dark);
     line-height: 1.6;
-    min-height: 100vh;
 }
 
-.title, .game-header h2, .mode-header h3, .settings-card h3 {
+h1, h2, h3 {
     font-family: 'Playfair Display', serif;
 }
 
-/* === ГЛАВНАЯ СТРАНИЦА === */
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* Уважаем системную настройку "меньше движения" — раньше не учитывалась
+   нигде (код-ревью §Low/20) */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Единый, но не навязчивый стиль фокуса с клавиатуры для ВСЕХ фокусируемых
+   элементов — раньше фокус был явно скрыт (outline:none) на select/input
+   без какой-либо замены, и вовсе не определён на кнопках (код-ревью
+   §Critical/2). :focus-visible показывает индикатор только при навигации
+   с клавиатуры, не мешая обычным кликам мышью. */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* === HERO / ГЛАВНЫЙ ЭКРАН === */
 .hero {
-    position: relative;
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 50%, #3d2c5e 100%);
-    overflow: hidden;
-}
-
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: 
-        radial-gradient(circle at 20% 50%, rgba(200, 164, 21, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(178, 34, 34, 0.08) 0%, transparent 50%);
-}
-
-.hero-content {
-    position: relative;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    color: var(--cream);
     text-align: center;
-    padding: 2rem;
-    z-index: 1;
-}
-
-.logo-container {
-    margin-bottom: 1rem;
+    padding: 4rem 1.5rem 5rem;
 }
 
 .logo {
@@ -74,7 +98,7 @@ body {
 }
 
 .title {
-    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-size: var(--text-hero);
     font-weight: 900;
     color: var(--gold);
     text-shadow: 0 2px 10px rgba(200, 164, 21, 0.3);
@@ -83,7 +107,7 @@ body {
 }
 
 .subtitle {
-    font-size: clamp(1rem, 3vw, 1.4rem);
+    font-size: clamp(var(--text-base), 3vw, var(--text-xl));
     color: var(--cream);
     opacity: 0.9;
     margin-bottom: 1rem;
@@ -94,54 +118,61 @@ body {
     margin: 0 auto;
     color: var(--cream-dark);
     opacity: 0.8;
-    font-size: 1rem;
+    font-size: var(--text-base);
 }
 
 /* === ОСНОВНОЙ КОНТЕНТ === */
-.main-content {
-    max-width: 1200px;
+main {
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 0 1.5rem;
 }
 
-/* === ФИЧИ === */
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+    margin-top: -3rem;
     margin-bottom: 3rem;
 }
 
 .feature-card {
     background: var(--white);
     border-radius: var(--radius);
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
     text-align: center;
     box-shadow: var(--shadow);
-    transition: var(--transition);
-    border: 1px solid rgba(200, 164, 21, 0.1);
+    transition: var(--transition-move);
 }
 
 .feature-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--gold);
 }
 
+/* Иконки теперь в едином круглом контейнере вместо голых эмодзи,
+   разбросанных по карточкам (код-ревью §Polish) */
 .feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 0.75rem;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    background: var(--cream-dark);
+    border-radius: 50%;
 }
 
 .feature-card h3 {
-    color: var(--dark);
+    font-size: var(--text-lg);
     margin-bottom: 0.5rem;
-    font-size: 1.1rem;
+    color: var(--dark);
 }
 
 .feature-card p {
+    font-size: var(--text-sm);
     color: #666;
-    font-size: 0.9rem;
 }
 
 /* === РЕЖИМЫ ИГРЫ === */
@@ -152,11 +183,10 @@ body {
 .game-modes h2,
 .leaderboard-preview h2,
 .about h2 {
+    font-size: var(--text-2xl);
     text-align: center;
-    font-size: 2rem;
+    margin-bottom: 0.5rem;
     color: var(--dark);
-    margin-bottom: 1.5rem;
-    position: relative;
 }
 
 .game-modes h2::after,
@@ -167,14 +197,14 @@ body {
     width: 60px;
     height: 3px;
     background: var(--gold);
-    margin: 0.5rem auto 0;
-    border-radius: 2px;
+    margin: 0.75rem auto 2rem;
+    border-radius: var(--radius-sm);
 }
 
 .modes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
 }
 
 .mode-card {
@@ -183,11 +213,12 @@ body {
     padding: 2rem;
     box-shadow: var(--shadow);
     border: 2px solid transparent;
-    transition: var(--transition);
+    transition: var(--transition-move);
 }
 
 .mode-card:hover {
     border-color: var(--gold);
+    box-shadow: var(--shadow-lg);
 }
 
 .mode-header {
@@ -197,19 +228,29 @@ body {
     margin-bottom: 1rem;
 }
 
+/* Иконка режима — тоже в едином круглом контейнере (тот же принцип,
+   что и feature-icon), а не самостоятельный эмодзи произвольного размера */
 .mode-icon {
-    font-size: 2rem;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    background: var(--cream-dark);
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
 .mode-header h3 {
-    font-size: 1.4rem;
+    font-size: var(--text-xl);
     color: var(--dark);
 }
 
 .mode-desc {
     color: #555;
     margin-bottom: 1rem;
-    font-size: 0.95rem;
+    font-size: var(--text-sm);
 }
 
 .mode-features {
@@ -218,9 +259,9 @@ body {
 }
 
 .mode-features li {
-    padding: 0.3rem 0;
-    font-size: 0.9rem;
-    color: #444;
+    font-size: var(--text-sm);
+    color: #666;
+    margin-bottom: 0.4rem;
 }
 
 /* === КНОПКИ === */
@@ -228,51 +269,101 @@ body {
     display: inline-block;
     padding: 0.75rem 1.5rem;
     border-radius: var(--radius-sm);
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    text-align: center;
-    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: var(--text-base);
     border: none;
-    transition: var(--transition);
+    cursor: pointer;
+    transition: var(--transition-move);
+    text-align: center;
 }
 
+/* Раньше: белый текст на градиенте от светлого к тёмному золоту — светлый
+   край проваливал контраст (2.39:1 против нужных 4.5:1). Теперь заливка
+   держится в светлой части палитры (gold-light -> gold), а текст —
+   тёмно-синий (уже часть системы цветов), что даёт 7.1–11.9:1 на обоих
+   концах градиента вместо провала посередине (код-ревью §Critical/1). */
 .btn-primary {
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-    color: var(--white);
-    box-shadow: 0 2px 10px rgba(200, 164, 21, 0.3);
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+    color: var(--dark);
+    box-shadow: 0 4px 14px rgba(200, 164, 21, 0.35);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(200, 164, 21, 0.4);
+    box-shadow: 0 6px 20px rgba(200, 164, 21, 0.5);
+}
+
+/* Явный отклик на нажатие — раньше ни у одной кнопки в интерфейсе не было
+   :active-состояния (код-ревью §High/5) */
+.btn-primary:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 8px rgba(200, 164, 21, 0.35);
 }
 
 .btn-secondary {
     background: var(--dark-light);
     color: var(--white);
+    box-shadow: var(--shadow);
 }
 
 .btn-secondary:hover {
     background: var(--dark);
+    transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+    transform: translateY(0) scale(0.98);
 }
 
 .btn-large {
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    font-size: var(--text-lg);
     width: 100%;
 }
 
-/* === ТАБЛИЦА ЛИДЕРОВ === */
+/* Явное disabled-состояние — раньше кнопка "Подтвердить ответ" выглядела
+   одинаково активной и до, и после того как поставлена метка на карте,
+   хотя клик по ней до этого молча ничего не делал (код-ревью §High/3).
+   Теперь кнопка реально блокируется атрибутом disabled (см. game-logic.js)
+   и выглядит соответственно. */
+.btn:disabled,
+.btn[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none !important;
+}
+
+.btn-primary:disabled:hover,
+.btn-primary[disabled]:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* === ТАБЛИЦА ЛИДЕРОВ (превью на главной) === */
 .leaderboard-preview {
     margin-bottom: 3rem;
+}
+
+.leaderboards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.leaderboard-column h3 {
+    font-size: var(--text-lg);
+    margin-bottom: 0.75rem;
+    color: var(--gold-dark);
 }
 
 .leaderboard-table {
     background: var(--white);
     border-radius: var(--radius);
-    padding: 1.5rem;
+    padding: 1rem;
     box-shadow: var(--shadow);
+    min-height: 100px;
 }
 
 .leaderboard-table table {
@@ -282,30 +373,61 @@ body {
 
 .leaderboard-table th,
 .leaderboard-table td {
-    padding: 0.75rem 1rem;
     text-align: left;
-    border-bottom: 1px solid #eee;
+    padding: 0.5rem;
+    font-size: var(--text-sm);
+    border-bottom: 1px solid var(--cream-dark);
 }
 
 .leaderboard-table th {
-    background: var(--cream-dark);
+    color: #888;
     font-weight: 600;
-    color: var(--dark);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
 }
 
-.leaderboard-table tr:last-child td {
-    border-bottom: none;
-}
-
+/* Пустое состояние теперь не голая серая строка, а маленький осмысленный
+   экран-приглашение — раньше это была одна нейтральная фраза без всякой
+   визуальной подачи (код-ревью §Medium/9). См. main.js. */
 .empty-leaderboard {
     text-align: center;
     color: #999;
-    padding: 2rem;
+    font-style: italic;
+    padding: 1.5rem 0;
+}
+
+.empty-leaderboard-state {
+    text-align: center;
+    padding: 1.5rem 1rem;
+}
+
+.empty-leaderboard-icon {
+    display: block;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.empty-leaderboard-title {
+    color: #888;
+    font-style: italic;
+    margin-bottom: 0.25rem;
+}
+
+.empty-leaderboard-sub {
+    font-size: var(--text-xs);
+    color: var(--gold-dark);
+    font-weight: 600;
+}
+
+/* === КНОПКА НАСТРОЕК (в подвале, рядом с копирайтом) === */
+.settings-link-row {
+    text-align: center;
+    margin: 2.5rem 0;
 }
 
 /* === О ПРОЕКТЕ === */
 .about {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 .about-content {
@@ -323,42 +445,69 @@ body {
 /* === ФУТЕР === */
 .footer {
     background: var(--dark);
-    color: var(--cream);
+    color: var(--cream-dark);
     text-align: center;
     padding: 1.5rem;
-    font-size: 0.85rem;
-    opacity: 0.9;
-}
-
-.footer p {
-    margin-bottom: 0.3rem;
-}
-
-/* === СТРАНИЦА ИГРЫ === */
-.game-page {
-    height: 100vh;
+    font-size: var(--text-sm);
+    opacity: 0.7;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.footer .settings-btn {
+    opacity: 0.85;
+}
+
+/* === НАСТРОЙКИ (кнопка) === */
+.settings-btn {
+    background: var(--dark-light);
+    color: var(--cream);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.settings-btn:hover {
+    background: var(--dark);
+    border-color: var(--gold);
+}
+
+.settings-btn:active {
+    transform: scale(0.97);
+}
+
+/* === ИГРОВОЙ ЭКРАН: ШАПКА === */
+.game-page {
+    background: var(--dark);
+    min-height: 100vh;
 }
 
 .game-header {
     background: var(--dark);
-    color: var(--white);
-    padding: 0.75rem 1rem;
+    padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0.5rem;
     z-index: 1000;
+    position: relative;
 }
 
 .back-btn {
     color: var(--gold);
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
+    padding: 0.25rem 0.4rem;
+    border-radius: var(--radius-sm);
 }
 
 .back-btn:hover {
@@ -366,93 +515,106 @@ body {
 }
 
 .game-header h2 {
-    font-size: 1.2rem;
+    font-size: var(--text-lg);
     color: var(--gold);
 }
 
 .game-stats {
     display: flex;
     gap: 1rem;
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     flex-wrap: wrap;
 }
 
 .game-stats span {
-    background: rgba(255,255,255,0.1);
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
+    background: var(--dark-light);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-sm);
+    color: var(--cream);
 }
 
 .hidden {
     display: none !important;
 }
 
-.round-progress {
-    position: absolute;
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    max-width: 400px;
-    z-index: 400;
-    text-align: center;
+/* === ЗАГРУЗКА ДАННЫХ ИГРЫ === */
+/* Раньше во время fetch() локаций/границы области не было вообще никакого
+   индикатора — страница просто "молчала" до готовности (код-ревью
+   §Medium/13). См. main.js: скрывается после initGamePage(). */
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    z-index: 3000;
+    color: var(--cream);
 }
 
-.progress-container {
-    height: 8px;
-    background: rgba(0,0,0,0.1);
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 0.3rem;
+.loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(200, 164, 21, 0.25);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
 }
 
-.progress-bar {
-    height: 100%;
-    background: var(--gold);
-    transition: width 0.5s ease;
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
-.progress-text {
-    font-size: 0.8rem;
-    color: var(--dark);
-    font-weight: 600;
+.loading-overlay p {
+    font-size: var(--text-sm);
+    color: var(--cream-dark);
 }
 
-/* === ПАНЕЛЬ НАСТРОЕК === */
+/* === ПАНЕЛЬ НАСТРОЕК ИГРЫ === */
 .settings-panel {
-    flex: 1;
+    min-height: calc(100vh - 70px);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%);
-    padding: 1rem;
+    padding: 2rem 1.5rem;
+    background: linear-gradient(180deg, var(--dark) 0%, var(--cream) 40%);
 }
 
 .settings-card {
     background: var(--white);
     border-radius: var(--radius);
-    padding: 2rem;
-    box-shadow: var(--shadow-lg);
-    max-width: 500px;
+    padding: 2.5rem;
+    max-width: 420px;
     width: 100%;
+    box-shadow: var(--shadow-lg);
 }
 
 .settings-card h3 {
+    font-size: var(--text-xl);
     text-align: center;
     margin-bottom: 1.5rem;
     color: var(--dark);
-    font-size: 1.4rem;
+}
+
+.settings-info {
+    font-size: var(--text-sm);
+    color: #666;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
 }
 
 .setting-group {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
 }
 
-.setting-group label {
+.setting-group > label {
     display: block;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 0.5rem;
     color: var(--dark);
+    font-size: var(--text-sm);
 }
 
 .radio-group {
@@ -461,193 +623,215 @@ body {
     gap: 0.5rem;
 }
 
-.radio-label {
+.radio-label,
+.checkbox-label {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    font-weight: 400;
-    padding: 0.5rem;
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem;
     border-radius: var(--radius-sm);
-    transition: var(--transition);
-}
-
-.radio-label:hover {
-    background: var(--cream);
-}
-
-.setting-group .checkbox-label {
     cursor: pointer;
-    font-weight: 400;
-    padding: 0.5rem;
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
-    background: transparent;
+    transition: var(--transition-fast);
+    font-size: var(--text-base);
 }
 
+.radio-label:hover,
 .setting-group .checkbox-label:hover {
-    background: var(--cream);
+    background: var(--cream-dark);
+}
+
+/* Чекбоксы и радио-кнопки теперь окрашены в цвет бренда и увеличены —
+   раньше это были единственные полностью нестилизованные элементы во
+   всём интерфейсе (код-ревью §Medium/12). accent-color работает во всех
+   современных браузерах и не требует пересборки контрола с нуля. */
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--gold-dark);
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 .setting-group select {
     width: 100%;
-    padding: 0.6rem;
-    border: 2px solid #ddd;
+    padding: 0.75rem;
+    border: 2px solid var(--cream-dark);
     border-radius: var(--radius-sm);
-    font-size: 1rem;
-    transition: var(--transition);
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--text-base);
+    background: var(--cream);
+    cursor: pointer;
 }
 
 .setting-group select:focus {
-    outline: none;
     border-color: var(--gold);
 }
 
-.settings-info {
-    color: #555;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-/* === ИГРОВАЯ ОБЛАСТЬ === */
+/* === ИГРОВОЕ ПОЛЕ === */
 .game-area {
-    flex: 1;
     display: flex;
+    height: calc(100vh - 70px);
     position: relative;
-    overflow: hidden;
 }
 
 .game-map {
     flex: 1;
-    z-index: 1;
+    height: 100%;
 }
 
-/* === БОКОВАЯ ПАНЕЛЬ (Напиши место) === */
+/* Контролы зума карты теперь в теме продукта, а не в дефолтном белом
+   стиле Leaflet, который выбивался на фоне тёмной кастомной темы
+   (код-ревью §Low/16) */
+.leaflet-control-zoom a {
+    background: var(--dark-light) !important;
+    color: var(--gold) !important;
+    border-color: rgba(255,255,255,0.12) !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background: var(--dark) !important;
+    color: var(--gold-light) !important;
+}
+
+/* === БОКОВАЯ ПАНЕЛЬ "ЗНАТОК ЯРОСЛАВЩИНЫ" === */
 .side-panel {
-    position: absolute;
-    top: 0;
-    right: 0;
     width: 320px;
-    height: 100%;
     background: var(--white);
-    box-shadow: -4px 0 20px rgba(0,0,0,0.1);
-    padding: 1rem;
-    z-index: 500;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+    z-index: 500;
 }
 
 .input-group {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
 }
 
 .input-group input {
     flex: 1;
-    padding: 0.7rem;
-    border: 2px solid #ddd;
+    padding: 0.75rem;
+    border: 2px solid var(--cream-dark);
     border-radius: var(--radius-sm);
-    font-size: 0.95rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--text-sm);
 }
 
 .input-group input:focus {
-    outline: none;
     border-color: var(--gold);
 }
 
 .input-group .btn {
-    padding: 0.7rem 1rem;
+    padding: 0.75rem 1.25rem;
 }
 
 .feedback {
-    padding: 0.5rem;
+    min-height: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 0.6rem 0.75rem;
     border-radius: var(--radius-sm);
-    font-size: 0.85rem;
-    min-height: 2rem;
-    margin-bottom: 0.75rem;
-    text-align: center;
+    font-size: var(--text-sm);
+    font-weight: 600;
 }
 
+/* Цвета обратной связи теперь взяты из собственной палитры продукта
+   (--green/--red), а не из чужой системы (это были буквально дефолтные
+   цвета Bootstrap) — раньше именно в момент фидбэка интерфейс выпадал из
+   общего стиля (код-ревью §High/6) */
 .feedback.success {
-    background: #d4edda;
-    color: #155724;
+    background: rgba(45, 106, 79, 0.12);
+    color: var(--green);
 }
 
 .feedback.error {
-    background: #f8d7da;
-    color: #721c24;
+    background: rgba(178, 34, 34, 0.1);
+    color: var(--red);
 }
 
 .found-list {
     flex: 1;
     overflow-y: auto;
-    margin-bottom: 1rem;
 }
 
 .found-list h4 {
-    margin-bottom: 0.5rem;
-    color: var(--dark);
-    padding-right: 0.5rem;
+    font-size: var(--text-sm);
+    color: #888;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .found-list ul {
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    margin: 0;
-    padding: 0;
 }
 
 .found-list li {
-    padding: 0.4rem 0.6rem;
+    padding: 0.5rem 0.75rem;
     background: var(--cream);
-    border-radius: 4px;
-    font-size: 0.85rem;
-    border-left: 3px solid var(--green);
-    word-wrap: break-word;
-    hyphens: auto;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.4rem;
+    font-size: var(--text-sm);
+    border-left: 3px solid var(--green-light);
 }
 
-/* === ПАНЕЛЬ УГАДЫВАНИЯ (ГеоГессер) === */
+/* Плейсхолдер пустого списка — раньше между пустым списком и кнопкой
+   "Закончить игру" была большая ничем не занятая область, особенно
+   заметная в начале игры (код-ревью §Medium/14). См. game-logic.js. */
+.found-list-empty {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 2rem 0.5rem;
+    font-size: var(--text-sm);
+    background: none !important;
+    border-left: none !important;
+}
+
+/* === ПАНЕЛЬ ИНФОРМАЦИИ О МЕСТЕ (ГеоКвест) === */
 .guess-panel {
     position: absolute;
-    bottom: 1rem;
+    bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
     background: var(--white);
     border-radius: var(--radius);
-    padding: 1.25rem;
+    padding: 1.5rem 2rem;
     box-shadow: var(--shadow-lg);
-    z-index: 500;
-    max-width: 400px;
-    width: calc(100% - 2rem);
+    z-index: 600;
+    max-width: 90%;
+    width: 420px;
 }
 
 .location-info h3 {
-    font-size: 1.2rem;
+    font-size: var(--text-lg);
+    margin-bottom: 0.4rem;
     color: var(--dark);
-    margin-bottom: 0.3rem;
 }
 
 .hint {
     color: #777;
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     margin-bottom: 0.75rem;
 }
 
 /* === РЕЗУЛЬТАТ РАУНДА === */
+/* Раньше карточка результата была по центру всего экрана и перекрывала
+   именно линию между догадкой и целью, которую сама же объясняет.
+   Теперь она, как и guess-panel, прижата к низу — это освобождает центр
+   карты, где обычно проходит эта линия (код-ревью §Medium/8). Затемнение
+   фона также ослаблено, чтобы карта позади оставалась различима. */
 .round-result {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(10, 10, 20, 0.4);
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    z-index: 600;
-    padding: 1rem;
+    z-index: 700;
+    padding: 1.5rem;
 }
 
 .result-card {
@@ -655,72 +839,154 @@ body {
     border-radius: var(--radius);
     padding: 2rem;
     text-align: center;
-    max-width: 400px;
+    max-width: 420px;
     width: 100%;
     box-shadow: var(--shadow-lg);
 }
 
 .result-card h3 {
-    font-size: 1.4rem;
+    font-size: var(--text-xl);
     margin-bottom: 1rem;
-    color: var(--dark);
 }
 
 .result-card p {
-    font-size: 1.1rem;
+    font-size: var(--text-lg);
     margin-bottom: 0.5rem;
-    color: #555;
+    color: #444;
 }
 
 .result-line {
-    height: 4px;
+    height: 8px;
     background: var(--cream-dark);
-    border-radius: 2px;
-    margin: 1rem 0;
+    border-radius: var(--radius-sm);
+    margin: 1rem 0 1.5rem;
+    position: relative;
     overflow: hidden;
 }
 
-.result-line::after {
+.result-line::before {
     content: '';
-    display: block;
-    height: 100%;
-    background: var(--gold);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
     width: var(--score-percent, 0%);
-    transition: width 1s ease;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+    border-radius: var(--radius-sm);
+    transition: width 0.6s ease;
 }
 
-/* === GAME OVER === */
+/* === ПРОГРЕСС РАУНДОВ (поверх карты) === */
+/* Раньше текст и линия прогресса лежали прямо на тёмной карте без
+   подложки и почти сливались с фоном (код-ревью §Medium/11). Теперь у
+   индикатора есть собственный контрастный контейнер. */
+.round-progress {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 550;
+    background: rgba(26, 26, 46, 0.8);
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-sm);
+    text-align: center;
+    min-width: 200px;
+}
+
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.15);
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.4rem;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--gold);
+    border-radius: var(--radius-sm);
+    transition: width 0.4s ease;
+}
+
+.progress-text {
+    font-size: var(--text-xs);
+    color: var(--cream);
+    font-weight: 600;
+}
+
+/* === КАРТА: МАРКЕРЫ === */
+.custom-marker {
+    background: none;
+    border: none;
+}
+
+/* Раньше "твой ответ" и "правильное место" различались ТОЛЬКО цветом
+   (зелёный/красный) — ровно та пара, которую хуже всего различают люди с
+   дальтонизмом. Теперь у каждого маркера ещё и своя форма/узор, поэтому
+   различие читается и без цветового зрения (код-ревью §High/4, §Polish). */
+.marker-pin {
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--white);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+}
+
+/* Цель — кольцо-мишень (бордовый круг с белым центром) */
+.marker-target {
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--white) 0%, var(--white) 24%, var(--red) 34%, var(--red) 100%);
+}
+
+/* Твоя догадка — ромб вместо круга */
+.marker-guess {
+    border-radius: 5px;
+    background: var(--green);
+    transform: rotate(45deg);
+}
+
+/* Найденное место в "Знатоке" — сплошной кружок */
+.marker-found {
+    border-radius: 50%;
+    background: var(--gold);
+}
+
+/* === LEAFLET КАСТОМИЗАЦИЯ === */
+.leaflet-container {
+    font-family: inherit;
+    background: #2d2d44 !important;
+}
+
+/* === ЭКРАН ОКОНЧАНИЯ ИГРЫ === */
 .game-over {
-    flex: 1;
+    min-height: calc(100vh - 70px);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
-    padding: 1rem;
+    padding: 2rem 1.5rem;
+    background: linear-gradient(180deg, var(--dark) 0%, var(--cream) 40%);
 }
 
 .game-over-card {
     background: var(--white);
     border-radius: var(--radius);
     padding: 2.5rem;
-    text-align: center;
-    max-width: 500px;
+    max-width: 440px;
     width: 100%;
+    text-align: center;
     box-shadow: var(--shadow-lg);
 }
 
 .game-over-card h2 {
-    font-size: 2rem;
+    font-size: var(--text-2xl);
     margin-bottom: 1.5rem;
-    color: var(--dark);
 }
 
 .final-stats {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: space-around;
     margin-bottom: 2rem;
-    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .final-stat {
@@ -729,13 +995,13 @@ body {
 
 .final-value {
     display: block;
-    font-size: 2rem;
+    font-size: var(--text-2xl);
     font-weight: 900;
     color: var(--gold-dark);
 }
 
 .final-label {
-    font-size: 0.8rem;
+    font-size: var(--text-xs);
     color: #777;
     text-transform: uppercase;
 }
@@ -748,168 +1014,15 @@ body {
 
 .game-over-actions input {
     padding: 0.75rem;
-    border: 2px solid #ddd;
+    border: 2px solid var(--cream-dark);
     border-radius: var(--radius-sm);
-    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--text-base);
     text-align: center;
 }
 
 .game-over-actions input:focus {
-    outline: none;
     border-color: var(--gold);
-}
-
-/* === LEAFLET КАСТОМИЗАЦИЯ === */
-.leaflet-container {
-    font-family: inherit;
-    background: #2d2d44 !important;
-}
-
-.custom-marker {
-    background: none;
-    border: none;
-}
-
-.marker-pin {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 3px solid var(--white);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
-.marker-target {
-    background: var(--red);
-}
-
-.marker-guess {
-    background: var(--green);
-}
-
-.marker-found {
-    background: var(--gold);
-}
-
-/* === МОБИЛЬНАЯ АДАПТИВНОСТЬ === */
-.settings-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-}
-
-.settings-modal-content {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 2rem;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: var(--shadow-lg);
-}
-
-.settings-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.settings-modal-header h3 {
-    font-size: 1.4rem;
-    color: var(--dark);
-    margin: 0;
-}
-
-.close-settings {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--dark);
-    padding: 0.25rem 0.5rem;
-}
-
-.settings-modal-body {
-    margin-bottom: 1.5rem;
-}
-
-.settings-modal-footer {
-    text-align: right;
-}
-
-@media (max-width: 768px) {
-    .hero {
-        min-height: 50vh;
-    }
-
-    .features {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .modes-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .game-header {
-        padding: 0.5rem 0.75rem;
-    }
-
-    .game-stats {
-        gap: 0.5rem;
-        font-size: 0.75rem;
-    }
-
-    .side-panel {
-        width: 100%;
-        height: 55%;
-        top: auto;
-        bottom: 0;
-        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-    }
-
-    .guess-panel {
-        bottom: 0.5rem;
-        padding: 1rem;
-    }
-
-    .game-over-card {
-        padding: 1.5rem;
-    }
-
-    .final-stats {
-        gap: 1rem;
-    }
-
-    .round-progress {
-        top: 55px;
-        width: 90%;
-    }
-}
-
-@media (max-width: 480px) {
-    .features {
-        grid-template-columns: 1fr;
-    }
-
-    .title {
-        letter-spacing: 0.05em;
-    }
-
-    .settings-card {
-        padding: 1.5rem;
-    }
-
-    .game-over-actions {
-        gap: 0.5rem;
-    }
-
-    .game-over-actions input {
-        padding: 0.6rem;
-        font-size: 0.9rem;
-    }
 }
 
 /* === АНИМАЦИИ === */
@@ -923,23 +1036,8 @@ body {
 }
 
 /* === ТАБЛИЦА ЛИДЕРОВ - ДВЕ КОЛОНКИ === */
-.leaderboards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.leaderboard-column h3 {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: var(--dark);
-    font-size: 1.2rem;
-}
-
-@media (max-width: 768px) {
-    .leaderboards-grid {
-        grid-template-columns: 1fr;
-    }
+.leaderboards-grid table {
+    font-size: var(--text-sm);
 }
 
 /* === ЗАТЕМНЕНИЕ ЗА ПРЕДЕЛАМИ ОБЛАСТИ === */
@@ -955,4 +1053,61 @@ body {
     stroke-width: 2;
     stroke-dasharray: 5, 10;
     pointer-events: none;
+}
+
+/* === АДАПТИВНОСТЬ === */
+@media (max-width: 768px) {
+    .features,
+    .modes-grid,
+    .leaderboards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-area {
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 70px);
+    }
+
+    .game-map {
+        height: 60vh;
+    }
+
+    .side-panel {
+        width: 100%;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    }
+
+    .settings-card,
+    .game-over-card {
+        padding: 1.5rem;
+    }
+
+    .final-stats {
+        gap: 1rem;
+    }
+
+    .round-progress {
+        top: 55px;
+        min-width: 160px;
+    }
+
+    .guess-panel {
+        width: 92%;
+        padding: 1.25rem 1.5rem;
+    }
+}
+
+/* Плотная упаковка лого + двух плашек статистики в одну строку на узких
+   экранах — теперь плашки очков/раунда/таймера переносятся на отдельную
+   строку вместо тесного сжатия всего подряд (код-ревью §Low/19) */
+@media (max-width: 480px) {
+    .game-header {
+        justify-content: space-between;
+    }
+
+    .game-stats {
+        flex-basis: 100%;
+        justify-content: center;
+    }
 }
