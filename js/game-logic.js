@@ -181,6 +181,7 @@ function nextGeoguesserRound() {
     gameState.roundAnswered = false;
     gameState.currentGuess = null;
     gameState.currentRound++;
+    updateConfirmButtonState();
 
     gameState.currentLocation = gameState.gameLocations[gameState.currentRound - 1];
 
@@ -217,10 +218,22 @@ function getDefaultHint(type) {
     return hints[type] || 'Населённый пункт Ярославской области';
 }
 
+// Кнопка "Подтвердить ответ" теперь реально блокируется, пока не поставлена
+// метка на карте — раньше она выглядела одинаково активной в обоих
+// случаях, а клик по ней без метки просто молча ничего не делал
+// (код-ревью §High/3). Вызывается и при старте раунда (блокировка),
+// и в onMapClick() из map.js (разблокировка).
+function updateConfirmButtonState() {
+    const btn = document.getElementById('confirm-guess-btn');
+    if (!btn) return;
+    btn.disabled = !gameState.currentGuess || gameState.roundAnswered;
+}
+
 function confirmGuess() {
     if (!gameState.currentGuess || gameState.roundAnswered) return;
 
     gameState.roundAnswered = true;
+    updateConfirmButtonState();
 
     const guess = gameState.currentGuess;
     const target = gameState.currentLocation;
@@ -312,7 +325,7 @@ function startWriteName() {
     document.getElementById('round-result').style.display = 'none';
     document.getElementById('round-display').textContent = `Найдено: 0/${window.LOCATIONS.length}`;
     document.getElementById('found-count').textContent = '0';
-    document.getElementById('found-places').innerHTML = '';
+    document.getElementById('found-places').innerHTML = '<li class="found-list-empty">Начни вводить названия мест — они будут появляться здесь</li>';
     document.getElementById('place-input').value = '';
     document.getElementById('feedback').textContent = '';
     document.getElementById('feedback').className = 'feedback';
@@ -359,6 +372,10 @@ function submitPlaceName() {
     // непропорционально много очков за один ввод (код-ревью, Critical #1).
     // Игроку не нужно ничего выбирать — засчитываются все совпадения сразу.
     const pointsPerMatch = Math.max(1, Math.round(POINTS_PER_PLACE / newMatches.length));
+
+    if (gameState.foundLocations.length === 0) {
+        document.getElementById('found-places').innerHTML = ''; // убираем плейсхолдер пустого состояния
+    }
 
     newMatches.forEach(found => {
         gameState.foundLocations.push(found);

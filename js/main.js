@@ -43,9 +43,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         initGamePage();
+        hideLoadingOverlay();
 
     } catch (error) {
         console.error("❌ КРИТИЧЕСКАЯ ОШИБКА ЗАГРУЗКИ:", error);
+        hideLoadingOverlay();
         // Пользователю — понятное сообщение и способ восстановиться,
         // технические детали остаются в консоли (код-ревью §Low/4)
         const shouldRetry = confirm(
@@ -56,6 +58,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 });
+
+function hideLoadingOverlay() {
+    const overlay = document.getElementById('loading-overlay');
+    if (overlay) overlay.remove();
+}
 
 // === ГЛАВНАЯ СТРАНИЦА ===
 function initHomePage() {
@@ -73,14 +80,22 @@ function renderHomeLeaderboard() {
     const geoguesserEntries = leaderboard.filter(e => e.mode === 'ГеоКвест').slice(0, 10);
     const writenameEntries = leaderboard.filter(e => e.mode === 'Знаток Ярославщины').slice(0, 10);
 
+    const emptyStateHtml = (icon) => `
+        <div class="empty-leaderboard-state">
+            <span class="empty-leaderboard-icon" aria-hidden="true">${icon}</span>
+            <p class="empty-leaderboard-title">Пока никто не играл</p>
+            <p class="empty-leaderboard-sub">Сыграй первым и займи первую строчку!</p>
+        </div>
+    `;
+
     if (geoguesserEntries.length === 0) {
-        geoguesserContainer.innerHTML = '<p class="empty-leaderboard">Пока никто не играл</p>';
+        geoguesserContainer.innerHTML = emptyStateHtml('🎯');
     } else {
         geoguesserContainer.innerHTML = renderLeaderboardTable(geoguesserEntries);
     }
 
     if (writenameEntries.length === 0) {
-        writenameContainer.innerHTML = '<p class="empty-leaderboard">Пока никто не играл</p>';
+        writenameContainer.innerHTML = emptyStateHtml('✍️');
     } else {
         writenameContainer.innerHTML = renderLeaderboardTable(writenameEntries);
     }

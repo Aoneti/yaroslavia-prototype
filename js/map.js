@@ -207,6 +207,7 @@ function onMapClick(e) {
     const { lat, lng } = e.latlng;
     placeGuessMarker(lat, lng);
     gameState.currentGuess = { lat, lng };
+    if (typeof updateConfirmButtonState === 'function') updateConfirmButtonState();
 }
 
 // bindMapClick()/unbindMapClick() теперь идемпотентны через mapClickBound —
