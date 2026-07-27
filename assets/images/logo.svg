@@ -10,21 +10,30 @@
       <stop offset="1" stop-color="#b8860b"/>
     </linearGradient>
   </defs>
-  <path d="M 237.767 68.178 L 275.767 82.178 L 275.767 119.178 C 275.767 140.178 260.767 153.178 237.767 160.178 C 214.767 153.178 199.767 140.178 199.767 119.178 L 199.767 82.178 L 237.767 68.178 Z" fill="url(#shield)" stroke="url(#gold)" stroke-width="3" style="stroke-width: 3;"/>
-  <g fill="url(#gold)" transform="matrix(1, 0, 0, 1, 187.766617, 64.178169)">
-    <path d=" M35 67 C33 54 37 43 45 39 C53 35 61 38 65 46 C68 52 68 61 64 69 C60 75 54 78 46 77 C40 76 36 73 35 67 Z"/>
-    <circle cx="50" cy="32" r="10"/>
-    <circle cx="43" cy="25" r="3.6"/>
-    <circle cx="57" cy="25" r="3.6"/>
-    <ellipse cx="40" cy="73" rx="4" ry="3"/>
-    <ellipse cx="60" cy="73" rx="4" ry="3"/>
-  </g>
-  <circle cx="234.267" cy="95.178" r="1.2" fill="#ffffff" style="stroke-width: 1;"/>
-  <circle cx="241.267" cy="95.178" r="1.2" fill="#ffffff" style="stroke-width: 1;"/>
-  <ellipse cx="237.767" cy="100.178" rx="2.2" ry="1.6" fill="#222" style="stroke-width: 1;"/>
+  <path d="M 237.767 68.178 L 275.767 82.178 L 275.767 119.178 C 275.767 140.178 260.767 153.178 237.767 160.178 C 214.767 153.178 199.767 140.178 199.767 119.178 L 199.767 82.178 L 237.767 68.178 Z" fill="url(#shield)" stroke="url(#gold)" stroke-width="3"/>
   <g transform="matrix(1, 0, 0, 1, 187.766617, 64.178169)">
-    <line x1="63" y1="35" x2="77" y2="71" stroke="#f2d46b" stroke-width="2.6" stroke-linecap="round"/>
-    <path d="M 67.205 34.943 L 77.205 31.943 L 74.205 42.943 L 65.205 39.943 L 67.205 34.943 Z" fill="#f2d46b"/>
+    <path d="M 32 76 C 28 55, 38 42, 50 42 C 62 42, 72 55, 68 76 C 60 79, 40 79, 32 76 Z" fill="url(#gold)"/>
+    <g id="axe">
+      <circle cx="63" cy="28" r="1.2" fill="#ffffff" opacity="0.8"/>
+    </g>
+    <circle cx="37" cy="28" r="5" fill="url(#gold)"/>
+    <circle cx="63" cy="28" r="5" fill="url(#gold)"/>
+    <circle cx="37" cy="28" r="2.5" fill="#131a2f"/>
+    <circle cx="63" cy="28" r="2.5" fill="#131a2f"/>
+    <ellipse cx="50" cy="38" rx="15" ry="14" fill="url(#gold)"/>
+    <path d="M 36 38 C 30 48, 35 54, 50 54 C 65 54, 70 48, 64 38 Z" fill="url(#gold)"/>
+    <ellipse cx="50" cy="46.5" rx="7.5" ry="5.5" fill="#ffe082"/>
+    <path d="M 46.5 44.5 L 53.5 44.5 C 53.5 47, 51.5 49, 50 49 C 48.5 49, 46.5 47, 46.5 44.5 Z" fill="#1a1a1a"/>
+    <path d="M 50 49 L 50 51.5" stroke="#1a1a1a" stroke-width="1.2"/>
+    <path d="M 46.5 51 C 48 52.5, 52 52.5, 53.5 51" stroke="#1a1a1a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <ellipse cx="43.5" cy="37" rx="2.2" ry="2.8" fill="#1a1a1a"/>
+    <ellipse cx="56.5" cy="37" rx="2.2" ry="2.8" fill="#1a1a1a"/>
+    <circle cx="44.3" cy="36" r="0.8" fill="#ffffff"/>
+    <circle cx="57.3" cy="36" r="0.8" fill="#ffffff"/>
+    <path d="M 40 33 L 45 34.5 L 45 32.5 Z" fill="#1a1a1a"/>
+    <path d="M 60 33 L 55 34.5 L 55 32.5 Z" fill="#1a1a1a"/>
+    <ellipse cx="40" cy="70" rx="5.5" ry="4.5" fill="url(#gold)"/>
+    <ellipse cx="60" cy="70" rx="5.5" ry="4.5" fill="url(#gold)"/>
   </g>
-  <polygon points="237.767 72.178 239.567 77.478 245.067 77.478 240.567 80.678 242.367 86.178 237.767 82.878 233.167 86.178 234.967 80.678 230.467 77.478 235.967 77.478" fill="#f7d76d" style="stroke-width: 1;"/>
+  <polygon points="237.767 72.178 239.567 77.478 245.067 77.478 240.567 80.678 242.367 86.178 237.767 82.878 233.167 86.178 234.967 80.678 230.467 77.478 235.967 77.478" fill="#f7d76d"/>
 </svg>
