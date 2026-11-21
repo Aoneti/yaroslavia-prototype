@@ -45,23 +45,75 @@ document.addEventListener('DOMContentLoaded', async () => {
         initGamePage();
         hideLoadingOverlay();
 
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('autostart') === '1') {
+            startGameFromSettings();
+        }
+
     } catch (error) {
         console.error("❌ КРИТИЧЕСКАЯ ОШИБКА ЗАГРУЗКИ:", error);
-        hideLoadingOverlay();
-        // Пользователю — понятное сообщение и способ восстановиться,
-        // технические детали остаются в консоли (код-ревью §Low/4)
-        const shouldRetry = confirm(
-            'Не удалось загрузить данные игры. Проверьте подключение к интернету.\n\nПопробовать снова?'
-        );
-        if (shouldRetry) {
-            location.reload();
-        }
+        showLoadErrorOverlay();
     }
 });
 
 function hideLoadingOverlay() {
     const overlay = document.getElementById('loading-overlay');
     if (overlay) overlay.remove();
+}
+
+function showLoadErrorOverlay() {
+    let overlay = document.getElementById('loading-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'loading-overlay';
+        overlay.className = 'loading-overlay';
+        document.body.appendChild(overlay);
+    }
+    overlay.innerHTML = `
+        <div class="loading-error-card" role="alert">
+            <h3>Не удалось загрузить данные игры</h3>
+            <p>Проверьте подключение к интернету и попробуйте снова.</p>
+            <button type="button" id="retry-load-btn" class="btn btn-primary">Попробовать снова</button>
+        </div>
+    `;
+    const retryBtn = document.getElementById('retry-load-btn');
+    if (retryBtn) {
+        retryBtn.addEventListener('click', () => location.reload());
+    }
+}
+
+function getAutoZoomSetting() {
+    if (typeof window.gameState !== 'undefined' && window.gameState.settings) {
+        return Boolean(window.gameState.settings.autoZoom);
+    }
+    try {
+        const saved = localStorage.getItem('yaroslavia_settings');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed && parsed.autoZoom !== undefined) {
+                return Boolean(parsed.autoZoom);
+            }
+        }
+    } catch (e) {
+        console.error('Ошибка чтения настроек:', e);
+    }
+    return true;
+}
+
+function setAutoZoomSetting(enabled) {
+    const autoZoom = Boolean(enabled);
+    if (typeof window.gameState !== 'undefined' && window.gameState.settings) {
+        window.gameState.settings.autoZoom = autoZoom;
+        if (typeof saveSettings === 'function') {
+            saveSettings();
+            return;
+        }
+    }
+    try {
+        localStorage.setItem('yaroslavia_settings', JSON.stringify({ autoZoom }));
+    } catch (e) {
+        console.error('Ошибка сохранения настроек:', e);
+    }
 }
 
 // === ГЛАВНАЯ СТРАНИЦА ===
@@ -148,47 +200,66 @@ function initGamePage() {
 }
 
 function showSettingsModal() {
+    const existing = document.getElementById('settings-modal');
+    if (existing) existing.remove();
+
+    const currentAutoZoom = getAutoZoomSetting();
     const settingsPanel = document.createElement('div');
     settingsPanel.id = 'settings-modal';
     settingsPanel.className = 'settings-modal';
+    settingsPanel.setAttribute('role', 'dialog');
+    settingsPanel.setAttribute('aria-modal', 'true');
+    settingsPanel.setAttribute('aria-labelledby', 'settings-modal-title');
     settingsPanel.innerHTML = `
         <div class="settings-modal-content">
             <div class="settings-modal-header">
-                <h3>Настройки</h3>
-                <button class="close-settings">&times;</button>
+                <h3 id="settings-modal-title">Настройки</h3>
+                <button type="button" class="close-settings" aria-label="Закрыть настройки">&times;</button>
             </div>
             <div class="settings-modal-body">
                 <div class="setting-group">
                     <label class="checkbox-label">
-                        <input type="checkbox" id="modal-auto-zoom" ${window.gameState.settings.autoZoom ? 'checked' : ''}> Автоприближение карты
+                        <input type="checkbox" id="modal-auto-zoom" ${currentAutoZoom ? 'checked' : ''}> Автоприближение карты
                     </label>
                 </div>
             </div>
             <div class="settings-modal-footer">
-                <button id="save-settings-btn" class="btn btn-primary">Сохранить</button>
+                <button type="button" id="save-settings-btn" class="btn btn-primary">Сохранить</button>
             </div>
         </div>
     `;
     document.body.appendChild(settingsPanel);
 
-    settingsPanel.style.display = 'flex';
-
-    document.querySelector('.close-settings').addEventListener('click', () => {
+    const closeModal = () => {
+        document.removeEventListener('keydown', onKeyDown);
         settingsPanel.remove();
+    };
+
+    const onKeyDown = (e) => {
+        if (e.key === 'Escape') closeModal();
+    };
+    document.addEventListener('keydown', onKeyDown);
+
+    settingsPanel.addEventListener('click', (e) => {
+        if (e.target === settingsPanel) closeModal();
     });
 
-    document.getElementById('save-settings-btn').addEventListener('click', () => {
-        window.gameState.settings.autoZoom = document.getElementById('modal-auto-zoom').checked;
-        saveSettings();
-        settingsPanel.remove();
+    settingsPanel.querySelector('.close-settings').addEventListener('click', closeModal);
+
+    settingsPanel.querySelector('#save-settings-btn').addEventListener('click', () => {
+        const checked = settingsPanel.querySelector('#modal-auto-zoom').checked;
+        setAutoZoomSetting(checked);
+        closeModal();
     });
 }
 
 function setupSettingsHandlers() {
     const startBtn = document.getElementById('start-game-btn');
-    startBtn.addEventListener('click', () => {
-        startGameFromSettings();
-    });
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            startGameFromSettings();
+        });
+    }
 
     const settingsBtn = document.getElementById('settings-btn');
     if (settingsBtn) {

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ярославия — Игра</title>
+    <meta name="description" content="Интерактивная краеведческая игра по Ярославской области с режимами ГеоКвест и Знаток Ярославщины.">
+    <meta property="og:title" content="Ярославия — Краеведческая игра">
+    <meta property="og:description" content="Интерактивная краеведческая игра по Ярославской области с режимами ГеоКвест и Знаток Ярославщины.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -88,8 +91,8 @@
         <!-- Боковая панель для режима "Знаток Ярославщины" -->
         <div id="side-panel" class="side-panel" style="display:none;">
             <div class="input-group">
-                <input type="text" id="place-input" placeholder="Введи название места..." autocomplete="off">
-                <button id="submit-place-btn" class="btn btn-primary">✓</button>
+                <input type="text" id="place-input" placeholder="Введи название места..." aria-label="Название населённого пункта" autocomplete="off">
+                <button id="submit-place-btn" class="btn btn-primary" aria-label="Отправить название">✓</button>
             </div>
             <div id="feedback" class="feedback"></div>
             <div id="found-list" class="found-list">
@@ -147,8 +150,9 @@
                 </div>
             </div>
             <div class="game-over-actions">
-                <input type="text" id="player-name" placeholder="Твоё имя" maxlength="20">
+                <input type="text" id="player-name" placeholder="Твоё имя" aria-label="Имя игрока" maxlength="20">
                 <button id="save-score-btn" class="btn btn-primary">Сохранить результат</button>
+                <p id="save-score-feedback" class="save-feedback" aria-live="polite"></p>
                 <button id="play-again-btn" class="btn btn-secondary">Играть снова</button>
                 <a href="index.html" class="btn btn-secondary">В меню</a>
             </div>

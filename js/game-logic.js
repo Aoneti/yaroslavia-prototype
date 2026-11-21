@@ -120,7 +120,7 @@ function shuffleArray(arr) {
 }
 
 // === СОСТОЯНИЕ ИГРЫ ===
-window.gameState = {
+const initialGameState = {
     mode: 'geoguesser',
     isPlaying: false,
     roundAnswered: false,
@@ -140,6 +140,9 @@ window.gameState = {
         autoZoom: true
     }
 };
+if (typeof window !== 'undefined') {
+    window.gameState = initialGameState;
+}
 
 // === ЛОГИКА ГЕОКВЕСТА ===
 function startGeoguesser() {
@@ -506,7 +509,10 @@ function saveScore() {
 
     localStorage.setItem('yaroslavia_leaderboard', JSON.stringify(leaderboard));
 
-    alert('✅ Результат сохранён!');
+    const saveFeedback = document.getElementById('save-score-feedback');
+    if (saveFeedback) {
+        saveFeedback.textContent = '✅ Результат сохранён в таблицу лидеров!';
+    }
     document.getElementById('save-score-btn').disabled = true;
     document.getElementById('save-score-btn').textContent = 'Сохранено ✓';
 }
@@ -517,6 +523,10 @@ function resetGame() {
     document.getElementById('game-area').style.display = 'none';
     document.getElementById('save-score-btn').disabled = false;
     document.getElementById('save-score-btn').textContent = 'Сохранить результат';
+    const saveFeedback = document.getElementById('save-score-feedback');
+    if (saveFeedback) {
+        saveFeedback.textContent = '';
+    }
     document.getElementById('player-name').value = '';
 
     gameState.isPlaying = false;
@@ -541,4 +551,15 @@ function loadSettings() {
 
 function saveSettings() {
     localStorage.setItem('yaroslavia_settings', JSON.stringify(gameState.settings));
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        haversineDistance,
+        calculateScore,
+        normalizeString,
+        checkPlaceName,
+        shuffleArray,
+        getDefaultHint
+    };
 }
