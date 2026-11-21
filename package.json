@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "build": "node --check server.js && node --check js/main.js && node --check js/game-logic.js && node --check js/map.js",
-    "lint": "node --check server.js && node --check js/main.js && node --check js/game-logic.js && node --check js/map.js",
+    "build": "node --check server.js && node --check js/icons.js && node --check js/main.js && node --check js/game-logic.js && node --check js/map.js",
+    "lint": "node --check server.js && node --check js/icons.js && node --check js/main.js && node --check js/game-logic.js && node --check js/map.js",
     "test": "node --test tests/game-logic.test.js"
   },
   "dependencies": {

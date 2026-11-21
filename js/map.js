@@ -50,6 +50,10 @@ function initMap() {
         zoomControl: true
     });
 
+    if (map.attributionControl) {
+        map.attributionControl.setPrefix('<a href="https://leafletjs.com" title="A JavaScript library for interactive maps">Leaflet</a>');
+    }
+
     const maxBoundsLatLng = L.latLngBounds(
         [extent.south - 0.5, extent.west - 0.5],
         [extent.north + 0.5, extent.east + 0.5]
@@ -145,6 +149,11 @@ function createIcon(colorClass) {
     });
 }
 
+function popupWithIcon(iconName, iconClass, text) {
+    const icon = typeof renderIcon === 'function' ? renderIcon(iconName, `ui-icon-sm ${iconClass}`) : '';
+    return `<span class="map-popup-label">${icon}<span>${text}</span></span>`;
+}
+
 function placeTargetMarker(lat, lng) {
     if (targetMarker) {
         map.removeLayer(targetMarker);
@@ -152,7 +161,7 @@ function placeTargetMarker(lat, lng) {
     targetMarker = L.marker([lat, lng], {
         icon: createIcon('target')
     }).addTo(map);
-    targetMarker.bindPopup('📍 Правильное место').openPopup();
+    targetMarker.bindPopup(popupWithIcon('pin', 'icon-red', 'Правильное место')).openPopup();
 }
 
 function placeGuessMarker(lat, lng) {
@@ -162,7 +171,7 @@ function placeGuessMarker(lat, lng) {
     guessMarker = L.marker([lat, lng], {
         icon: createIcon('guess')
     }).addTo(map);
-    guessMarker.bindPopup('🎯 Твой ответ');
+    guessMarker.bindPopup(popupWithIcon('target', 'icon-green', 'Твой ответ'));
 }
 
 function drawResultLine(guessLat, guessLng, targetLat, targetLng) {
@@ -179,7 +188,7 @@ function addFoundMarker(lat, lng, name) {
     const marker = L.marker([lat, lng], {
         icon: createIcon('found')
     }).addTo(map);
-    marker.bindPopup(`✅ ${escapeHtml(name)}`);
+    marker.bindPopup(popupWithIcon('checkCircle', 'icon-green', escapeHtml(name)));
     foundMarkers.push(marker);
 }
 

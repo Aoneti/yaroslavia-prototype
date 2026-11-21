@@ -83,12 +83,154 @@ textarea:focus-visible {
     border-radius: var(--radius-sm);
 }
 
+/* === ЛЕГКИЙ ФОНОВЫЙ ПАТТЕРН НА ГЛАВНОЙ === */
+body.home-page {
+    background-color: var(--cream);
+    background-image:
+        radial-gradient(circle at 12% 28%, rgba(200, 164, 21, 0.06) 0%, transparent 42%),
+        radial-gradient(circle at 88% 72%, rgba(26, 26, 46, 0.04) 0%, transparent 46%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%238b7010' stroke-opacity='0.075' stroke-width='0.85'%3E%3Cpath d='M0 48h96M48 0v96' stroke-dasharray='2 6'/%3E%3Cpath d='M48 18 L78 48 L48 78 L18 48 Z'/%3E%3Ccircle cx='48' cy='48' r='2.2' fill='%238b7010' fill-opacity='0.14' stroke='none'/%3E%3Ccircle cx='0' cy='0' r='1.5' fill='%238b7010' fill-opacity='0.12' stroke='none'/%3E%3Ccircle cx='96' cy='0' r='1.5' fill='%238b7010' fill-opacity='0.12' stroke='none'/%3E%3Ccircle cx='0' cy='96' r='1.5' fill='%238b7010' fill-opacity='0.12' stroke='none'/%3E%3Ccircle cx='96' cy='96' r='1.5' fill='%238b7010' fill-opacity='0.12' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: auto, auto, 96px 96px;
+}
+
+/* === SVG-ИКОНКИ === */
+.ui-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ui-icon-sm {
+    width: 16px;
+    height: 16px;
+}
+
+.ui-icon-md {
+    width: 24px;
+    height: 24px;
+}
+
+.ui-icon-lg {
+    width: 28px;
+    height: 28px;
+}
+
+.icon-gold {
+    color: var(--gold-dark);
+}
+
+.icon-green {
+    color: var(--green);
+}
+
+.icon-red {
+    color: var(--red);
+}
+
+.heading-with-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.heading-centered {
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-with-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-with-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.map-popup-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
 /* === HERO / ГЛАВНЫЙ ЭКРАН === */
 .hero {
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse 70% 80% at 50% 0%, rgba(200, 164, 21, 0.2) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 60% at 85% 90%, rgba(64, 145, 108, 0.12) 0%, transparent 60%),
+        linear-gradient(145deg, #121528 0%, #1d223c 52%, #292d4a 100%);
     color: var(--cream);
     text-align: center;
-    padding: 4rem 1.5rem 5rem;
+    padding: 1.5rem 1.5rem 5.5rem;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%23f0d850' stroke-opacity='0.08' stroke-width='1'%3E%3Cpath d='M0 80 Q40 60 80 80 T160 80'/%3E%3Cpath d='M0 30 Q40 12 80 30 T160 30'/%3E%3Cpath d='M0 130 Q40 112 80 130 T160 130'/%3E%3Ccircle cx='80' cy='80' r='28' stroke-dasharray='3 7'/%3E%3Ccircle cx='80' cy='80' r='2' fill='%23f0d850' fill-opacity='0.22' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 160px 160px;
+}
+
+.hero-topbar {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-settings-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    color: var(--cream);
+    border: 1px solid rgba(240, 216, 80, 0.35);
+    padding: 0.55rem 1.05rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+
+.hero-settings-btn .ui-icon {
+    color: var(--gold-light);
+    transition: transform 0.25s ease;
+}
+
+.hero-settings-btn:hover {
+    background: rgba(200, 164, 21, 0.18);
+    border-color: var(--gold-light);
+    color: var(--white);
+}
+
+.hero-settings-btn:hover .ui-icon {
+    transform: rotate(35deg);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
 }
 
 .logo {
@@ -117,7 +259,7 @@ textarea:focus-visible {
     max-width: 600px;
     margin: 0 auto;
     color: var(--cream-dark);
-    opacity: 0.8;
+    opacity: 0.85;
     font-size: var(--text-base);
 }
 
@@ -129,6 +271,8 @@ main {
 }
 
 .features {
+    position: relative;
+    z-index: 2;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
@@ -150,8 +294,7 @@ main {
     box-shadow: var(--shadow-lg);
 }
 
-/* Иконки теперь в едином круглом контейнере вместо голых эмодзи,
-   разбросанных по карточкам (код-ревью §Polish) */
+/* Иконки теперь в едином круглом контейнере со стильными векторными SVG */
 .feature-icon {
     width: 64px;
     height: 64px;
@@ -159,8 +302,9 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.75rem;
-    background: var(--cream-dark);
+    color: var(--gold-dark);
+    background: linear-gradient(145deg, #fbf5df 0%, #f1e4bc 100%);
+    border: 1px solid rgba(200, 164, 21, 0.28);
     border-radius: 50%;
 }
 
@@ -208,16 +352,57 @@ main {
 }
 
 .mode-card {
-    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(155deg, #ffffff 0%, #fcfaf2 64%, #f4ebd2 100%);
     border-radius: var(--radius);
     padding: 2rem;
     box-shadow: var(--shadow);
-    border: 2px solid transparent;
-    transition: var(--transition-move);
+    border: 1px solid rgba(200, 164, 21, 0.24);
+    transition: var(--transition-move), border-color 0.2s ease;
+}
+
+.mode-card-geoguesser {
+    background:
+        radial-gradient(circle at 92% 10%, rgba(200, 164, 21, 0.18) 0%, transparent 48%),
+        radial-gradient(circle at 6% 94%, rgba(26, 26, 46, 0.05) 0%, transparent 42%),
+        linear-gradient(155deg, #ffffff 0%, #fdfbf3 60%, #f6edd6 100%);
+}
+
+.mode-card-writename {
+    background:
+        radial-gradient(circle at 92% 10%, rgba(45, 106, 79, 0.14) 0%, transparent 48%),
+        radial-gradient(circle at 6% 94%, rgba(200, 164, 21, 0.1) 0%, transparent 45%),
+        linear-gradient(155deg, #ffffff 0%, #f9fbf8 60%, #edf4ee 100%);
+}
+
+.mode-card-pattern {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.mode-card-geoguesser .mode-card-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%238b7010' stroke-opacity='0.11' stroke-width='1'%3E%3Ccircle cx='185' cy='35' r='34'/%3E%3Ccircle cx='185' cy='35' r='62' stroke-dasharray='4 6'/%3E%3Ccircle cx='185' cy='35' r='92'/%3E%3Cpath d='M185 0v70M150 35h70' stroke-opacity='0.09'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+.mode-card-writename .mode-card-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%232d6a4f' stroke-opacity='0.1' stroke-width='1'%3E%3Cpath d='M120 15 Q160 5 220 25'/%3E%3Cpath d='M105 45 Q155 28 220 52'/%3E%3Cpath d='M125 75 Q175 60 220 82'/%3E%3Cpath d='M145 105 Q185 95 220 112'/%3E%3Ccircle cx='178' cy='46' r='2.5' fill='%232d6a4f' fill-opacity='0.18' stroke='none'/%3E%3Ccircle cx='152' cy='68' r='2' fill='%238b7010' fill-opacity='0.22' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+.mode-card-inner {
+    position: relative;
+    z-index: 1;
 }
 
 .mode-card:hover {
     border-color: var(--gold);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -228,18 +413,23 @@ main {
     margin-bottom: 1rem;
 }
 
-/* Иконка режима — тоже в едином круглом контейнере (тот же принцип,
-   что и feature-icon), а не самостоятельный эмодзи произвольного размера */
 .mode-icon {
     width: 48px;
     height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
-    background: var(--cream-dark);
+    color: var(--gold-dark);
+    background: linear-gradient(145deg, #fbf4db 0%, #efe0b0 100%);
+    border: 1px solid rgba(200, 164, 21, 0.32);
     border-radius: 50%;
     flex-shrink: 0;
+}
+
+.mode-card-writename .mode-icon {
+    color: var(--green);
+    background: linear-gradient(145deg, #e7f4ec 0%, #d1eadb 100%);
+    border-color: rgba(45, 106, 79, 0.25);
 }
 
 .mode-header h3 {
@@ -259,9 +449,20 @@ main {
 }
 
 .mode-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
     font-size: var(--text-sm);
-    color: #666;
-    margin-bottom: 0.4rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.mode-feature-icon {
+    color: var(--gold-dark);
+}
+
+.mode-card-writename .mode-feature-icon {
+    color: var(--green);
 }
 
 /* === КНОПКИ === */
@@ -402,9 +603,15 @@ main {
 }
 
 .empty-leaderboard-icon {
-    display: block;
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--cream);
+    color: var(--gold-dark);
 }
 
 .empty-leaderboard-title {
@@ -502,16 +709,21 @@ main {
 }
 
 .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     color: var(--gold);
     text-decoration: none;
     font-weight: 600;
     font-size: var(--text-sm);
-    padding: 0.25rem 0.4rem;
+    padding: 0.35rem 0.6rem;
     border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
 }
 
 .back-btn:hover {
     color: var(--gold-light);
+    background: rgba(255, 255, 255, 0.06);
 }
 
 .game-header h2 {
@@ -519,18 +731,45 @@ main {
     color: var(--gold);
 }
 
+.game-header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
 .game-stats {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     font-size: var(--text-sm);
     flex-wrap: wrap;
 }
 
-.game-stats span {
+.game-stats > span {
     background: var(--dark-light);
     padding: 0.4rem 0.8rem;
     border-radius: var(--radius-sm);
     color: var(--cream);
+    font-variant-numeric: tabular-nums;
+}
+
+.icon-header-btn {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--gold-light);
+    border: 1px solid rgba(240, 216, 80, 0.25);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.icon-header-btn:hover {
+    background: rgba(200, 164, 21, 0.2);
+    border-color: var(--gold);
+    color: var(--white);
 }
 
 .hidden {
@@ -572,23 +811,41 @@ main {
     color: var(--cream-dark);
 }
 
-/* === ПАНЕЛЬ НАСТРОЕК ИГРЫ === */
+/* === ПАНЕЛЬ НАСТРОЕК ИГРЫ (выбор параметров режима) === */
 .settings-panel {
-    min-height: calc(100vh - 70px);
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100vh - 68px);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem 1.5rem;
-    background: linear-gradient(180deg, var(--dark) 0%, var(--cream) 40%);
+    background:
+        radial-gradient(ellipse 65% 55% at 50% 18%, rgba(200, 164, 21, 0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 50% at 15% 85%, rgba(45, 106, 79, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 45% at 88% 80%, rgba(240, 216, 80, 0.12) 0%, transparent 60%),
+        linear-gradient(160deg, #121629 0%, #1d2340 48%, #293254 100%);
+}
+
+.settings-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%23f0d850' stroke-opacity='0.095' stroke-width='1'%3E%3Cpath d='M0 45 Q45 25 90 45 T180 45'/%3E%3Cpath d='M0 105 Q45 85 90 105 T180 105'/%3E%3Cpath d='M0 165 Q45 145 90 165 T180 165'/%3E%3Cpath d='M90 0v180M0 90h180' stroke-opacity='0.055' stroke-dasharray='3 7'/%3E%3Ccircle cx='90' cy='90' r='34' stroke-dasharray='4 8'/%3E%3Ccircle cx='90' cy='90' r='2.2' fill='%23f0d850' fill-opacity='0.22' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 180px 180px;
 }
 
 .settings-card {
-    background: var(--white);
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(165deg, #ffffff 0%, #fdfbf4 100%);
     border-radius: var(--radius);
     padding: 2.5rem;
-    max-width: 420px;
+    max-width: 440px;
     width: 100%;
-    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(200, 164, 21, 0.3);
+    box-shadow: 0 20px 55px rgba(8, 10, 24, 0.42);
 }
 
 .settings-card h3 {
@@ -729,12 +986,25 @@ input[type="radio"] {
 }
 
 .feedback {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
     min-height: 1.5rem;
     margin-bottom: 1rem;
     padding: 0.6rem 0.75rem;
     border-radius: var(--radius-sm);
     font-size: var(--text-sm);
     font-weight: 600;
+}
+
+.feedback:empty {
+    display: none;
+}
+
+.end-game-btn {
+    margin-top: 1rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
 }
 
 /* Цвета обратной связи теперь взяты из собственной палитры продукта
@@ -957,14 +1227,22 @@ input[type="radio"] {
     background: #2d2d44 !important;
 }
 
+.leaflet-attribution-flag {
+    display: none !important;
+}
+
 /* === ЭКРАН ОКОНЧАНИЯ ИГРЫ === */
 .game-over {
-    min-height: calc(100vh - 70px);
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100vh - 68px);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem 1.5rem;
-    background: linear-gradient(180deg, var(--dark) 0%, var(--cream) 40%);
+    background:
+        radial-gradient(ellipse 65% 55% at 50% 18%, rgba(200, 164, 21, 0.22) 0%, transparent 65%),
+        linear-gradient(160deg, #121629 0%, #1d2340 48%, #293254 100%);
 }
 
 .game-over-card {
@@ -1178,10 +1456,18 @@ input[type="radio"] {
 }
 
 .save-feedback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
     min-height: 1.25rem;
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--green);
+}
+
+.save-feedback:empty {
+    display: none;
 }
 
 .loading-error-card {

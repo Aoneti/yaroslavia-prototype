@@ -132,22 +132,22 @@ function renderHomeLeaderboard() {
     const geoguesserEntries = leaderboard.filter(e => e.mode === 'ГеоКвест').slice(0, 10);
     const writenameEntries = leaderboard.filter(e => e.mode === 'Знаток Ярославщины').slice(0, 10);
 
-    const emptyStateHtml = (icon) => `
+    const emptyStateHtml = (iconName) => `
         <div class="empty-leaderboard-state">
-            <span class="empty-leaderboard-icon" aria-hidden="true">${icon}</span>
+            <span class="empty-leaderboard-icon" aria-hidden="true">${typeof renderIcon === 'function' ? renderIcon(iconName, 'ui-icon-lg') : ''}</span>
             <p class="empty-leaderboard-title">Пока никто не играл</p>
             <p class="empty-leaderboard-sub">Сыграй первым и займи первую строчку!</p>
         </div>
     `;
 
     if (geoguesserEntries.length === 0) {
-        geoguesserContainer.innerHTML = emptyStateHtml('🎯');
+        geoguesserContainer.innerHTML = emptyStateHtml('target');
     } else {
         geoguesserContainer.innerHTML = renderLeaderboardTable(geoguesserEntries);
     }
 
     if (writenameEntries.length === 0) {
-        writenameContainer.innerHTML = emptyStateHtml('✍️');
+        writenameContainer.innerHTML = emptyStateHtml('pen');
     } else {
         writenameContainer.innerHTML = renderLeaderboardTable(writenameEntries);
     }
@@ -175,11 +175,11 @@ function initGamePage() {
 
     const titleEl = document.getElementById('game-mode-title');
     if (mode === 'geoguesser') {
-        titleEl.textContent = '🎯 ГеоКвест';
+        titleEl.innerHTML = `${typeof renderIcon === 'function' ? renderIcon('target', 'ui-icon-sm') : ''}<span>ГеоКвест</span>`;
         document.getElementById('geoguesser-settings').style.display = 'block';
         document.getElementById('writename-settings').style.display = 'none';
     } else {
-        titleEl.textContent = '✍️ Знаток Ярославщины';
+        titleEl.innerHTML = `${typeof renderIcon === 'function' ? renderIcon('pen', 'ui-icon-sm') : ''}<span>Знаток Ярославщины</span>`;
         document.getElementById('geoguesser-settings').style.display = 'none';
         document.getElementById('writename-settings').style.display = 'block';
     }
@@ -249,6 +249,10 @@ function showSettingsModal() {
     settingsPanel.querySelector('#save-settings-btn').addEventListener('click', () => {
         const checked = settingsPanel.querySelector('#modal-auto-zoom').checked;
         setAutoZoomSetting(checked);
+        const ggCheckbox = document.getElementById('auto-zoom-checkbox');
+        const wnCheckbox = document.getElementById('auto-zoom-checkbox-wn');
+        if (ggCheckbox) ggCheckbox.checked = checked;
+        if (wnCheckbox) wnCheckbox.checked = checked;
         closeModal();
     });
 }

@@ -255,14 +255,16 @@ function confirmGuess() {
     const scorePercent = (score / MAX_ROUND_SCORE) * 100;
     document.getElementById('result-line').style.setProperty('--score-percent', scorePercent + '%');
 
+    const iconHtml = (name, cls = '') => (typeof renderIcon === 'function' ? renderIcon(name, cls) : '');
+    const resultTitle = document.getElementById('result-title');
     if (score >= EXCELLENT_SCORE_THRESHOLD) {
-        document.getElementById('result-title').textContent = '🎉 Отлично!';
+        resultTitle.innerHTML = `${iconHtml('award', 'ui-icon-md icon-gold')}<span>Отлично!</span>`;
     } else if (score >= GOOD_SCORE_THRESHOLD) {
-        document.getElementById('result-title').textContent = '👍 Хорошо!';
+        resultTitle.innerHTML = `${iconHtml('thumbsUp', 'ui-icon-md icon-green')}<span>Хорошо!</span>`;
     } else if (score >= OK_SCORE_THRESHOLD) {
-        document.getElementById('result-title').textContent = '😐 Можно лучше';
+        resultTitle.innerHTML = `${iconHtml('compass', 'ui-icon-md icon-gold')}<span>Можно лучше</span>`;
     } else {
-        document.getElementById('result-title').textContent = '😅 В следующий раз!';
+        resultTitle.innerHTML = `${iconHtml('target', 'ui-icon-md icon-red')}<span>В следующий раз!</span>`;
     }
 
     document.getElementById('guess-panel').style.display = 'none';
@@ -307,7 +309,15 @@ function startTimer() {
 function updateTimerDisplay() {
     const minutes = Math.floor(gameState.timeLeft / 60);
     const seconds = gameState.timeLeft % 60;
-    document.getElementById('timer-display').textContent = `⏱️ ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    const formatted = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    const timerEl = document.getElementById('timer-display');
+    const valueEl = timerEl ? timerEl.querySelector('.timer-value') : null;
+    if (valueEl) {
+        valueEl.textContent = formatted;
+    } else if (timerEl) {
+        const icon = typeof renderIcon === 'function' ? renderIcon('timer', 'ui-icon-sm') : '';
+        timerEl.innerHTML = `${icon}<span class="timer-value">${formatted}</span>`;
+    }
 }
 
 // === ЛОГИКА "ЗНАТОК ЯРОСЛАВЩИНЫ" ===
@@ -348,8 +358,10 @@ function submitPlaceName() {
 
     const matches = checkPlaceName(value, gameState.allLocations);
 
+    const iconHtml = (name) => (typeof renderIcon === 'function' ? renderIcon(name, 'ui-icon-sm') : '');
+
     if (matches.length === 0) {
-        feedback.textContent = '❌ Место не найдено. Попробуй ещё!';
+        feedback.innerHTML = `${iconHtml('xCircle')}<span>Место не найдено. Попробуй ещё!</span>`;
         feedback.className = 'feedback error';
         input.value = '';
         input.focus();
@@ -362,7 +374,7 @@ function submitPlaceName() {
     });
 
     if (newMatches.length === 0) {
-        feedback.textContent = '⚠️ Это место уже найдено!';
+        feedback.innerHTML = `${iconHtml('alertTriangle')}<span>Это место уже найдено!</span>`;
         feedback.className = 'feedback error';
         input.value = '';
         input.focus();
@@ -396,11 +408,12 @@ function submitPlaceName() {
     document.getElementById('found-count').textContent = gameState.foundLocations.length;
     document.getElementById('round-display').textContent = `Найдено: ${gameState.foundLocations.length}/${window.LOCATIONS.length}`;
 
+    const safeName = typeof escapeHtml === 'function' ? escapeHtml(newMatches[0].name) : newMatches[0].name;
     if (newMatches.length === 1) {
-        feedback.textContent = `✅ Верно! ${newMatches[0].name} (+${pointsPerMatch})`;
+        feedback.innerHTML = `${iconHtml('checkCircle')}<span>Верно! ${safeName} (+${pointsPerMatch})</span>`;
     } else {
         const totalAwarded = pointsPerMatch * newMatches.length;
-        feedback.textContent = `✅ Есть сразу ${newMatches.length} мест «${newMatches[0].name}»: +${totalAwarded} очков`;
+        feedback.innerHTML = `${iconHtml('checkCircle')}<span>Есть сразу ${newMatches.length} мест «${safeName}»: +${totalAwarded} очков</span>`;
     }
     feedback.className = 'feedback success';
 
@@ -509,12 +522,14 @@ function saveScore() {
 
     localStorage.setItem('yaroslavia_leaderboard', JSON.stringify(leaderboard));
 
+    const iconHtml = (name) => (typeof renderIcon === 'function' ? renderIcon(name, 'ui-icon-sm') : '');
     const saveFeedback = document.getElementById('save-score-feedback');
     if (saveFeedback) {
-        saveFeedback.textContent = '✅ Результат сохранён в таблицу лидеров!';
+        saveFeedback.innerHTML = `${iconHtml('checkCircle')}<span>Результат сохранён в таблицу лидеров!</span>`;
     }
-    document.getElementById('save-score-btn').disabled = true;
-    document.getElementById('save-score-btn').textContent = 'Сохранено ✓';
+    const saveBtn = document.getElementById('save-score-btn');
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = `<span>Сохранено</span>${iconHtml('check')}`;
 }
 
 function resetGame() {

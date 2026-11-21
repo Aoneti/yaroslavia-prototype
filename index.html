@@ -15,7 +15,16 @@
 </head>
 <body class="home-page">
     <header class="hero">
-        <div class="hero-overlay"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-topbar">
+            <button id="settings-btn" type="button" class="btn settings-btn hero-settings-btn" aria-label="Настройки игры">
+                <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/>
+                </svg>
+                <span>Настройки</span>
+            </button>
+        </div>
         <div class="hero-content">
             <div class="logo-container">
                 <img src="assets/images/logo.svg" alt="Ярославия" class="logo">
@@ -23,7 +32,7 @@
             <h1 class="title">ОТКРЫВАЙ ЯРОСЛАВИЮ</h1>
             <p class="subtitle">Краеведческая игра по столице Золотого кольца России</p>
             <p class="description">
-                Исследуй Ярославскую область, узнавай новые места и проверяй свои знания 
+                Исследуй Ярославскую область, узнавай новые места и проверяй свои знания
                 в интерактивном формате.
             </p>
         </div>
@@ -32,18 +41,37 @@
     <main class="main-content">
         <section class="features">
             <div class="feature-card">
-                <div class="feature-icon" aria-hidden="true">🗺️</div>
+                <div class="feature-icon" aria-hidden="true">
+                    <svg class="ui-icon ui-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+                        <line x1="9" y1="3" x2="9" y2="18"/>
+                        <line x1="15" y1="6" x2="15" y2="21"/>
+                    </svg>
+                </div>
                 <h3>Интерактивная карта</h3>
-                <p>Реальная карта Ярославской области
-				и сотни деревень, сёл и городов</p>
+                <p>Реальная карта Ярославской области и сотни деревень, сёл и городов</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon" aria-hidden="true">📍</div>
+                <div class="feature-icon" aria-hidden="true">
+                    <svg class="ui-icon ui-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
                 <h3>Два режима игры</h3>
                 <p>Угадай на карте или назови место — выбирай свой стиль</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon" aria-hidden="true">🏆</div>
+                <div class="feature-icon" aria-hidden="true">
+                    <svg class="ui-icon ui-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                        <path d="M4 22h16"/>
+                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                    </svg>
+                </div>
                 <h3>Система очков</h3>
                 <p>Чем точнее ответ — тем больше баллов. Ставь рекорды!</p>
             </div>
@@ -52,38 +80,85 @@
         <section class="game-modes">
             <h2>Режимы игры</h2>
             <div class="modes-grid">
-                <div class="mode-card">
-                    <div class="mode-header">
-                        <span class="mode-icon" aria-hidden="true">🎯</span>
-                        <h3>ГеоКвест</h3>
+                <div class="mode-card mode-card-geoguesser">
+                    <div class="mode-card-pattern" aria-hidden="true"></div>
+                    <div class="mode-card-inner">
+                        <div class="mode-header">
+                            <span class="mode-icon" aria-hidden="true">
+                                <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <circle cx="12" cy="12" r="5"/>
+                                    <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+                                </svg>
+                            </span>
+                            <h3>ГеоКвест</h3>
+                        </div>
+                        <p class="mode-desc">
+                            Тебе показывают название места. Поставь пин на карте как можно ближе к цели.
+                            Баллы начисляются по расстоянию — чем точнее, тем лучше!
+                        </p>
+                        <ul class="mode-features">
+                            <li>
+                                <svg class="ui-icon ui-icon-sm mode-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/>
+                                </svg>
+                                <span>Свободный режим (без ограничений)</span>
+                            </li>
+                            <li>
+                                <svg class="ui-icon ui-icon-sm mode-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/><path d="M12 2v3"/>
+                                </svg>
+                                <span>Режим на время (5 минут)</span>
+                            </li>
+                            <li>
+                                <svg class="ui-icon ui-icon-sm mode-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/>
+                                </svg>
+                                <span>Продолжительность (от 5 до 20 раундов)</span>
+                            </li>
+                        </ul>
+                        <a href="game.html?mode=geoguesser" class="btn btn-primary">Играть</a>
                     </div>
-                    <p class="mode-desc">
-                        Тебе показывают название места. Поставь пин на карте как можно ближе к цели. 
-                        Баллы начисляются по расстоянию — чем точнее, тем лучше!
-                    </p>
-                    <ul class="mode-features">
-                        <li><span aria-hidden="true">✅</span> Свободный режим (без ограничений)</li>
-                        <li><span aria-hidden="true">⏱️</span> Режим на время (5 минут)</li>
-						<li><span aria-hidden="true">🔎</span> Продолжительность (от 5 до 20 раундов)</li>
-                    </ul>
-                    <a href="game.html?mode=geoguesser" class="btn btn-primary">Играть</a>
                 </div>
 
-                <div class="mode-card">
-                    <div class="mode-header">
-                        <span class="mode-icon" aria-hidden="true">✍️</span>
-                        <h3>Знаток Ярославщины</h3>
+                <div class="mode-card mode-card-writename">
+                    <div class="mode-card-pattern" aria-hidden="true"></div>
+                    <div class="mode-card-inner">
+                        <div class="mode-header">
+                            <span class="mode-icon" aria-hidden="true">
+                                <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 20h9"/>
+                                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                                </svg>
+                            </span>
+                            <h3>Знаток Ярославщины</h3>
+                        </div>
+                        <p class="mode-desc">
+                            Вводи названия населённых пунктов Ярославской области.
+                            Угадай правильно — и место появится на карте! Сколько сможешь найти?
+                        </p>
+                        <ul class="mode-features">
+                            <li>
+                                <svg class="ui-icon ui-icon-sm mode-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                                </svg>
+                                <span>Текстовый ввод названий</span>
+                            </li>
+                            <li>
+                                <svg class="ui-icon ui-icon-sm mode-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/>
+                                </svg>
+                                <span>Визуализация на карте</span>
+                            </li>
+                            <li>
+                                <svg class="ui-icon ui-icon-sm mode-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <span>Подсчёт найденных мест</span>
+                            </li>
+                        </ul>
+                        <a href="game.html?mode=writename" class="btn btn-primary">Играть</a>
                     </div>
-                    <p class="mode-desc">
-                        Вводи названия населённых пунктов Ярославской области. 
-                        Угадай правильно — и место появится на карте! Сколько сможешь найти?
-                    </p>
-                    <ul class="mode-features">
-                        <li><span aria-hidden="true">📝</span> Текстовый ввод названий</li>
-                        <li><span aria-hidden="true">🗺️</span> Визуализация на карте</li>
-                        <li><span aria-hidden="true">⭐</span> Подсчёт найденных мест</li>
-                    </ul>
-                    <a href="game.html?mode=writename" class="btn btn-primary">Играть</a>
                 </div>
             </div>
         </section>
@@ -92,13 +167,23 @@
             <h2>Таблица лидеров</h2>
             <div class="leaderboards-grid">
                 <div class="leaderboard-column">
-                    <h3><span aria-hidden="true">🎯</span> ГеоКвест</h3>
+                    <h3 class="heading-with-icon">
+                        <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+                        </svg>
+                        <span>ГеоКвест</span>
+                    </h3>
                     <div id="geoguesser-leaderboard" class="leaderboard-table">
                         <p class="empty-leaderboard">Пока никто не играл</p>
                     </div>
                 </div>
                 <div class="leaderboard-column">
-                    <h3><span aria-hidden="true">✍️</span> Знаток Ярославщины</h3>
+                    <h3 class="heading-with-icon">
+                        <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                        </svg>
+                        <span>Знаток Ярославщины</span>
+                    </h3>
                     <div id="writename-leaderboard" class="leaderboard-table">
                         <p class="empty-leaderboard">Пока никто не играл</p>
                     </div>
@@ -110,14 +195,14 @@
             <h2>О проекте</h2>
             <div class="about-content">
                 <p>
-                    <strong>«Ярославия»</strong> — это образовательная краеведческая игра, 
-                    посвящённая Ярославской области. 
-                    Проект создан для популяризации региональной истории и географии 
+                    <strong>«Ярославия»</strong> — это образовательная краеведческая игра,
+                    посвящённая Ярославской области.
+                    Проект создан для популяризации региональной истории и географии
                     в увлекательном игровом формате.
                 </p>
                 <p>
-                    Ярославская область — сердце Золотого кольца: Ярославль, Ростов Великий, 
-                    Углич, Мышкин, Переславль-Залесский и десятки других уникальных мест 
+                    Ярославская область — сердце Золотого кольца: Ярославль, Ростов Великий,
+                    Углич, Мышкин, Переславль-Залесский и десятки других уникальных мест
                     с тысячелетней историей.
                 </p>
             </div>
@@ -126,11 +211,11 @@
 
     <footer class="footer">
         <p>© 2026 Ярославия — Краеведческая игра | Прототип MVP</p>
-        <button id="settings-btn" class="btn settings-btn">⚙️ Настройки</button>
     </footer>
 
-	<!-- Скрипты должны загружаться в правильном порядке! -->
-	<script src="js/main.js"></script>
+    <!-- Скрипты должны загружаться в правильном порядке! -->
+    <script src="js/icons.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 </html>
