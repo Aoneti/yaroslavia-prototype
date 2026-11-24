@@ -1489,3 +1489,1121 @@ input[type="radio"] {
     font-size: var(--text-sm);
 }
 
+/* === ГЛАВНАЯ СТРАНИЦА: БЛОК КУЛЬТУРНОГО НАСЛЕДИЯ === */
+.hero-topbar {
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.heritage-showcase {
+    margin-bottom: 3rem;
+}
+
+.heritage-showcase h2 {
+    font-size: var(--text-2xl);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+.heritage-showcase h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--gold);
+    margin: 0.75rem auto 2rem;
+    border-radius: var(--radius-sm);
+}
+
+.mode-card-heritage {
+    background:
+        radial-gradient(circle at 95% 12%, rgba(200, 164, 21, 0.22) 0%, transparent 50%),
+        radial-gradient(circle at 8% 88%, rgba(45, 106, 79, 0.12) 0%, transparent 45%),
+        linear-gradient(155deg, #ffffff 0%, #fdfaf0 58%, #f3e7c9 100%);
+}
+
+.mode-card-heritage .mode-card-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%238b7010' stroke-opacity='0.11' stroke-width='1'%3E%3Ccircle cx='200' cy='40' r='44'/%3E%3Ccircle cx='200' cy='40' r='78' stroke-dasharray='4 7'/%3E%3Ccircle cx='200' cy='40' r='115'/%3E%3Cpath d='M130 40h110M200 0v110' stroke-opacity='0.08'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+.heritage-card-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.heritage-card-info {
+    flex: 1;
+}
+
+.heritage-subtitle {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--gold-dark);
+    margin-top: 0.15rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.heritage-features-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.5rem;
+    margin-bottom: 0;
+}
+
+.heritage-features-row li {
+    margin-bottom: 0;
+}
+
+.heritage-card-cta {
+    flex-shrink: 0;
+}
+
+/* === РАЗДЕЛ ОКН: СТРАНИЦА РЕЕСТРА И КАРТЫ КУЛЬТУРНОГО НАСЛЕДИЯ === */
+body.okn-page {
+    background-color: var(--cream);
+    background-image:
+        radial-gradient(circle at 12% 20%, rgba(200, 164, 21, 0.06) 0%, transparent 42%),
+        radial-gradient(circle at 88% 80%, rgba(26, 26, 46, 0.04) 0%, transparent 46%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%238b7010' stroke-opacity='0.065' stroke-width='0.85'%3E%3Cpath d='M0 48h96M48 0v96' stroke-dasharray='2 6'/%3E%3Cpath d='M48 18 L78 48 L48 78 L18 48 Z'/%3E%3Ccircle cx='48' cy='48' r='2' fill='%238b7010' fill-opacity='0.12' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: auto, auto, 96px 96px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.okn-header {
+    background:
+        radial-gradient(ellipse 60% 80% at 50% 0%, rgba(200, 164, 21, 0.16) 0%, transparent 70%),
+        linear-gradient(155deg, #121528 0%, #1c213b 60%, #262c49 100%);
+    color: var(--cream);
+    border-bottom: 1px solid rgba(200, 164, 21, 0.25);
+    padding: 0.9rem 1.5rem;
+}
+
+.okn-header-inner {
+    max-width: 1380px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.okn-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+}
+
+.okn-title-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.okn-kicker {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold-light);
+    opacity: 0.85;
+    font-weight: 600;
+}
+
+.okn-page-title {
+    font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+    color: var(--white);
+    line-height: 1.2;
+}
+
+.okn-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+}
+
+.okn-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(240, 216, 80, 0.25);
+    color: var(--cream);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    transition: var(--transition-fast);
+}
+
+.okn-nav-link .ui-icon {
+    color: var(--gold-light);
+}
+
+.okn-nav-link:hover {
+    background: rgba(200, 164, 21, 0.2);
+    border-color: var(--gold-light);
+    color: var(--white);
+}
+
+.okn-main {
+    max-width: 1380px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* === KPI ПОЛОСА === */
+.okn-kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.9rem;
+}
+
+.okn-kpi-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(200, 164, 21, 0.22);
+    box-shadow: 0 2px 12px rgba(26, 26, 46, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.okn-kpi-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+    margin-bottom: 0.35rem;
+}
+
+.okn-kpi-label {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.okn-kpi-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+}
+
+.okn-kpi-sub {
+    font-size: var(--text-xs);
+    color: #777;
+    margin-top: 0.25rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.okn-cat-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.okn-cat-dot-federal {
+    background: var(--gold);
+    box-shadow: 0 0 0 2px rgba(200, 164, 21, 0.25);
+}
+
+.okn-cat-dot-regional {
+    background: var(--green);
+    box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.22);
+}
+
+.okn-cat-dot-local {
+    background: #4c6ef5;
+    box-shadow: 0 0 0 2px rgba(76, 110, 245, 0.22);
+}
+
+/* === АНАЛИТИЧЕСКИЕ ДАШБОРДЫ === */
+.okn-dashboards-section {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    border: 1px solid rgba(200, 164, 21, 0.22);
+    box-shadow: 0 4px 16px rgba(26, 26, 46, 0.06);
+}
+
+.okn-section-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.okn-section-title-group {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.okn-section-title {
+    font-size: var(--text-lg);
+    color: var(--dark);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.okn-section-hint {
+    font-size: var(--text-xs);
+    color: #777;
+}
+
+.btn-text-action {
+    background: var(--cream);
+    color: var(--dark);
+    border: 1px solid var(--cream-dark);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.btn-text-action:hover {
+    border-color: var(--gold);
+    background: var(--cream-dark);
+}
+
+.okn-dashboards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.okn-dashboard-card {
+    background: var(--cream);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(200, 164, 21, 0.16);
+}
+
+.okn-dashboard-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.65rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid rgba(26, 26, 46, 0.08);
+}
+
+.okn-dashboard-head h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.okn-dashboard-meta {
+    font-size: var(--text-xs);
+    color: var(--gold-dark);
+    font-weight: 600;
+}
+
+.okn-bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.okn-bar-row {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 0.3rem 0.4rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: var(--transition-fast);
+}
+
+.okn-bar-row:hover {
+    background: rgba(200, 164, 21, 0.1);
+}
+
+.okn-bar-row.active {
+    background: rgba(200, 164, 21, 0.18);
+    border-color: var(--gold);
+}
+
+.okn-bar-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: var(--text-xs);
+    margin-bottom: 0.22rem;
+}
+
+.okn-bar-label {
+    color: var(--dark);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.okn-bar-numbers {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+    color: var(--dark);
+}
+
+.okn-bar-pct {
+    color: #777;
+}
+
+.okn-bar-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(26, 26, 46, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.okn-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.okn-bar-fill-gold,
+.okn-bar-fill-federal {
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+}
+
+.okn-bar-fill-green,
+.okn-bar-fill-regional {
+    background: linear-gradient(90deg, var(--green), var(--green-light));
+}
+
+.okn-bar-fill-indigo,
+.okn-bar-fill-local {
+    background: linear-gradient(90deg, #364fc7, #5c7cfa);
+}
+
+.okn-chart-empty {
+    font-size: var(--text-xs);
+    color: #888;
+    font-style: italic;
+    padding: 0.75rem 0;
+    text-align: center;
+}
+
+/* === ПАНЕЛЬ ФИЛЬТРАЦИИ И ПОИСКА === */
+.okn-filter-panel {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.15rem 1.25rem;
+    border: 1px solid rgba(200, 164, 21, 0.24);
+    box-shadow: 0 4px 16px rgba(26, 26, 46, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.okn-filter-top-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.okn-search-box {
+    flex: 1;
+    min-width: 260px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.okn-search-icon {
+    position: absolute;
+    left: 0.85rem;
+    color: #777;
+    pointer-events: none;
+}
+
+.okn-search-box input {
+    width: 100%;
+    padding: 0.68rem 0.9rem 0.68rem 2.4rem;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: var(--radius-sm);
+    background: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--text-sm);
+    color: var(--dark);
+    transition: var(--transition-fast);
+}
+
+.okn-search-box input:focus {
+    background: var(--white);
+    border-color: var(--gold);
+}
+
+.okn-quick-toggles {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.okn-toggle-btn,
+.okn-reset-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: var(--radius-sm);
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-variant-numeric: tabular-nums;
+}
+
+.okn-toggle-btn {
+    background: var(--cream);
+    color: var(--dark);
+    border: 1.5px solid var(--cream-dark);
+}
+
+.okn-toggle-btn:hover {
+    border-color: var(--gold);
+}
+
+.okn-toggle-btn.active {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+    color: var(--dark);
+    border-color: var(--gold-dark);
+    box-shadow: 0 2px 8px rgba(200, 164, 21, 0.28);
+}
+
+.okn-reset-btn {
+    background: var(--dark-light);
+    color: var(--cream);
+    border: 1.5px solid transparent;
+}
+
+.okn-reset-btn:hover {
+    background: var(--dark);
+    border-color: var(--gold);
+}
+
+.okn-filter-selects-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.75rem;
+}
+
+.okn-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+}
+
+.okn-filter-field label {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: #666;
+}
+
+.okn-filter-field select {
+    width: 100%;
+    padding: 0.55rem 0.65rem;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: var(--radius-sm);
+    background: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--dark);
+    cursor: pointer;
+}
+
+.okn-filter-field select:focus {
+    border-color: var(--gold);
+    background: var(--white);
+}
+
+/* === СПЛИТ-РАБОЧАЯ ОБЛАСТЬ: КАРТА + СПИСОК РЕЕСТРА === */
+.okn-workspace {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 1.25rem;
+    align-items: stretch;
+}
+
+.okn-map-panel,
+.okn-list-panel {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid rgba(200, 164, 21, 0.24);
+    box-shadow: 0 6px 24px rgba(26, 26, 46, 0.07);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 680px;
+}
+
+.okn-panel-header {
+    padding: 0.9rem 1.15rem;
+    background: linear-gradient(160deg, #ffffff 0%, #faf6e9 100%);
+    border-bottom: 1px solid var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.okn-panel-title-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.okn-panel-title {
+    font-size: var(--text-base);
+    color: var(--dark);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.okn-panel-counter {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--gold-dark);
+    font-variant-numeric: tabular-nums;
+}
+
+.btn-map-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.38rem 0.75rem;
+    background: var(--cream);
+    border: 1px solid rgba(200, 164, 21, 0.35);
+    border-radius: var(--radius-sm);
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--dark);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.btn-map-action:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-dark);
+}
+
+.okn-map-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.okn-map-canvas {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.okn-map-legend {
+    background: rgba(26, 26, 46, 0.92);
+    color: var(--cream);
+    padding: 0.55rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    font-size: var(--text-xs);
+    font-weight: 600;
+}
+
+.okn-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* === ПОПАП НА КАРТЕ ОКН === */
+.okn-map-popup {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--dark);
+    padding: 0.15rem 0;
+}
+
+.okn-popup-meta {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.25rem;
+}
+
+.okn-popup-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    line-height: 1.3;
+    color: var(--dark);
+    margin-bottom: 0.35rem;
+}
+
+.okn-popup-date {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 0.25rem;
+}
+
+.okn-popup-addr {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+}
+
+.okn-popup-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-xs {
+    padding: 0.35rem 0.7rem;
+    font-size: var(--text-xs);
+}
+
+/* === СПИСОК РЕЕСТРА ОКН === */
+.okn-page-indicator {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: #666;
+    font-variant-numeric: tabular-nums;
+}
+
+.okn-list-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    background: var(--cream);
+}
+
+.okn-item-card {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(26, 26, 46, 0.09);
+    transition: var(--transition-fast);
+}
+
+.okn-item-card:hover {
+    border-color: rgba(200, 164, 21, 0.55);
+    box-shadow: 0 3px 12px rgba(26, 26, 46, 0.06);
+}
+
+.okn-item-card.active {
+    border-color: var(--gold);
+    background: linear-gradient(160deg, #ffffff 0%, #fcf7e6 100%);
+    box-shadow: 0 4px 14px rgba(200, 164, 21, 0.18);
+}
+
+.okn-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.okn-item-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: #666;
+}
+
+.okn-item-date {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--green);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.okn-item-title {
+    font-size: var(--text-base);
+    color: var(--dark);
+    line-height: 1.35;
+    margin-bottom: 0.28rem;
+}
+
+.okn-item-ensemble {
+    font-size: var(--text-xs);
+    color: var(--gold-dark);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.okn-item-address {
+    font-size: var(--text-xs);
+    color: #666;
+    line-height: 1.45;
+    margin-bottom: 0.65rem;
+}
+
+.okn-item-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--cream-dark);
+    flex-wrap: wrap;
+}
+
+.okn-item-regnum {
+    font-size: var(--text-xs);
+    color: #777;
+    font-variant-numeric: tabular-nums;
+}
+
+.okn-item-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.okn-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.34rem 0.68rem;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.okn-action-locate {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+    color: var(--dark);
+    border: 1px solid rgba(139, 112, 16, 0.25);
+}
+
+.okn-action-locate:hover {
+    box-shadow: 0 2px 8px rgba(200, 164, 21, 0.35);
+    transform: translateY(-1px);
+}
+
+.okn-action-passport {
+    background: var(--cream);
+    color: var(--dark);
+    border: 1px solid var(--cream-dark);
+}
+
+.okn-action-passport:hover {
+    border-color: var(--gold);
+    background: var(--cream-dark);
+}
+
+.okn-no-coords-note {
+    font-size: var(--text-xs);
+    color: #888;
+    font-style: italic;
+    padding-right: 0.25rem;
+}
+
+.okn-pagination {
+    padding: 0.7rem 1rem;
+    background: var(--white);
+    border-top: 1px solid var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.okn-page-btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius-sm);
+    background: var(--cream);
+    border: 1px solid var(--cream-dark);
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--dark);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.okn-page-btn:hover:not(:disabled) {
+    border-color: var(--gold);
+    background: var(--gold-light);
+}
+
+.okn-page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.okn-pagination-status {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: #555;
+    font-variant-numeric: tabular-nums;
+}
+
+.okn-empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: #666;
+}
+
+.okn-empty-state h3 {
+    font-size: var(--text-lg);
+    color: var(--dark);
+    margin-bottom: 0.4rem;
+}
+
+.okn-empty-state p {
+    font-size: var(--text-sm);
+}
+
+/* === МОДАЛЬНОЕ ОКНО ПАСПОРТА ОБЪЕКТА ОКН === */
+.okn-modal-card {
+    background: var(--white);
+    color: var(--dark);
+    border-radius: var(--radius);
+    max-width: 720px;
+    width: 100%;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(200, 164, 21, 0.35);
+    overflow: hidden;
+}
+
+.okn-modal-header {
+    padding: 1rem 1.5rem;
+    background: linear-gradient(160deg, #161a30 0%, #242a48 100%);
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.okn-modal-kicker {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gold-light);
+}
+
+.okn-modal-header .close-settings {
+    color: var(--cream);
+}
+
+.okn-modal-header .close-settings:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+}
+
+.okn-modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+}
+
+.okn-modal-title {
+    font-size: var(--text-xl);
+    color: var(--dark);
+    line-height: 1.3;
+}
+
+.okn-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    background: var(--cream);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--cream-dark);
+}
+
+.okn-modal-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.okn-field-label {
+    font-size: var(--text-xs);
+    color: #777;
+    font-weight: 600;
+}
+
+.okn-field-value {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--dark);
+    font-variant-numeric: tabular-nums;
+}
+
+.okn-coords-num {
+    color: var(--green);
+}
+
+.okn-modal-section h4 {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gold-dark);
+    margin-bottom: 0.35rem;
+}
+
+.okn-modal-section p {
+    font-size: var(--text-sm);
+    color: #444;
+    line-height: 1.6;
+}
+
+.okn-docs-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.okn-docs-list li {
+    background: var(--cream);
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--cream-dark);
+}
+
+.okn-doc-title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.okn-doc-meta {
+    font-size: var(--text-xs);
+    color: #666;
+    margin-top: 0.15rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.okn-modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--cream-dark);
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+/* === АДАПТИВНОСТЬ РАЗДЕЛА ОКН === */
+@media (max-width: 1180px) {
+    .okn-kpi-strip {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .okn-dashboards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .okn-filter-selects-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .okn-workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .okn-map-panel {
+        height: 500px;
+    }
+
+    .okn-list-panel {
+        height: 620px;
+    }
+}
+
+@media (max-width: 768px) {
+    .heritage-card-layout {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .heritage-card-cta,
+    .heritage-card-cta .btn {
+        width: 100%;
+    }
+
+    .okn-kpi-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .okn-dashboards-grid,
+    .okn-filter-selects-row,
+    .okn-modal-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+

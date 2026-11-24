@@ -21,6 +21,10 @@ app.get(['/game', '/game.html'], (_req, res) => {
   res.sendFile(path.join(__dirname, 'game.html'));
 });
 
+app.get(['/okn', '/okn.html'], (_req, res) => {
+  res.sendFile(path.join(__dirname, 'okn.html'));
+});
+
 app.listen(PORT, HOST, () => {
   console.log(`Yaroslavia server listening on http://${HOST}:${PORT}`);
 });

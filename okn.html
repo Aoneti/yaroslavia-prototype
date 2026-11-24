@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ярославия — Реестр и карта культурного наследия (ОКН)</title>
+    <meta name="description" content="Интерактивная карта, аналитические дашборды и полный реестр объектов культурного наследия Ярославской области (2 484 памятника и ансамбля).">
+    <meta property="og:title" content="Ярославия — Реестр и карта культурного наследия (ОКН)">
+    <meta property="og:description" content="Интерактивная карта, аналитические дашборды и полный реестр объектов культурного наследия Ярославской области.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+</head>
+<body class="okn-page">
+    <!-- Индикатор загрузки реестра -->
+    <div id="okn-loading-overlay" class="loading-overlay">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>Загружаем реестр объектов культурного наследия Ярославской области…</p>
+    </div>
+
+    <!-- Верхняя навигационная шапка -->
+    <header class="okn-header">
+        <div class="okn-header-inner">
+            <div class="okn-brand-row">
+                <a href="index.html" class="back-btn" aria-label="На главную">
+                    <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+                    </svg>
+                    <span>На главную</span>
+                </a>
+                <div class="okn-title-block">
+                    <div class="okn-kicker">Единый государственный реестр · Регион 76</div>
+                    <h1 class="okn-page-title">Культурное наследие Ярославии</h1>
+                </div>
+            </div>
+            <div class="okn-header-actions">
+                <a href="game.html?mode=geoguesser" class="okn-nav-link">
+                    <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span>ГеоКвест</span>
+                </a>
+                <a href="game.html?mode=writename" class="okn-nav-link">
+                    <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                    </svg>
+                    <span>Знаток Ярославщины</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="okn-main">
+        <!-- Полоса ключевых показателей (KPI Strip) -->
+        <section class="okn-kpi-strip" aria-label="Сводная статистика объектов культурного наследия">
+            <div class="okn-kpi-card">
+                <div class="okn-kpi-header">
+                    <span class="okn-kpi-label">Объектов в выборке</span>
+                    <svg class="ui-icon ui-icon-sm icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/>
+                    </svg>
+                </div>
+                <div class="okn-kpi-value" id="kpi-total-count">0</div>
+                <div class="okn-kpi-sub" id="kpi-total-sub">из 2 484 в реестре</div>
+            </div>
+
+            <div class="okn-kpi-card">
+                <div class="okn-kpi-header">
+                    <span class="okn-kpi-label">Нанесено на карту</span>
+                    <svg class="ui-icon ui-icon-sm icon-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <div class="okn-kpi-value" id="kpi-map-count">0</div>
+                <div class="okn-kpi-sub" id="kpi-map-sub">с геокоординатами</div>
+            </div>
+
+            <div class="okn-kpi-card">
+                <div class="okn-kpi-header">
+                    <span class="okn-kpi-label">Федерального значения</span>
+                    <span class="okn-cat-dot okn-cat-dot-federal" aria-hidden="true"></span>
+                </div>
+                <div class="okn-kpi-value" id="kpi-federal-count">0</div>
+                <div class="okn-kpi-sub" id="kpi-federal-sub">высшая категория охраны</div>
+            </div>
+
+            <div class="okn-kpi-card">
+                <div class="okn-kpi-header">
+                    <span class="okn-kpi-label">Регионального значения</span>
+                    <span class="okn-cat-dot okn-cat-dot-regional" aria-hidden="true"></span>
+                </div>
+                <div class="okn-kpi-value" id="kpi-regional-count">0</div>
+                <div class="okn-kpi-sub" id="kpi-regional-sub">памятники области</div>
+            </div>
+
+            <div class="okn-kpi-card">
+                <div class="okn-kpi-header">
+                    <span class="okn-kpi-label">Местного значения</span>
+                    <span class="okn-cat-dot okn-cat-dot-local" aria-hidden="true"></span>
+                </div>
+                <div class="okn-kpi-value" id="kpi-local-count">0</div>
+                <div class="okn-kpi-sub" id="kpi-local-sub">муниципальный фонд</div>
+            </div>
+
+            <div class="okn-kpi-card">
+                <div class="okn-kpi-header">
+                    <span class="okn-kpi-label">ЮНЕСКО и память ВОВ</span>
+                    <svg class="ui-icon ui-icon-sm icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <div class="okn-kpi-value" id="kpi-special-count">0 / 0</div>
+                <div class="okn-kpi-sub">Всемирное наследие · ВОВ</div>
+            </div>
+        </section>
+
+        <!-- Аналитические дашборды (интерактивные — клик по строке фильтрует выборку) -->
+        <section class="okn-dashboards-section" aria-label="Аналитические дашборды">
+            <div class="okn-section-bar">
+                <div class="okn-section-title-group">
+                    <h2 class="okn-section-title">
+                        <svg class="ui-icon ui-icon-sm icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>
+                        </svg>
+                        <span>Аналитические дашборды реестра</span>
+                    </h2>
+                    <p class="okn-section-hint">Нажмите на любую полосу графика для мгновенной фильтрации карты и списка</p>
+                </div>
+                <button id="okn-toggle-dashboards-btn" type="button" class="btn-text-action" aria-expanded="true">
+                    <span>Свернуть дашборды</span>
+                </button>
+            </div>
+
+            <div id="okn-dashboards-grid" class="okn-dashboards-grid">
+                <div class="okn-dashboard-card">
+                    <div class="okn-dashboard-head">
+                        <h3>Категория охраны и вид объекта</h3>
+                        <span class="okn-dashboard-meta">По статусу</span>
+                    </div>
+                    <div id="chart-category" class="okn-bar-chart"></div>
+                </div>
+
+                <div class="okn-dashboard-card">
+                    <div class="okn-dashboard-head">
+                        <h3>Видовая принадлежность</h3>
+                        <span class="okn-dashboard-meta">Типология</span>
+                    </div>
+                    <div id="chart-typology" class="okn-bar-chart"></div>
+                </div>
+
+                <div class="okn-dashboard-card">
+                    <div class="okn-dashboard-head">
+                        <h3>Города и районы области</h3>
+                        <span class="okn-dashboard-meta">География</span>
+                    </div>
+                    <div id="chart-municipality" class="okn-bar-chart"></div>
+                </div>
+
+                <div class="okn-dashboard-card">
+                    <div class="okn-dashboard-head">
+                        <h3>Исторические эпохи</h3>
+                        <span class="okn-dashboard-meta">Датировка</span>
+                    </div>
+                    <div id="chart-era" class="okn-bar-chart"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Панель фильтрации и поиска -->
+        <section class="okn-filter-panel" aria-label="Фильтрация объектов культурного наследия">
+            <div class="okn-filter-top-row">
+                <div class="okn-search-box">
+                    <svg class="ui-icon ui-icon-sm okn-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <input
+                        type="search"
+                        id="okn-search-input"
+                        placeholder="Поиск по названию памятника, адресу, номеру в реестре или дате (например: Успенский собор, Ростов, XVII в.)..."
+                        aria-label="Поиск объектов культурного наследия"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="okn-quick-toggles" role="group" aria-label="Быстрые фильтры">
+                    <button type="button" id="okn-toggle-coords" class="okn-toggle-btn" aria-pressed="false">
+                        <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <span>Только на карте (1 086)</span>
+                    </button>
+                    <button type="button" id="okn-toggle-unesco" class="okn-toggle-btn" aria-pressed="false">
+                        <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <span>ЮНЕСКО (27)</span>
+                    </button>
+                    <button type="button" id="okn-toggle-wwii" class="okn-toggle-btn" aria-pressed="false">
+                        <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <span>Память ВОВ (52)</span>
+                    </button>
+                    <button type="button" id="okn-reset-filters" class="okn-reset-btn" title="Сбросить все активные фильтры">
+                        <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+                        </svg>
+                        <span>Сбросить</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="okn-filter-selects-row">
+                <div class="okn-filter-field">
+                    <label for="okn-filter-category">Категория значения</label>
+                    <select id="okn-filter-category">
+                        <option value="all">Все категории</option>
+                    </select>
+                </div>
+
+                <div class="okn-filter-field">
+                    <label for="okn-filter-type">Вид объекта</label>
+                    <select id="okn-filter-type">
+                        <option value="all">Все виды (памятники, ансамбли)</option>
+                    </select>
+                </div>
+
+                <div class="okn-filter-field">
+                    <label for="okn-filter-typology">Видовая принадлежность</label>
+                    <select id="okn-filter-typology">
+                        <option value="all">Все типы наследия</option>
+                    </select>
+                </div>
+
+                <div class="okn-filter-field">
+                    <label for="okn-filter-municipality">Город / район</label>
+                    <select id="okn-filter-municipality">
+                        <option value="all">Вся Ярославская область</option>
+                    </select>
+                </div>
+
+                <div class="okn-filter-field">
+                    <label for="okn-filter-era">Историческая эпоха</label>
+                    <select id="okn-filter-era">
+                        <option value="all">Все эпохи</option>
+                    </select>
+                </div>
+
+                <div class="okn-filter-field">
+                    <label for="okn-sort-select">Сортировка</label>
+                    <select id="okn-sort-select">
+                        <option value="default">Сначала на карте и особо ценные</option>
+                        <option value="name-asc">По названию (А → Я)</option>
+                        <option value="name-desc">По названию (Я → А)</option>
+                        <option value="category">По категории значения</option>
+                        <option value="municipality">По городу / району</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Сплит-экран: Интерактивная карта + Реестр объектов -->
+        <section class="okn-workspace" aria-label="Карта и список объектов культурного наследия">
+            <!-- Левая колонка: Карта ОКН -->
+            <div class="okn-map-panel">
+                <div class="okn-panel-header">
+                    <div class="okn-panel-title-wrap">
+                        <h2 class="okn-panel-title">
+                            <svg class="ui-icon ui-icon-sm icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/>
+                            </svg>
+                            <span>Карта объектов культурного наследия</span>
+                        </h2>
+                        <span id="okn-map-counter" class="okn-panel-counter">1 086 меток на карте</span>
+                    </div>
+                    <button type="button" id="okn-fit-bounds-btn" class="btn-map-action" title="Показать все метки текущей выборки">
+                        <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <span>Вся область</span>
+                    </button>
+                </div>
+
+                <div class="okn-map-wrapper">
+                    <div id="okn-map" class="okn-map-canvas" aria-label="Интерактивная карта объектов культурного наследия Ярославской области"></div>
+                    <div class="okn-map-legend" aria-label="Условные обозначения карты">
+                        <span class="okn-legend-item">
+                            <span class="okn-cat-dot okn-cat-dot-federal"></span>
+                            <span>Федерального значения</span>
+                        </span>
+                        <span class="okn-legend-item">
+                            <span class="okn-cat-dot okn-cat-dot-regional"></span>
+                            <span>Регионального значения</span>
+                        </span>
+                        <span class="okn-legend-item">
+                            <span class="okn-cat-dot okn-cat-dot-local"></span>
+                            <span>Местного значения</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Правая колонка: Список объектов реестра -->
+            <div class="okn-list-panel">
+                <div class="okn-panel-header">
+                    <div class="okn-panel-title-wrap">
+                        <h2 class="okn-panel-title">
+                            <svg class="ui-icon ui-icon-sm icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                            <span>Реестр объектов</span>
+                        </h2>
+                        <span id="okn-list-counter" class="okn-panel-counter">Найдено: 2 484</span>
+                    </div>
+                    <div id="okn-page-indicator" class="okn-page-indicator">Стр. 1</div>
+                </div>
+
+                <div id="okn-list-container" class="okn-list-container" aria-live="polite"></div>
+
+                <div id="okn-pagination" class="okn-pagination">
+                    <button type="button" id="okn-prev-page" class="okn-page-btn" disabled>Назад</button>
+                    <span id="okn-pagination-status" class="okn-pagination-status">1–24 из 2 484</span>
+                    <button type="button" id="okn-next-page" class="okn-page-btn">Далее</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Модальное окно паспорта объекта ОКН -->
+    <div id="okn-detail-modal" class="settings-modal okn-detail-modal hidden" role="dialog" aria-modal="true" aria-labelledby="okn-modal-title">
+        <div class="okn-modal-card">
+            <div class="okn-modal-header">
+                <div class="okn-modal-kicker" id="okn-modal-kicker">Паспорт объекта культурного наследия</div>
+                <button type="button" id="okn-close-modal" class="close-settings" aria-label="Закрыть паспорт объекта">&times;</button>
+            </div>
+            <div class="okn-modal-body" id="okn-modal-body">
+                <h3 id="okn-modal-title" class="okn-modal-title">Название объекта</h3>
+            </div>
+            <div class="okn-modal-footer">
+                <button type="button" id="okn-modal-locate-btn" class="btn btn-primary btn-with-icon hidden">
+                    <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span>Показать на карте</span>
+                </button>
+                <button type="button" id="okn-modal-done-btn" class="btn btn-secondary">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Ярославия — Краеведческая игра и реестр культурного наследия Ярославской области</p>
+    </footer>
+
+    <script src="js/icons.js"></script>
+    <script src="js/okn-logic.js"></script>
+    <script src="js/okn-page.js"></script>
+</body>
+</html>
